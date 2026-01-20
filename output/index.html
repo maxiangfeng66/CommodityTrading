@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commodity Trading Analysis - Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a1a 0%, #1a1a2e 50%, #0f3460 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+        .header {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 30px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .header h1 {
+            font-size: 2.5em;
+            background: linear-gradient(90deg, #00d4ff, #7b2cbf, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+        .header p {
+            color: #888;
+            font-size: 1.1em;
+        }
+        .nav-links {
+            margin-top: 20px;
+        }
+        .nav-links a {
+            color: #00d4ff;
+            text-decoration: none;
+            margin: 0 15px;
+            padding: 8px 20px;
+            border: 1px solid #00d4ff;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        .nav-links a:hover {
+            background: #00d4ff;
+            color: #0a0a1a;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            margin-bottom: 30px;
+            color: #00d4ff;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 30px;
+            background: linear-gradient(180deg, #00d4ff, #7b2cbf);
+            border-radius: 2px;
+        }
+
+        .commodity-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .commodity-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .commodity-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--card-color), transparent);
+        }
+        .commodity-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--card-color);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+        .commodity-name {
+            font-size: 1.4em;
+            font-weight: bold;
+        }
+        .exchange-badge {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            color: #888;
+        }
+
+        .score-section {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .score-circle {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3em;
+            font-weight: bold;
+            background: rgba(255, 255, 255, 0.1);
+            border: 3px solid var(--card-color);
+        }
+        .score-label {
+            flex: 1;
+        }
+        .score-label .label {
+            font-size: 0.85em;
+            color: #888;
+        }
+        .score-label .value {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: var(--card-color);
+        }
+
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .metric {
+            text-align: center;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+        }
+        .metric .num {
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+        .metric .label {
+            font-size: 0.75em;
+            color: #888;
+        }
+
+        .card-footer {
+            display: flex;
+            gap: 10px;
+        }
+        .btn {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9em;
+            font-weight: 600;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .btn-primary {
+            background: var(--card-color);
+            color: #0a0a1a;
+        }
+        .btn-primary:hover {
+            filter: brightness(1.2);
+            transform: scale(1.02);
+        }
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Color themes for each commodity */
+        .cotton { --card-color: #7b2cbf; }
+        .iron-ore { --card-color: #ff6b6b; }
+        .copper { --card-color: #ffa502; }
+        .silver { --card-color: #c0c0c0; }
+        .sugar { --card-color: #00d4ff; }
+        .lithium { --card-color: #00ff88; }
+
+        /* Summary stats */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 50px;
+        }
+        .summary-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .summary-num {
+            font-size: 2.5em;
+            font-weight: bold;
+            background: linear-gradient(90deg, #00d4ff, #7b2cbf);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .summary-label {
+            color: #888;
+            margin-top: 5px;
+        }
+
+        /* Bias indicator */
+        .bias-grid {
+            display: flex;
+            gap: 5px;
+            margin-top: 10px;
+        }
+        .bias-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #333;
+        }
+        .bias-dot.active.bearish { background: #ff6b6b; }
+        .bias-dot.active.neutral { background: #ffa502; }
+        .bias-dot.active.bullish { background: #00ff88; }
+
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #666;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .footer a {
+            color: #00d4ff;
+            text-decoration: none;
+        }
+
+        .cot-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 107, 107, 0.2);
+            color: #ff6b6b;
+            padding: 4px 10px;
+            border-radius: 10px;
+            font-size: 0.7em;
+        }
+        .cot-badge.has-cot {
+            background: rgba(0, 255, 136, 0.2);
+            color: #00ff88;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Commodity Trading Analysis</h1>
+        <p>Multi-Agent Analysis System with Hierarchical Debate Protocol</p>
+        <div class="nav-links">
+            <a href="agent_map.html">Agent Architecture</a>
+            <a href="#commodities">All Reports</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Summary Stats -->
+        <div class="summary-grid">
+            <div class="summary-card">
+                <div class="summary-num">6</div>
+                <div class="summary-label">Commodities Analyzed</div>
+            </div>
+            <div class="summary-card">
+                <div class="summary-num">138</div>
+                <div class="summary-label">Agent Instances</div>
+            </div>
+            <div class="summary-card">
+                <div class="summary-num">108</div>
+                <div class="summary-label">Debate Rounds</div>
+            </div>
+            <div class="summary-card">
+                <div class="summary-num">36</div>
+                <div class="summary-label">Module Analyses</div>
+            </div>
+        </div>
+
+        <!-- Commodity Reports -->
+        <h2 class="section-title" id="commodities">Analysis Reports</h2>
+        <div class="commodity-grid">
+            <!-- Cotton -->
+            <div class="commodity-card cotton">
+                <span class="cot-badge has-cot">COT Data</span>
+                <div class="card-header">
+                    <div class="commodity-name">ICE Cotton No.2</div>
+                    <div class="exchange-badge">ICE Futures</div>
+                </div>
+                <div class="score-section">
+                    <div class="score-circle">-2</div>
+                    <div class="score-label">
+                        <div class="label">Overall Bias</div>
+                        <div class="value">Bearish</div>
+                    </div>
+                </div>
+                <div class="metrics">
+                    <div class="metric">
+                        <div class="num">-2</div>
+                        <div class="label">Fundamentals</div>
+                    </div>
+                    <div class="metric">
+                        <div class="num">-1.5</div>
+                        <div class="label">Technical</div>
+                    </div>
+                    <div class="metric">
+                        <div class="num">-4</div>
+                        <div class="label">Positioning</div>
+                    </div>
+                </div>
+                <div class="bias-grid">
+                    <div class="bias-dot active bearish"></div>
+                    <div class="bias-dot active bearish"></div>
+                    <div class="bias-dot"></div>
+                    <div class="bias-dot"></div>
+                    <div class="bias-dot"></div>
+                </div>
+                <div class="card-footer">
+                    <a href="report.html" class="btn btn-primary">View Report</a>
+                </div>
+            </div>
+
+            <!-- Iron Ore -->
+            <div class="commodity-card iron-ore">
+                <span class="cot-badge">No COT</span>
+                <div class="card-header">
+                    <div class="commodity-name">SGX Iron Ore</div>
+                    <div class="exchange-badge">SGX</div>
+                </div>
+                <div class="score-section">
+                    <div class="score-circle">+12</div>
+                    <div class="score-label">
+                        <div class="label">Overall Bias</div>
+                        <div class="value">Neutral-Bearish</div>
+                    </div>
+                </div>
+                <div class="metrics">
+                    <div class="metric">
+                        <div class="num">-15</div>
+                        <div class="label">Fundamentals</div>
+                    </div>
+                    <div class="metric">
+                        <div class="num">+5</div>
+                        <div class="label">Technical</div>
+                    </div>
+                    <div class="metric">
+                        <div class="num">+10</div>
+                        <div class="label">Structure</div>
+                    </div>
+                </div>
+                <div class="bias-grid">
+                    <div class="bias-dot"></div>
+                    <div class="bias-dot active neutral"></div>
+                    <div class="bias-dot active neutral"></div>
+                    <div class="bias-dot"></div>
+                    <div class="bias-dot"></div>
+                </div>
+                <div class="card-footer">
+                    <a href="iron_ore.html" class="btn btn-primary">View Report</a>
+                </div>
+            </div>
+
+            <!-- Copper -->
+            <div class="commodity-card copper">
+                <span class="cot-badge has-cot">COT Data</span>
+                <div class="card-header">
+                    <div class="commodity-name">CME Copper</div>
+                    <div class="exchange-badge">COMEX</div>
+                </div>
+                <div class="score-section">
+                    <div class="score-circle">66</div>
+                    <div class="score-label">
+                        <div class="label">Overall Bias</div>
+                        <div class="value">Moderately Bullish</div>
+                    </div>
+                </div>
+                <div class="metrics">
+                    <div class="metric">
+                        <div class="num">72</div>
+                        <div class="label">Fundamentals</div>
+                    </div>
+                    <div class="metric">
+                        <div class="num">65</div>
+                        <div class="label">Technical</div>
+                    </div>
+                    <div class="metric">
+                        <div class="num">58</div>
+                        <div class="label">Positioning</div>
+                    </div>
+                </div>
+                <div class="bias-grid">
+                    <div class="bias-dot"></div>
+                    <div class="bias-dot"></div>
+                    <div class="bias-dot active neutral"></div>
+                    <div class="bias-dot active bullish"></div>
+                    <div class="bias-dot"></div>
+                </div>
+                <div class="card-footer">
+                    <a href="copper.html" class="btn btn-primary">View Report</a>
+                </div>
+            </div>
+
+            <!-- Silver -->
+            <div class="commodity-card silver">
+                <span class="cot-badge has-cot">COT Data</span>
+                <div class="card-header">
+                    <div class="commodity-name">CME Silver</div>
+                    <div class="exchange-badge">COMEX</div>
+                </div>
+                <div class="score-section">
+                    <div class="score-circle">7.8</div>
+                    <div class="score-label">
+                        <div class="label">Overall Bias</div>
+                        <div class="value">Bullish</div>
+                    </div>
+                </div>
+                <div class="metrics">
+                    <div class="metric">
+                        <div class="num">8.0</div>
+                        <div class="label">Fundamentals</div>
+                    </div>
+                    <div class="metric">
+                        <div class="num">7.5</div>
+                        <div class="label">Technical</div>
+                    </div>
+                    <div class="metric">
+                        <div class="num">7.0</div>
+                        <div class="label">Positioning</div>
+                    </div>
+                </div>
+                <div class="bias-grid">
+                    <div class="bias-dot"></div>
+                    <div class="bias-dot"></div>
+                    <div class="bias-dot"></div>
+                    <div class="bias-dot active bullish"></div>
+                    <div class="bias-dot active bullish"></div>
+                </div>
+                <div class="card-footer">
+                    <a href="silver.html" class="btn btn-primary">View Report</a>
+                </div>
+            </div>
+
+            <!-- Sugar -->
+            <div class="commodity-card sugar">
+                <span class="cot-badge has-cot">COT Data</span>
+                <div class="card-header">
+                    <div class="commodity-name">ICE Sugar No.11</div>
+                    <div class="exchange-badge">ICE Futures</div>
+                </div>
+                <div class="score-section">
+                    <div class="score-circle">35</div>
+                    <div class="score-label">
+                        <div class="label">Overall Bias</div>
+                        <div class="value">Bearish</div>
+                    </div>
+                </div>
+                <div class="metrics">
+                    <div class="metric">
+                        <div class="num">30</div>
+                        <div class="label">Fundamentals</div>
+                    </div>
+                    <div class="metric">
+                        <div class="num">40</div>
+                        <div class="label">Technical</div>
+                    </div>
+                    <div class="metric">
+                        <div class="num">35</div>
+                        <div class="label">Positioning</div>
+                    </div>
+                </div>
+                <div class="bias-grid">
+                    <div class="bias-dot active bearish"></div>
+                    <div class="bias-dot active bearish"></div>
+                    <div class="bias-dot"></div>
+                    <div class="bias-dot"></div>
+                    <div class="bias-dot"></div>
+                </div>
+                <div class="card-footer">
+                    <a href="sugar.html" class="btn btn-primary">View Report</a>
+                </div>
+            </div>
+
+            <!-- Lithium Carbonate -->
+            <div class="commodity-card lithium">
+                <span class="cot-badge">No COT</span>
+                <div class="card-header">
+                    <div class="commodity-name">GFEX Lithium Carbonate</div>
+                    <div class="exchange-badge">Guangzhou Futures</div>
+                </div>
+                <div class="score-section">
+                    <div class="score-circle">7.3</div>
+                    <div class="score-label">
+                        <div class="label">Overall Bias</div>
+                        <div class="value">Moderately Bullish</div>
+                    </div>
+                </div>
+                <div class="metrics">
+                    <div class="metric">
+                        <div class="num">7.5</div>
+                        <div class="label">Fundamentals</div>
+                    </div>
+                    <div class="metric">
+                        <div class="num">7.0</div>
+                        <div class="label">Technical</div>
+                    </div>
+                    <div class="metric">
+                        <div class="num">7.5</div>
+                        <div class="label">Structure</div>
+                    </div>
+                </div>
+                <div class="bias-grid">
+                    <div class="bias-dot"></div>
+                    <div class="bias-dot"></div>
+                    <div class="bias-dot"></div>
+                    <div class="bias-dot active bullish"></div>
+                    <div class="bias-dot"></div>
+                </div>
+                <div class="card-footer">
+                    <a href="lithium_carbonate.html" class="btn btn-primary">View Report</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Analysis Date -->
+        <div style="text-align: center; margin: 30px 0; color: #666;">
+            <p>Analysis Date: January 20, 2026</p>
+            <p style="margin-top: 10px;">Generated by Multi-Agent Commodity Analysis System</p>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Commodity Trading Analysis System</p>
+        <p style="margin-top: 10px;">
+            <a href="agent_map.html">View Agent Architecture</a> |
+            <a href="https://github.com" target="_blank">GitHub Repository</a>
+        </p>
+    </div>
+</body>
+</html>

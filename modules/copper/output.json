@@ -1,0 +1,1113 @@
+{
+  "commodity": "CME Copper Futures",
+  "exchange": "CME/COMEX",
+  "contract_symbol": "HG",
+  "timestamp": "2026-01-20T12:00:00Z",
+  "analysis_date": "2026-01-20",
+  "has_cot_data": true,
+  "current_price": {
+    "value": 5.88,
+    "unit": "USD/lb",
+    "as_of": "2026-01-19",
+    "daily_range": {
+      "low": 5.7715,
+      "high": 6.0245
+    },
+    "52_week_range": {
+      "low": 4.03,
+      "high": 6.154
+    },
+    "ytd_change_pct": 33.48
+  },
+  "project_manager": {
+    "analysis_plan": {
+      "scope": "Comprehensive CME Copper Futures outlook covering fundamentals, news/policy, market views, technical analysis, market structure, and positioning",
+      "modules_assigned": [
+        "TM-FUND: Fundamentals Analysis",
+        "TM-NEWS: News & Policy Analysis",
+        "TM-VIEWS: Market Views Assessment",
+        "TM-TECH: Technical Analysis",
+        "TM-STRUCT: Market Structure Analysis",
+        "TM-POS: Positioning Analysis (CFTC COT)"
+      ],
+      "debate_protocol": "Each module undergoes 3 rounds of debate between TM (Team Manager), SUP-A (Logic Supervisor), and SUP-B (Data Validator)",
+      "key_focus_areas": [
+        "Global supply-demand balance with focus on mine production constraints",
+        "China's smelting capacity and demand trajectory",
+        "Green energy transition and AI/data center demand",
+        "US tariff policy and critical minerals designation",
+        "Technical price structure and momentum",
+        "CFTC COT positioning dynamics"
+      ]
+    }
+  },
+  "modules": {
+    "fundamentals": {
+      "module_id": "TM-FUND",
+      "score": 72,
+      "outlook": "moderately_bullish",
+      "confidence": "high",
+      "analysis": {
+        "supply_analysis": {
+          "global_mine_production": {
+            "2025_estimate_mt": 19.48,
+            "yoy_change_mt": -0.22,
+            "growth_rate_2026_pct": 1.4,
+            "key_constraint": "Mine supply growth estimates for 2026 fallen to +1.4%, approximately 500 kmt lower than beginning of year estimates"
+          },
+          "major_disruptions": [
+            {
+              "mine": "Grasberg (Indonesia)",
+              "operator": "Freeport-McMoRan",
+              "event": "800,000 metric tons wet material cave-in, 7 fatalities",
+              "impact": "Phased restart not until mid-2026"
+            },
+            {
+              "mine": "El Teniente (Chile)",
+              "event": "Production interruptions",
+              "impact": "Ongoing constraints"
+            },
+            {
+              "mine": "Kamoa-Kakula (DRC)",
+              "event": "Production disruptions",
+              "impact": "Supply uncertainty"
+            },
+            {
+              "mine": "QB (Chile)",
+              "event": "Operational issues",
+              "impact": "Production delays"
+            },
+            {
+              "mine": "Snow Lake (Canada)",
+              "event": "Production interruptions",
+              "impact": "Supply reduction"
+            }
+          ],
+          "smelter_dynamics": {
+            "china_share_of_smelting_pct": 40,
+            "china_share_of_concentrate_imports_pct": 66,
+            "outlook": "Chinese smelters may face copper raw material shortage, limiting ability to wait out higher prices"
+          }
+        },
+        "demand_analysis": {
+          "global_demand_drivers": {
+            "energy_transition": {
+              "share_of_growth_to_2030_pct": 60,
+              "equivalent": "Adding another US in copper demand",
+              "by_2040_mt": 42,
+              "growth_vs_current_pct": 50
+            },
+            "data_centers_ai": {
+              "2026_demand_kt": 475,
+              "yoy_increase_kt": 110,
+              "driver": "Continued surge in compute demand for AI"
+            },
+            "ev_adoption": {
+              "trend": "Growing EV sales driving copper intensity per vehicle",
+              "copper_per_ev_kg": "60-80 vs 20-25 for ICE"
+            },
+            "grid_infrastructure": {
+              "trend": "Largest demand driver through 2030"
+            }
+          },
+          "china_demand": {
+            "q4_2025_yoy_pct": -8,
+            "outlook": "Stimulus boost fading, demand recovery uncertain",
+            "structural_factors": "Property sector weakness offset by grid and EV investment"
+          }
+        },
+        "supply_demand_balance": {
+          "jp_morgan_forecast": {
+            "2026_deficit_kt": 330,
+            "outlook": "Tighter market"
+          },
+          "goldman_sachs_forecast": {
+            "2025_surplus_kt": 500,
+            "2026_surplus_kt": 160,
+            "outlook": "Market moving toward balance but not shortage"
+          },
+          "bloomberg_nef": {
+            "structural_deficit_timing": "As early as 2026",
+            "long_term_demand_growth": "Copper demand for energy transition could triple by 2045"
+          },
+          "s_and_p_global": {
+            "assessment": "Substantial shortfall in copper supply widens",
+            "drivers": "AI demand and defense spending acceleration"
+          }
+        }
+      },
+      "debate_log": {
+        "round_1": {
+          "tm_fund_initial": {
+            "position": "Bullish on supply constraints. Mine production growth of only 1.4% in 2026 versus demand growth of 3-4% from energy transition and AI creates structural deficit. Grasberg disruption alone removes significant supply until mid-2026.",
+            "score_initial": 75
+          },
+          "sup_a_challenge": {
+            "critique": "Logic appears sound but overstates deficit certainty. Goldman Sachs sees surplus of 160kt in 2026, not deficit. How do you reconcile these divergent views? Also, China demand fell -8% YoY in Q4 2025 - doesn't this offset supply concerns?",
+            "questions": [
+              "Why trust JP Morgan deficit forecast over Goldman surplus forecast?",
+              "Isn't China weakness a bigger factor than you're accounting for?"
+            ]
+          },
+          "tm_fund_response": {
+            "rebuttal": "Valid point on forecast divergence. Key difference is assumptions about disruption persistence. Goldman may not fully account for Grasberg's mid-2026 restart timeline. On China, the -8% Q4 was stimulus fadeout - structural demand from grid/EVs remains robust. However, I acknowledge uncertainty and reduce confidence.",
+            "revised_score": 72
+          },
+          "sup_b_validation": {
+            "data_check": "Verified: Mine production data from SMM showing 19.48 million mt 2025 with -220kt YoY decline. JP Morgan 330kt deficit and Goldman 160kt surplus both from credible sources. China smelter capacity 40% verified. Data integrity: PASSED.",
+            "status": "validated_with_caveats"
+          }
+        },
+        "round_2": {
+          "tm_fund_refined": {
+            "position": "Refined view: Moderately bullish. Supply constraints are real and persistent, but demand uncertainty from China prevents extreme bullishness. Energy transition demand (475kt data centers + grid) provides floor support. Key risk is if China demand weakens further.",
+            "key_factors": [
+              "Mine supply growth +1.4% vs demand growth 3-4%",
+              "Grasberg restart mid-2026",
+              "China demand uncertain but structural drivers intact",
+              "Data center/AI demand underappreciated"
+            ]
+          },
+          "sup_a_challenge": {
+            "critique": "Better balanced. But you haven't addressed price sensitivity. At $5.88/lb ($12,960/mt), are we already pricing in the bullish scenario? JP Morgan target is $12,500/mt - we're already above that.",
+            "questions": [
+              "At current prices, how much upside remains?",
+              "What's the downside risk if China disappoints?"
+            ]
+          },
+          "tm_fund_response": {
+            "rebuttal": "Important point. Current price near JP Morgan H1 target suggests limited near-term upside. However, if deficit materializes as JP Morgan expects, prices could overshoot to $13,000+. Downside: if China remains weak and Goldman surplus scenario plays out, support around $4.50-5.00/lb. Risk/reward still favors bulls but margin of safety reduced.",
+            "revised_score": 72
+          },
+          "sup_b_validation": {
+            "data_check": "Price data verified: $5.88/lb = ~$12,960/mt. JP Morgan forecast $12,000-12,500/mt verified. Goldman $10,710/mt average H1 2026 verified. Conversion and data: ACCURATE.",
+            "status": "validated"
+          }
+        },
+        "round_3": {
+          "tm_fund_final": {
+            "position": "Final synthesis: MODERATELY BULLISH. Supply constraints from mine disruptions and slow production growth create structural tightness. Demand from energy transition, AI/data centers provides strong floor. China remains swing factor. Current price near fair value but upside to $6.00-6.50/lb if deficit materializes. Downside to $4.80-5.00/lb if demand disappoints.",
+            "final_score": 72,
+            "confidence": "high"
+          },
+          "sup_a_signoff": {
+            "status": "APPROVED",
+            "comment": "Logic chain is coherent. Supply constraints well-documented, demand drivers identified with appropriate uncertainty around China. Price targets reasonable given fundamental backdrop."
+          },
+          "sup_b_signoff": {
+            "status": "APPROVED",
+            "comment": "All data points verified against source materials. Forecast ranges from credible institutions. Quantitative elements accurate."
+          }
+        }
+      }
+    },
+    "news": {
+      "module_id": "TM-NEWS",
+      "score": 68,
+      "outlook": "moderately_bullish",
+      "confidence": "medium",
+      "analysis": {
+        "key_news_themes": {
+          "us_tariff_policy": {
+            "headline": "US deferred tariffs on critical minerals including copper",
+            "impact": "Near-term relief for copper markets after August 2025 50% tariff shock",
+            "background": "Copper added to US critical minerals list due to national security, defense, and grid electrification importance",
+            "price_recovery": "44% recovery from August 2025 lows after initial 25% single-week plunge"
+          },
+          "china_regulatory": {
+            "headline": "China announced crackdown on high-frequency trading",
+            "impact": "Contributed to copper falling below $5.90 on January 19, 2026",
+            "context": "Broader efforts to reduce risks in capital markets"
+          },
+          "ev_and_green_transition": {
+            "headline": "EV demand continues structural growth despite near-term volatility",
+            "impact": "Copper intensity per EV (60-80kg) versus ICE (20-25kg) drives demand",
+            "policy_support": "Infrastructure Investment and Jobs Act, IRA continue to drive US grid investment"
+          },
+          "infrastructure_spending": {
+            "headline": "Grid and power infrastructure projected to drive 60%+ of copper demand growth to 2030",
+            "impact": "Long-term demand floor established",
+            "regional_focus": "US, Europe, and emerging markets upgrading grid capacity"
+          },
+          "ai_data_centers": {
+            "headline": "AI infrastructure boom driving substantial copper demand",
+            "impact": "475kt projected data center copper demand in 2026, up 110kt YoY",
+            "trend": "Accelerating and underappreciated by market"
+          }
+        },
+        "policy_assessment": {
+          "us_policy": {
+            "direction": "Supportive long-term, volatile near-term due to tariff uncertainty",
+            "critical_minerals_status": "Positive for domestic copper importance",
+            "risk": "Tariff policy reversals could create volatility"
+          },
+          "china_policy": {
+            "direction": "Mixed - stimulus fading but structural support for grid/EVs",
+            "risk": "HFT crackdown and capital market reforms create near-term headwinds"
+          },
+          "global_trade": {
+            "direction": "Increasingly fragmented supply chains favor domestic/regional production",
+            "implication": "Premium for non-Chinese refined copper possible"
+          }
+        }
+      },
+      "debate_log": {
+        "round_1": {
+          "tm_news_initial": {
+            "position": "News flow is net bullish. US critical minerals designation and infrastructure spending positive. Tariff deferral removes near-term risk. AI/data center demand is emerging mega-theme. Main negative is China HFT crackdown creating near-term selling pressure.",
+            "score_initial": 72
+          },
+          "sup_a_challenge": {
+            "critique": "You're downplaying tariff risk. The August 2025 50% tariff caused 25% price crash in a week. Tariffs are 'deferred', not eliminated. What happens if they're reimposed? Also, China HFT news is symptomatic of deeper capital market concerns.",
+            "questions": [
+              "How do you weight the tail risk of tariff reimposition?",
+              "Is China HFT news a leading indicator of broader weakness?"
+            ]
+          },
+          "tm_news_response": {
+            "rebuttal": "Fair challenge on tariff risk. Deferral creates uncertainty overhang rather than resolution. If tariffs reimposed, could see similar volatility. Reducing score to account for this tail risk. On China HFT, agree it signals tighter regulatory environment which could dampen speculative demand.",
+            "revised_score": 68
+          },
+          "sup_b_validation": {
+            "data_check": "Verified: 50% tariff on copper August 2025, 25% price drop in single week, 44% recovery since. China HFT crackdown announced Jan 2026. Critical minerals designation 2025. Data: ACCURATE.",
+            "status": "validated"
+          }
+        },
+        "round_2": {
+          "tm_news_refined": {
+            "position": "Refined: Moderately bullish with significant policy uncertainty. Positive structural themes (energy transition, AI, infrastructure) provide medium-term support. Near-term headwinds from China regulatory tightening and US tariff overhang. News flow favors bulls on 3-6 month view, uncertain on 1-month view.",
+            "key_factors": [
+              "US critical minerals status positive",
+              "Tariff deferral creates uncertainty not resolution",
+              "China regulatory tightening near-term negative",
+              "AI/infrastructure mega-themes underway"
+            ]
+          },
+          "sup_a_challenge": {
+            "critique": "Better balanced. But consider: is the AI/data center theme priced in? Every commodity analyst is talking about it. What if data center buildout slows due to power constraints or recession fears?",
+            "questions": [
+              "Is AI copper demand at risk of overhype?",
+              "What's the base case for data center growth slowdown?"
+            ]
+          },
+          "tm_news_response": {
+            "rebuttal": "Valid concern on AI hype. However, physical infrastructure buildout is tangible and contracted - major hyperscalers have multi-year capex committed. Power constraints are real but drive more grid investment (also copper positive). Recession risk is legitimate - if growth slows significantly, all commodity demand suffers. Maintaining 68 score as balanced view.",
+            "revised_score": 68
+          },
+          "sup_b_validation": {
+            "data_check": "AI demand 475kt for 2026 sourced from JP Morgan. Hyperscaler capex commitments verifiable from earnings. Grid/power infrastructure 60%+ demand growth to 2030 from multiple sources. Data: VERIFIED.",
+            "status": "validated"
+          }
+        },
+        "round_3": {
+          "tm_news_final": {
+            "position": "Final synthesis: MODERATELY BULLISH. Structural news themes (energy transition, AI, infrastructure) are clearly positive for copper demand. Policy environment mixed - US supportive long-term but tariff risk remains; China regulatory tightening creates near-term pressure. News flow suggests volatility around policy headlines but underlying demand drivers intact.",
+            "final_score": 68,
+            "confidence": "medium"
+          },
+          "sup_a_signoff": {
+            "status": "APPROVED",
+            "comment": "Appropriately cautious on policy risks while recognizing structural demand themes. Tariff tail risk properly discounted."
+          },
+          "sup_b_signoff": {
+            "status": "APPROVED",
+            "comment": "News events and policy developments accurately characterized. Sources verified."
+          }
+        }
+      }
+    },
+    "views": {
+      "module_id": "TM-VIEWS",
+      "score": 70,
+      "outlook": "moderately_bullish",
+      "confidence": "medium",
+      "analysis": {
+        "analyst_forecasts": {
+          "jp_morgan": {
+            "price_target_h1_2026_usd_mt": 12500,
+            "price_target_h1_2026_usd_lb": 5.67,
+            "outlook": "Bullish - prices above $12,000/mt in H1 2026",
+            "key_thesis": "Supply constraints + data center demand = structural deficit of 330kt",
+            "analyst": "Gregory Shearer, Head of Base and Precious Metals Strategy"
+          },
+          "goldman_sachs": {
+            "price_target_h1_2026_avg_usd_mt": 10710,
+            "price_target_h1_2026_avg_usd_lb": 4.86,
+            "price_range_usd_mt": "10000-11000",
+            "outlook": "Neutral to slightly bearish vs current - prices to remain range-bound",
+            "key_thesis": "Market surplus of 160kt in 2026, not deficit"
+          },
+          "wood_mackenzie": {
+            "outlook": "Bullish long-term - supply cannot keep up with surging demand",
+            "key_thesis": "Structural supply gap emerging"
+          },
+          "bloomberg_nef": {
+            "outlook": "Bullish - structural deficit as early as 2026",
+            "key_thesis": "Energy transition demand could triple by 2045"
+          },
+          "s_and_p_global": {
+            "outlook": "Bullish - substantial shortfall widening",
+            "key_thesis": "AI and defense spending acceleration",
+            "demand_by_2040_mt": 42
+          },
+          "devere_group": {
+            "outlook": "Bullish - supply shortage supports higher prices",
+            "key_thesis": "Mine production constraints structural"
+          },
+          "argus_media": {
+            "outlook": "Uncertain - US copper faces challenging 2026",
+            "key_thesis": "Tariff and policy volatility"
+          }
+        },
+        "consensus_assessment": {
+          "bullish_count": 5,
+          "neutral_count": 1,
+          "bearish_count": 1,
+          "consensus": "Majority bullish on supply constraints and energy transition demand",
+          "key_debate": "Timing and magnitude of deficit - JP Morgan sees it now, Goldman sees surplus persisting"
+        },
+        "logic_assessment": {
+          "bull_case_strength": {
+            "rating": "Strong",
+            "reasoning": "Supply constraints verifiable (mine disruptions, slow growth). Demand drivers tangible (grid, EVs, AI). Multiple independent bullish factors."
+          },
+          "bear_case_strength": {
+            "rating": "Moderate",
+            "reasoning": "China demand weakness real but may be transitory. Surplus scenarios depend on demand disappointing. Current prices may already reflect bullish fundamentals."
+          },
+          "contrarian_risk": {
+            "rating": "Medium",
+            "reasoning": "Consensus is clearly bullish - contrarian would look for demand disappointment or faster supply recovery"
+          }
+        }
+      },
+      "debate_log": {
+        "round_1": {
+          "tm_views_initial": {
+            "position": "Analyst consensus is bullish - 5 of 7 major forecasters bullish, 1 neutral, 1 uncertain. Bull case logic is strong: supply constraints are verifiable and demand drivers tangible. However, consensus bullishness itself is a risk - crowded trades can reverse sharply.",
+            "score_initial": 72
+          },
+          "sup_a_challenge": {
+            "critique": "You note consensus is bullish but didn't stress-test the bull logic enough. Goldman Sachs - one of the most influential voices - sees surplus not deficit. Why is market ignoring Goldman? Also, if consensus is this bullish, isn't a lot already priced in?",
+            "questions": [
+              "What does Goldman know that others don't?",
+              "At what price level would the bull case be fully priced?"
+            ]
+          },
+          "tm_views_response": {
+            "rebuttal": "Goldman's key assumption is that demand will disappoint enough to create surplus despite supply constraints. If China continues at -8% YoY, Goldman may be right. The bull case is partially priced - current $12,960/mt is above Goldman's $10,710 average target but at JP Morgan's $12,500 target. Suggests market closer to bull camp but vulnerable if Goldman is right.",
+            "revised_score": 70
+          },
+          "sup_b_validation": {
+            "data_check": "Analyst forecasts verified: JP Morgan $12,500/mt H1 target, Goldman $10,710 average with $10-11k range. Analyst counts and outlooks accurately categorized. Data: ACCURATE.",
+            "status": "validated"
+          }
+        },
+        "round_2": {
+          "tm_views_refined": {
+            "position": "Refined: Consensus is bullish but market price already reflects much of bull thesis. Key differentiation: JP Morgan/Wood Mac/S&P see structural deficit emerging now; Goldman sees surplus persisting. Differentiator is demand assumptions, not supply. Follow the demand data.",
+            "key_factors": [
+              "5/7 analysts bullish",
+              "Goldman contrarian with surplus view",
+              "Current price at high end of consensus",
+              "Demand trajectory is key differentiator"
+            ]
+          },
+          "sup_a_challenge": {
+            "critique": "Good insight that demand is the differentiator. But you haven't assessed analyst track records. Has JP Morgan or Goldman been more accurate on copper historically?",
+            "questions": [
+              "What's the historical accuracy of these forecasters on copper?",
+              "Should we weight some views more heavily?"
+            ]
+          },
+          "tm_views_response": {
+            "rebuttal": "Fair point - track record matters. Historically, Goldman has been more conservative and JP Morgan more bullish on commodities. In recent copper cycle, bulls were generally right but timing was off. Without detailed accuracy metrics, weighting views equally is defensible. Score reflects balanced view of competing forecasts.",
+            "revised_score": 70
+          },
+          "sup_b_validation": {
+            "data_check": "Cannot verify historical forecast accuracy without additional data. Qualitative assessment of bullish/conservative tendencies is reasonable approximation. Data: PARTIALLY VERIFIED.",
+            "status": "validated_with_caveats"
+          }
+        },
+        "round_3": {
+          "tm_views_final": {
+            "position": "Final synthesis: MODERATELY BULLISH. Analyst consensus clearly favors bulls, with supply constraints and energy transition demand as key drivers. Goldman's contrarian surplus view keeps overall assessment moderate rather than strongly bullish. Current price already reflects much of consensus - additional upside requires demand to exceed expectations.",
+            "final_score": 70,
+            "confidence": "medium"
+          },
+          "sup_a_signoff": {
+            "status": "APPROVED",
+            "comment": "Analyst views appropriately synthesized. Consensus bullishness acknowledged while noting contrarian risks. Price reflection of consensus appropriately noted."
+          },
+          "sup_b_signoff": {
+            "status": "APPROVED",
+            "comment": "Analyst forecasts accurately reported. Categorization of bullish/bearish appropriate."
+          }
+        }
+      }
+    },
+    "technical": {
+      "module_id": "TM-TECH",
+      "score": 65,
+      "outlook": "neutral_to_bullish",
+      "confidence": "medium",
+      "analysis": {
+        "current_price_context": {
+          "price_usd_lb": 5.88,
+          "price_usd_mt": 12960,
+          "position_in_52w_range_pct": 87,
+          "distance_from_52w_high_pct": -4.5,
+          "distance_from_52w_low_pct": 45.9
+        },
+        "trend_analysis": {
+          "primary_trend": "Bullish - price up 33.48% YTD, recovered 44% from August 2025 lows",
+          "intermediate_trend": "Consolidating - pulled back from recent highs near $6.15",
+          "short_term_trend": "Bearish - fell below $5.90 on Jan 19, second consecutive session of losses"
+        },
+        "key_levels": {
+          "resistance": [
+            {
+              "level_usd_lb": 6.02,
+              "level_usd_mt": 13270,
+              "description": "Recent session high - immediate resistance"
+            },
+            {
+              "level_usd_lb": 6.15,
+              "level_usd_mt": 13560,
+              "description": "52-week high - major resistance"
+            },
+            {
+              "level_usd_lb": 6.50,
+              "level_usd_mt": 14330,
+              "description": "Psychological level - extension target"
+            }
+          ],
+          "support": [
+            {
+              "level_usd_lb": 5.77,
+              "level_usd_mt": 12720,
+              "description": "Recent session low - immediate support"
+            },
+            {
+              "level_usd_lb": 5.50,
+              "level_usd_mt": 12125,
+              "description": "Psychological level - key support"
+            },
+            {
+              "level_usd_lb": 5.00,
+              "level_usd_mt": 11023,
+              "description": "Major psychological support - breakdown level"
+            },
+            {
+              "level_usd_lb": 4.50,
+              "level_usd_mt": 9920,
+              "description": "Goldman Sachs fair value zone lower bound"
+            },
+            {
+              "level_usd_lb": 4.03,
+              "level_usd_mt": 8885,
+              "description": "52-week low - extreme support"
+            }
+          ]
+        },
+        "moving_averages": {
+          "estimated_20_day_ma": {
+            "position": "Price likely above 20 DMA given recent strength",
+            "signal": "Bullish"
+          },
+          "estimated_50_day_ma": {
+            "position": "Price above 50 DMA based on 44% rally from August lows",
+            "signal": "Bullish"
+          },
+          "estimated_200_day_ma": {
+            "position": "Price above 200 DMA given 33% YTD gain",
+            "signal": "Bullish"
+          },
+          "ma_assessment": "All major MAs likely trending up and price above - bullish configuration"
+        },
+        "momentum_assessment": {
+          "recent_action": "Two consecutive down sessions after retreating from record highs",
+          "volatility": "High - 52-week range spans $4.03 to $6.15 (53% range)",
+          "rsi_estimate": "Likely 50-60 range after pullback from overbought",
+          "momentum_bias": "Neutral short-term, bullish intermediate"
+        },
+        "technical_patterns": {
+          "observed_patterns": [
+            "Higher highs and higher lows since August 2025 - bullish",
+            "Consolidation below all-time highs - neutral",
+            "Failed breakout above $6.00 on Jan 17 - short-term bearish"
+          ],
+          "chart_structure": "Uptrend intact but showing signs of exhaustion near highs"
+        }
+      },
+      "debate_log": {
+        "round_1": {
+          "tm_tech_initial": {
+            "position": "Technical picture is bullish on intermediate timeframe but showing near-term weakness. Price 87% of the way to 52-week high suggests limited upside in near-term. Two consecutive down sessions and failed $6.00 breakout are warning signs. But uptrend from August lows intact.",
+            "score_initial": 68
+          },
+          "sup_a_challenge": {
+            "critique": "You're extrapolating MA positions without real-time data. How confident are you in these MA estimates? Also, 'showing signs of exhaustion' is vague - what specific signals?",
+            "questions": [
+              "Without real-time chart data, how reliable is this technical assessment?",
+              "What would invalidate the bullish intermediate trend?"
+            ]
+          },
+          "tm_tech_response": {
+            "rebuttal": "Valid critique. MA positions are estimates based on price action narrative rather than actual calculations. Confidence is medium at best. Exhaustion signals: failed breakout above $6.00, two consecutive down days, retreat from near all-time highs. Trend invalidation: close below $5.50 would be concerning; close below $5.00 would suggest trend reversal. Reducing score to reflect data limitations.",
+            "revised_score": 65
+          },
+          "sup_b_validation": {
+            "data_check": "Price data verified: $5.88 current, $6.0245 recent high, $5.7715 recent low, $6.154 52-week high, $4.03 52-week low. 33.48% YTD change verified. MA positions are estimates, not calculated values. Data: PARTIALLY VERIFIED.",
+            "status": "validated_with_caveats"
+          }
+        },
+        "round_2": {
+          "tm_tech_refined": {
+            "position": "Refined: Neutral to bullish. Uptrend from August 2025 is intact based on price action. Near-term weakness with failed $6.00 breakout. Key technical question: is this a healthy pullback in an uptrend or early signs of reversal? Lean toward pullback given fundamental support.",
+            "key_factors": [
+              "Price near 52-week high (87% of range)",
+              "Uptrend from August lows intact",
+              "Near-term weakness after failed breakout",
+              "Key support at $5.50, critical at $5.00"
+            ]
+          },
+          "sup_a_challenge": {
+            "critique": "Mixing fundamentals into technical assessment. Pure technicals should be agnostic to fundamentals. Based only on price action, what's the view?",
+            "questions": [
+              "Separating fundamentals, what do pure technicals say?",
+              "What's the risk/reward on technical basis alone?"
+            ]
+          },
+          "tm_tech_response": {
+            "rebuttal": "Fair point on methodology. Pure technical view: uptrend intact, price above presumed MAs, but near resistance with short-term bearish momentum. Risk/reward: upside to $6.15-6.50 (5-10%) vs downside to $5.50-5.00 (6-15%). Slightly negative risk/reward from pure technical basis. Maintaining 65 score.",
+            "revised_score": 65
+          },
+          "sup_b_validation": {
+            "data_check": "Risk/reward calculation based on price levels is mathematically sound. Upside 5-10%, downside 6-15% accurately reflects stated support/resistance. Data: VERIFIED.",
+            "status": "validated"
+          }
+        },
+        "round_3": {
+          "tm_tech_final": {
+            "position": "Final synthesis: NEUTRAL TO BULLISH. Intermediate uptrend intact with price well above August lows. Near-term consolidation/weakness after testing all-time highs. Technical risk/reward slightly unfavorable near highs. Prefer buying pullbacks to support ($5.50-5.70) rather than chasing breakouts.",
+            "final_score": 65,
+            "confidence": "medium"
+          },
+          "sup_a_signoff": {
+            "status": "APPROVED",
+            "comment": "Technical assessment appropriately caveated given data limitations. Risk/reward framework is sound. Not mixing fundamentals into final technical view."
+          },
+          "sup_b_signoff": {
+            "status": "APPROVED",
+            "comment": "Price levels verified. Risk/reward math accurate. Acknowledged limitations in MA calculations."
+          }
+        }
+      }
+    },
+    "structure": {
+      "module_id": "TM-STRUCT",
+      "score": 62,
+      "outlook": "neutral",
+      "confidence": "medium",
+      "analysis": {
+        "contract_specifications": {
+          "exchange": "CME/COMEX",
+          "symbol": "HG",
+          "contract_size": "25,000 lbs",
+          "tick_size": 0.0005,
+          "tick_value_usd": 12.50,
+          "trading_platform": "CME Globex",
+          "grade": "Grade 1 electrolytic copper cathodes"
+        },
+        "market_structure_assessment": {
+          "liquidity": {
+            "assessment": "High - copper is one of most actively traded base metals on COMEX",
+            "front_month_activity": "Active with tight bid-ask spreads typically"
+          },
+          "volatility_structure": {
+            "52_week_range_pct": 53,
+            "august_2025_event": "25% single-week decline on tariff news",
+            "recovery": "44% rally from August lows",
+            "assessment": "High volatility environment - event risk significant"
+          },
+          "term_structure": {
+            "assessment": "Without real-time curve data, cannot precisely characterize",
+            "typical_pattern": "Copper typically trades in contango during surplus, backwardation during deficit",
+            "implication": "If deficit thesis correct, expect backwardation to develop"
+          }
+        },
+        "volume_analysis": {
+          "assessment": "Cannot verify real-time volume data",
+          "typical_patterns": "Volume typically increases on trend moves, decreases on consolidation",
+          "current_inference": "Recent pullback likely on lower volume if healthy consolidation"
+        },
+        "open_interest_analysis": {
+          "assessment": "Cannot verify real-time OI data directly",
+          "cot_inference": "COT report shows declining net long positions - suggests some position reduction",
+          "implication": "Reduced OI during pullback would be constructive; increasing OI on selloff would be concerning"
+        },
+        "market_microstructure": {
+          "participant_mix": "Producers, consumers, speculators, index funds",
+          "hedging_activity": "Active producer hedging likely at elevated prices",
+          "speculator_influence": "COT data shows managed money reducing longs - potential dry powder for next move up"
+        }
+      },
+      "debate_log": {
+        "round_1": {
+          "tm_struct_initial": {
+            "position": "Market structure is neutral. High liquidity in copper futures. Volatility elevated with 53% 52-week range. Cannot fully assess term structure, volume, or OI without real-time data. COT-derived insight suggests position reduction which could be constructive.",
+            "score_initial": 60
+          },
+          "sup_a_challenge": {
+            "critique": "This analysis has significant gaps due to data limitations. You're inferring a lot from limited information. What confidence can we really have in structural assessment without volume/OI data?",
+            "questions": [
+              "Should confidence be lower given data gaps?",
+              "What structural signals would you need to be more confident?"
+            ]
+          },
+          "tm_struct_response": {
+            "rebuttal": "Valid criticism. Data gaps are real and acknowledged. However, we can draw some inferences: 1) Copper is highly liquid market - that's verifiable; 2) Volatility is high based on price range - verifiable; 3) COT data provides positioning insight. Confidence is appropriately 'medium'. Would need real-time OI and volume trends plus term structure data for higher confidence. Slight score increase for acknowledging what we do know.",
+            "revised_score": 62
+          },
+          "sup_b_validation": {
+            "data_check": "Contract specs verified (25,000 lbs, $12.50 tick). 53% 52-week range calculated correctly. August 25% decline and 44% recovery verified. COT positioning data available. Volume/OI real-time data: NOT AVAILABLE. Data: PARTIALLY VERIFIED.",
+            "status": "validated_with_caveats"
+          }
+        },
+        "round_2": {
+          "tm_struct_refined": {
+            "position": "Refined: Neutral with constructive elements. Market structure supports active trading with high liquidity. Elevated volatility means larger moves possible in both directions. Position reduction from COT potentially creates capacity for re-entry on dips.",
+            "key_factors": [
+              "High liquidity - good execution environment",
+              "High volatility - large moves possible",
+              "Position reduction - potential re-entry capacity",
+              "Data gaps limit confidence"
+            ]
+          },
+          "sup_a_challenge": {
+            "critique": "Better framed. But you mentioned backwardation if deficit - shouldn't we at least estimate where the curve might be based on fundamentals? This could inform trading strategy.",
+            "questions": [
+              "What does the fundamental deficit thesis imply for curve structure?",
+              "How should traders position given expected curve structure?"
+            ]
+          },
+          "tm_struct_response": {
+            "rebuttal": "Good point. If JP Morgan 330kt deficit materializes, expect backwardation to develop - front month premium to deferred. This favors owning front-month futures rather than rolling deferred. If Goldman surplus view correct, contango persists and rolling costs eat into returns. Without real curve data, traders should monitor term structure for confirmation of deficit/surplus thesis.",
+            "revised_score": 62
+          },
+          "sup_b_validation": {
+            "data_check": "Backwardation/contango logic is theoretically sound. Cannot verify actual term structure without real-time data. Conceptual framework: VERIFIED.",
+            "status": "validated"
+          }
+        },
+        "round_3": {
+          "tm_struct_final": {
+            "position": "Final synthesis: NEUTRAL. Market structure provides good trading environment (high liquidity) but elevated volatility means large moves possible. Cannot definitively characterize term structure or volume/OI trends. Positioning data suggests some capacity for re-entry buying. Structure neither strongly supports nor refutes directional view.",
+            "final_score": 62,
+            "confidence": "medium"
+          },
+          "sup_a_signoff": {
+            "status": "APPROVED",
+            "comment": "Appropriately conservative given data limitations. Good theoretical framework for curve structure implications."
+          },
+          "sup_b_signoff": {
+            "status": "APPROVED",
+            "comment": "Available data accurately characterized. Limitations clearly stated."
+          }
+        }
+      }
+    },
+    "positioning": {
+      "module_id": "TM-POS",
+      "score": 58,
+      "outlook": "neutral_to_cautious",
+      "confidence": "high",
+      "analysis": {
+        "cftc_cot_data": {
+          "report_date": "2026-01-13",
+          "release_date": "2026-01-16",
+          "next_update": "2026-01-23",
+          "data_available": true
+        },
+        "positioning_summary": {
+          "net_position_change": {
+            "direction": "Decline",
+            "magnitude_contracts": -4417,
+            "period": "Week ending Jan 13, 2026",
+            "consecutive_weeks_declining": 2
+          },
+          "cot_strength_score": {
+            "value_pct": 83,
+            "interpretation": "Relatively bullish positioning compared to 3-year range",
+            "implication": "Positioning already extended on bullish side"
+          },
+          "breakdown": {
+            "large_speculators": {
+              "net_long_trend": "Declining for second consecutive week",
+              "gross_longs": "Increased last week",
+              "gross_shorts": "Implied increase to reduce net"
+            },
+            "managed_money": {
+              "net_long_trend": "Declining for second consecutive week",
+              "gross_longs": "Flat last week",
+              "gross_shorts": "Implied increase"
+            }
+          }
+        },
+        "positioning_interpretation": {
+          "current_state": "Net long positioning remains elevated (83rd percentile) but declining at the margin",
+          "historical_context": "Price recovered 44% from August 2025 lows but positioning suggests bulls may want to tread more cautiously",
+          "contrarian_signal": "Elevated long positioning often precedes consolidation or pullbacks",
+          "bullish_read": "Declining longs create capacity for re-entry, providing potential fuel for next leg up",
+          "bearish_read": "Longs reducing exposure suggests smart money sees limited near-term upside"
+        },
+        "risk_assessment": {
+          "long_liquidation_risk": {
+            "level": "Moderate",
+            "reasoning": "Net longs elevated but already declining, reducing forced liquidation risk"
+          },
+          "short_squeeze_risk": {
+            "level": "Low",
+            "reasoning": "Shorts not at extreme levels that would trigger squeeze"
+          },
+          "positioning_asymmetry": {
+            "assessment": "Skewed long - more room for downside from position unwind than upside from short covering"
+          }
+        }
+      },
+      "debate_log": {
+        "round_1": {
+          "tm_pos_initial": {
+            "position": "Positioning is a cautionary signal. COT strength at 83% means longs are extended relative to history. Net longs declining for two weeks suggests smart money reducing exposure. While this creates re-entry capacity, it also signals near-term caution. Positioning favors bears short-term.",
+            "score_initial": 55
+          },
+          "sup_a_challenge": {
+            "critique": "You're reading declining longs as purely bearish. But couldn't this be healthy consolidation? If gross longs increased among large specs even as net declined, doesn't that suggest rotation rather than exodus?",
+            "questions": [
+              "Is this position reduction capitulation or rotation?",
+              "Does the fundamental backdrop change how we read positioning?"
+            ]
+          },
+          "tm_pos_response": {
+            "rebuttal": "Fair nuance. Gross long increase among large specs while net declines suggests some are adding while others reduce - rotation not capitulation. This is less bearish than pure liquidation. However, at 83rd percentile net long, positioning is still extended. Raising score slightly to reflect rotation interpretation but maintaining cautious stance.",
+            "revised_score": 58
+          },
+          "sup_b_validation": {
+            "data_check": "COT data verified: -4,417 contracts weekly decline in copper. 83% COT strength score from InvestMacro. Two consecutive weeks of declining net longs verified. Gross long increase among large specs noted. Data: VERIFIED.",
+            "status": "validated"
+          }
+        },
+        "round_2": {
+          "tm_pos_refined": {
+            "position": "Refined: Neutral to cautious. Positioning extended at 83rd percentile but not extreme. Declining net longs suggest rotation/consolidation rather than capitulation. Creates dry powder for next move but doesn't signal immediate upside catalyst. Positioning argues for patience not urgency.",
+            "key_factors": [
+              "COT strength 83% - elevated but not extreme",
+              "-4,417 contracts weekly decline",
+              "Two weeks of net long reduction",
+              "Rotation vs capitulation distinction"
+            ]
+          },
+          "sup_a_challenge": {
+            "critique": "Good refinement. But what's the trigger to flip positioning bullish again? What would you need to see in COT to turn more constructive?",
+            "questions": [
+              "What COT signals would turn you bullish?",
+              "At what strength score does positioning become supportive?"
+            ]
+          },
+          "tm_pos_response": {
+            "rebuttal": "Bullish triggers: 1) COT strength declining to 50-60% range (positioning reset); 2) Net longs increasing while price holds above support; 3) Short interest building that could fuel squeeze. Supportive positioning would be sub-70% strength with building longs. Current 83% with declining longs is neutral-to-cautious setup.",
+            "revised_score": 58
+          },
+          "sup_b_validation": {
+            "data_check": "Proposed thresholds (50-60%, sub-70%) are reasonable based on historical COT ranges. Logic for bullish triggers is sound. Data: VERIFIED CONCEPTUALLY.",
+            "status": "validated"
+          }
+        },
+        "round_3": {
+          "tm_pos_final": {
+            "position": "Final synthesis: NEUTRAL TO CAUTIOUS. COT positioning at 83rd percentile is extended but not extreme. Two weeks of declining net longs with some rotation (not pure liquidation) suggests consolidation phase. Positioning doesn't support aggressive longs here but isn't screaming sell either. Wait for better positioning setup (sub-70% strength) or price pullback to support for better entry.",
+            "final_score": 58,
+            "confidence": "high"
+          },
+          "sup_a_signoff": {
+            "status": "APPROVED",
+            "comment": "Positioning analysis well-grounded in COT data. Appropriate distinction between rotation and liquidation. Thresholds for bullish triggers clearly articulated."
+          },
+          "sup_b_signoff": {
+            "status": "APPROVED",
+            "comment": "All COT data points verified against sources. Interpretation consistent with data."
+          }
+        }
+      }
+    }
+  },
+  "overall": {
+    "synthesis_methodology": "Weighted average of module scores with adjustments for confidence levels and cross-module consistency",
+    "module_weights": {
+      "fundamentals": 0.25,
+      "news": 0.15,
+      "views": 0.15,
+      "technical": 0.15,
+      "structure": 0.10,
+      "positioning": 0.20
+    },
+    "weighted_score_calculation": {
+      "fundamentals": "72 * 0.25 = 18.0",
+      "news": "68 * 0.15 = 10.2",
+      "views": "70 * 0.15 = 10.5",
+      "technical": "65 * 0.15 = 9.75",
+      "structure": "62 * 0.10 = 6.2",
+      "positioning": "58 * 0.20 = 11.6",
+      "total": 66.25
+    },
+    "score": 66,
+    "outlook": "moderately_bullish",
+    "outlook_scale": {
+      "0_20": "strongly_bearish",
+      "20_40": "bearish",
+      "40_55": "neutral",
+      "55_70": "moderately_bullish",
+      "70_85": "bullish",
+      "85_100": "strongly_bullish"
+    },
+    "confidence": "medium",
+    "price_forecast": {
+      "current_price_usd_lb": 5.88,
+      "current_price_usd_mt": 12960,
+      "3_month_range": {
+        "low_usd_lb": 5.20,
+        "high_usd_lb": 6.30,
+        "low_usd_mt": 11464,
+        "high_usd_mt": 13889,
+        "base_case_usd_lb": 5.75,
+        "base_case_usd_mt": 12677
+      },
+      "6_month_range": {
+        "low_usd_lb": 5.00,
+        "high_usd_lb": 6.50,
+        "low_usd_mt": 11023,
+        "high_usd_mt": 14330,
+        "base_case_usd_lb": 6.00,
+        "base_case_usd_mt": 13228
+      },
+      "12_month_range": {
+        "low_usd_lb": 4.50,
+        "high_usd_lb": 7.00,
+        "low_usd_mt": 9921,
+        "high_usd_mt": 15432,
+        "base_case_usd_lb": 6.25,
+        "base_case_usd_mt": 13779
+      }
+    },
+    "key_drivers": [
+      {
+        "driver": "Mine supply constraints",
+        "direction": "Bullish",
+        "importance": "High",
+        "detail": "Only +1.4% production growth in 2026; Grasberg restart delayed to mid-2026"
+      },
+      {
+        "driver": "Energy transition demand",
+        "direction": "Bullish",
+        "importance": "High",
+        "detail": "Grid and infrastructure to drive 60%+ of demand growth to 2030"
+      },
+      {
+        "driver": "AI/Data center demand",
+        "direction": "Bullish",
+        "importance": "Medium-High",
+        "detail": "475kt demand in 2026, up 110kt YoY; underappreciated by market"
+      },
+      {
+        "driver": "China demand recovery",
+        "direction": "Uncertain",
+        "importance": "High",
+        "detail": "Q4 2025 demand -8% YoY; stimulus fading; structural EV/grid demand provides floor"
+      },
+      {
+        "driver": "US tariff policy",
+        "direction": "Uncertain",
+        "importance": "Medium",
+        "detail": "Tariffs deferred but not eliminated; potential volatility catalyst"
+      },
+      {
+        "driver": "Extended positioning",
+        "direction": "Bearish near-term",
+        "importance": "Medium",
+        "detail": "COT 83rd percentile; declining net longs suggest consolidation"
+      }
+    ],
+    "risks": {
+      "upside": [
+        {
+          "risk": "Faster-than-expected supply disruptions",
+          "probability": "Medium",
+          "impact": "Additional mine outages beyond Grasberg could accelerate deficit"
+        },
+        {
+          "risk": "China stimulus surprise",
+          "probability": "Low-Medium",
+          "impact": "Renewed fiscal/monetary stimulus could reverse demand weakness"
+        },
+        {
+          "risk": "AI demand acceleration",
+          "probability": "Medium",
+          "impact": "Data center buildout could exceed forecasts; power constraints drive more grid spend"
+        },
+        {
+          "risk": "US tariff imposition on non-critical imports",
+          "probability": "Medium",
+          "impact": "Could boost domestic copper premium and COMEX prices"
+        }
+      ],
+      "downside": [
+        {
+          "risk": "China demand collapse",
+          "probability": "Low-Medium",
+          "impact": "Property sector deterioration could drive demand below -10% YoY"
+        },
+        {
+          "risk": "Global recession",
+          "probability": "Low",
+          "impact": "Broad demand destruction across all end markets"
+        },
+        {
+          "risk": "Supply recovery surprise",
+          "probability": "Low",
+          "impact": "Faster Grasberg restart or new supply could flip to surplus"
+        },
+        {
+          "risk": "Long liquidation cascade",
+          "probability": "Medium",
+          "impact": "Extended positioning could unwind sharply on negative catalyst"
+        },
+        {
+          "risk": "Tariff removal on copper",
+          "probability": "Low-Medium",
+          "impact": "Loss of critical minerals premium could pressure prices"
+        }
+      ]
+    },
+    "trading_recommendations": {
+      "strategic_view": "Moderately bullish medium-term; neutral near-term",
+      "preferred_approach": "Buy pullbacks to support rather than chase breakouts",
+      "entry_zones": [
+        {
+          "level_usd_lb": "5.50-5.70",
+          "rationale": "Immediate support zone with good risk/reward"
+        },
+        {
+          "level_usd_lb": "5.00-5.20",
+          "rationale": "Major support - attractive if reached"
+        }
+      ],
+      "target_zones": [
+        {
+          "level_usd_lb": "6.15-6.30",
+          "rationale": "52-week high area and psychological resistance"
+        },
+        {
+          "level_usd_lb": "6.50+",
+          "rationale": "Extension target if deficit materializes"
+        }
+      ],
+      "stop_loss_guidance": "Below $5.00/lb invalidates bullish thesis",
+      "position_sizing": "Moderate given elevated volatility and extended positioning"
+    },
+    "executive_summary": "CME Copper Futures present a moderately bullish opportunity with asymmetric risk/reward favoring patient buyers. Supply constraints from mine disruptions (particularly Grasberg) and sluggish production growth (+1.4% in 2026) support structural tightness. Demand drivers from the energy transition, grid infrastructure, and AI/data centers provide a solid floor. However, near-term headwinds exist: China demand fell -8% in Q4 2025, COT positioning is extended at the 83rd percentile with declining net longs, and current price ($5.88/lb) already reflects much of the bullish consensus. The key differentiation among analysts is demand assumptions - JP Morgan sees a 330kt deficit while Goldman sees a 160kt surplus. We favor the mild deficit scenario but acknowledge uncertainty. Recommended approach: maintain moderate bullish exposure, add on pullbacks to $5.50-5.70 support, take profits on approaches to $6.15-6.30, and use $5.00 as a stop-loss level. Monitor COT data for positioning reset (sub-70% strength) as potential re-entry signal."
+  },
+  "sources": [
+    {
+      "name": "CME Group - Copper Overview",
+      "url": "https://www.cmegroup.com/markets/metals/base/copper.html",
+      "data_used": "Contract specifications, current pricing"
+    },
+    {
+      "name": "Trading Economics - Copper",
+      "url": "https://tradingeconomics.com/commodity/copper",
+      "data_used": "Current price, 52-week range, YTD performance"
+    },
+    {
+      "name": "Investing.com - Copper Futures",
+      "url": "https://www.investing.com/commodities/copper",
+      "data_used": "Real-time pricing, daily range"
+    },
+    {
+      "name": "TradingView - HG1! Charts",
+      "url": "https://www.tradingview.com/symbols/COMEX-HG1!/",
+      "data_used": "Price quotes, recent price action"
+    },
+    {
+      "name": "CFTC - Commitments of Traders",
+      "url": "https://www.cftc.gov/dea/futures/deacmxsf.htm",
+      "data_used": "COT report data for copper positioning"
+    },
+    {
+      "name": "InvestMacro - COT Metals Charts",
+      "url": "https://investmacro.com/2026/01/cot-metals-charts-weekly-speculator-changes-led-by-gold-4/",
+      "data_used": "COT strength scores, weekly position changes"
+    },
+    {
+      "name": "StoneX - Commodity Futures Positioning",
+      "url": "https://www.stonex.com/en/market-intelligence/commodity-futures-positioning-gold-silver-copper-wti-crude-cot-report/",
+      "data_used": "COT analysis and positioning trends"
+    },
+    {
+      "name": "JP Morgan - Copper Market Outlook",
+      "url": "https://www.jpmorgan.com/insights/global-research/commodities/copper-outlook",
+      "data_used": "Price forecasts, supply-demand balance, analyst views"
+    },
+    {
+      "name": "Goldman Sachs - Copper Price Forecast",
+      "url": "https://www.goldmansachs.com/insights/articles/copper-prices-forecast-to-decline-from-record-highs-in-2026",
+      "data_used": "Price forecasts, surplus projections"
+    },
+    {
+      "name": "Mining.com - Copper Supply and Tariff Risks",
+      "url": "https://www.mining.com/coppers-tight-supply-and-tariff-risks-set-for-a-volatile-2026/",
+      "data_used": "Supply constraints, tariff risk analysis"
+    },
+    {
+      "name": "Wood Mackenzie - Copper Supply Demand",
+      "url": "https://www.woodmac.com/blogs/the-edge/can-copper-supply-keep-up-with-surging-demand/",
+      "data_used": "Long-term supply-demand outlook"
+    },
+    {
+      "name": "S&P Global - Copper Supply Study",
+      "url": "https://press.spglobal.com/2026-01-08-Substantial-Shortfall-in-Copper-Supply-Widens-as-the-Race-for-AI-and-Growing-Defense-Spending-Add-to-Accelerating-Demand,-New-S-P-Global-Study-Finds",
+      "data_used": "Supply shortfall analysis, AI and defense demand"
+    },
+    {
+      "name": "SMM - Copper Conference Takeaways",
+      "url": "https://www.metal.com/en/newscontent/103601469",
+      "data_used": "Mine production data, China smelter dynamics"
+    },
+    {
+      "name": "Fastmarkets - Base Metals 2026 Outlook",
+      "url": "https://www.fastmarkets.com/insights/what-will-2026-bring-for-base-metals-prices/",
+      "data_used": "Industry price forecasts"
+    },
+    {
+      "name": "Argus Media - US Copper 2026 Outlook",
+      "url": "https://www.argusmedia.com/en/news-and-insights/latest-market-news/2771940-viewpoint-us-copper-faces-uncertain-2026-outlook",
+      "data_used": "US market outlook, policy uncertainty"
+    },
+    {
+      "name": "Investing News - Copper Forecast 2026",
+      "url": "https://investingnews.com/daily/resource-investing/base-metals-investing/copper-investing/copper-forecast/",
+      "data_used": "Analyst consensus, key trends"
+    },
+    {
+      "name": "deVere Group - Copper Price Forecast 2026",
+      "url": "https://www.devere-group.com/copper-price-forecast-2026-analysts-issue-bullish-outlook-amid-supply-shortage/",
+      "data_used": "Bullish outlook rationale"
+    },
+    {
+      "name": "Barchart - Copper Futures",
+      "url": "https://www.barchart.com/futures/quotes/HG*0/futures-prices",
+      "data_used": "Futures pricing data"
+    }
+  ],
+  "disclaimer": "This analysis is for informational purposes only and does not constitute investment advice. Commodity futures trading involves substantial risk of loss. Past performance is not indicative of future results. All data and analysis are based on publicly available information as of the analysis date and may not reflect current market conditions."
+}

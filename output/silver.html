@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CME Silver Futures (COMEX) - Comprehensive Outlook Report</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary: #1a365d;
+            --secondary: #2c5282;
+            --accent: #4299e1;
+            --success: #48bb78;
+            --warning: #ed8936;
+            --danger: #f56565;
+            --neutral: #718096;
+            --bg-light: #f7fafc;
+            --bg-card: #ffffff;
+            --text-primary: #1a202c;
+            --text-secondary: #4a5568;
+            --border: #e2e8f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-light);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #4a5568 0%, #718096 100%);
+            color: white;
+            padding: 40px 20px;
+            margin-bottom: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        header .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        header .date {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .executive-summary {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--success);
+        }
+
+        .executive-summary h2 {
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .outlook-badge {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin: 15px 0;
+        }
+
+        .outlook-bearish {
+            background: linear-gradient(135deg, #fc8181 0%, #f56565 100%);
+            color: white;
+        }
+
+        .outlook-neutral {
+            background: linear-gradient(135deg, #fbd38d 0%, #ed8936 100%);
+            color: white;
+        }
+
+        .outlook-bullish {
+            background: linear-gradient(135deg, #68d391 0%, #48bb78 100%);
+            color: white;
+        }
+
+        .score-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .score-card {
+            background: var(--bg-light);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .score-card .label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .score-card .value {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .score-positive { color: var(--success); }
+        .score-negative { color: var(--danger); }
+        .score-neutral { color: var(--warning); }
+
+        .section {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .section h2 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .section h3 {
+            color: var(--secondary);
+            margin: 20px 0 15px 0;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background: var(--bg-light);
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        tr:hover {
+            background: var(--bg-light);
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+            margin: 20px 0;
+        }
+
+        .indicator {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin: 5px;
+        }
+
+        .indicator-bullish {
+            background: #c6f6d5;
+            color: #276749;
+        }
+
+        .indicator-bearish {
+            background: #fed7d7;
+            color: #c53030;
+        }
+
+        .indicator-neutral {
+            background: #fefcbf;
+            color: #975a16;
+        }
+
+        .key-level {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 15px;
+            background: var(--bg-light);
+            border-radius: 6px;
+            margin: 8px 0;
+        }
+
+        .key-level .price {
+            font-weight: bold;
+            font-family: monospace;
+            font-size: 1.1rem;
+        }
+
+        .key-level.support { border-left: 4px solid var(--success); }
+        .key-level.resistance { border-left: 4px solid var(--danger); }
+
+        .news-item {
+            padding: 15px;
+            border-left: 3px solid var(--accent);
+            margin: 15px 0;
+            background: var(--bg-light);
+            border-radius: 0 8px 8px 0;
+        }
+
+        .news-item .date {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .news-item .title {
+            font-weight: 600;
+            margin: 5px 0;
+        }
+
+        .news-item .impact {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+        }
+
+        .impact-bullish { background: #c6f6d5; color: #276749; }
+        .impact-bearish { background: #fed7d7; color: #c53030; }
+        .impact-neutral { background: #e2e8f0; color: #4a5568; }
+
+        .debate-box {
+            background: linear-gradient(135deg, #ebf8ff 0%, #bee3f8 100%);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .debate-box h4 {
+            color: var(--secondary);
+            margin-bottom: 15px;
+        }
+
+        .debate-round {
+            margin: 15px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 6px;
+        }
+
+        .debate-round .agent {
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .risk-matrix {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .risk-column h4 {
+            padding: 10px 15px;
+            border-radius: 6px 6px 0 0;
+            margin-bottom: 0;
+        }
+
+        .risk-column.upside h4 {
+            background: var(--success);
+            color: white;
+        }
+
+        .risk-column.downside h4 {
+            background: var(--danger);
+            color: white;
+        }
+
+        .risk-column ul {
+            background: var(--bg-light);
+            padding: 15px 15px 15px 35px;
+            border-radius: 0 0 6px 6px;
+            min-height: 200px;
+        }
+
+        .risk-column li {
+            margin: 8px 0;
+        }
+
+        .source-list {
+            columns: 2;
+            column-gap: 30px;
+        }
+
+        .source-list li {
+            margin: 8px 0;
+            font-size: 0.9rem;
+            break-inside: avoid;
+        }
+
+        .source-list a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .source-list a:hover {
+            text-decoration: underline;
+        }
+
+        .gauge-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .gauge {
+            width: 200px;
+            height: 100px;
+            position: relative;
+        }
+
+        .confidence-bar {
+            height: 30px;
+            background: linear-gradient(90deg, #f56565 0%, #ed8936 25%, #ecc94b 50%, #48bb78 75%, #38a169 100%);
+            border-radius: 15px;
+            position: relative;
+            margin: 20px 0;
+        }
+
+        .confidence-marker {
+            position: absolute;
+            top: -5px;
+            width: 4px;
+            height: 40px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        .confidence-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .disclaimer {
+            background: #fff5f5;
+            border: 1px solid #fc8181;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 30px;
+            font-size: 0.85rem;
+        }
+
+        .disclaimer h4 {
+            color: #c53030;
+            margin-bottom: 10px;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #faf089 0%, #f6e05e 100%);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .highlight-box h4 {
+            color: #744210;
+            margin-bottom: 10px;
+        }
+
+        .highlight-box-green {
+            background: linear-gradient(135deg, #c6f6d5 0%, #9ae6b4 100%);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .highlight-box-green h4 {
+            color: #276749;
+            margin-bottom: 10px;
+        }
+
+        .metric-pill {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin: 2px;
+        }
+
+        .pill-green { background: #c6f6d5; color: #276749; }
+        .pill-red { background: #fed7d7; color: #c53030; }
+        .pill-yellow { background: #fefcbf; color: #975a16; }
+        .pill-blue { background: #bee3f8; color: #2c5282; }
+        .pill-silver { background: #e2e8f0; color: #4a5568; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>CME Silver Futures (COMEX)</h1>
+            <div class="subtitle">Comprehensive Commodity Outlook Report</div>
+            <div class="date">Report Date: January 20, 2026 | Data as of: January 20, 2026</div>
+        </header>
+
+        <!-- Executive Summary -->
+        <section class="executive-summary">
+            <h2>Executive Summary</h2>
+
+            <div class="outlook-badge outlook-bullish">
+                OVERALL OUTLOOK: BULLISH
+            </div>
+
+            <p style="margin: 20px 0; font-size: 1.1rem;">
+                CME Silver Futures present a compelling <strong>bullish opportunity</strong> driven by persistent supply deficits, industrial demand growth from solar PV, and supportive macro factors including expected Fed rate cuts. With China's export restrictions effective January 1, 2026 constraining 60-70% of global supply, and a cumulative 820M oz deficit since 2021, the supply-demand fundamentals strongly favor higher prices. While technical overbought conditions warrant near-term caution, institutional targets suggest significant upside potential toward $100-110/oz by H2 2026.
+            </p>
+
+            <div class="score-grid">
+                <div class="score-card">
+                    <div class="label">Composite Score</div>
+                    <div class="value score-positive">7.83</div>
+                </div>
+                <div class="score-card">
+                    <div class="label">Current Price</div>
+                    <div class="value" style="color: var(--primary);">$93.36</div>
+                </div>
+                <div class="score-card">
+                    <div class="label">Gold/Silver Ratio</div>
+                    <div class="value" style="color: var(--success);">49.7</div>
+                </div>
+            </div>
+
+            <h3>Key Takeaways</h3>
+            <ul style="margin-left: 20px;">
+                <li><strong>Near-term Price Range (1-3 months):</strong> $90-100/oz</li>
+                <li><strong>Medium-term Target (6 months):</strong> $95-110/oz</li>
+                <li><strong>Downside Scenario:</strong> $80-85/oz (corrective pullback)</li>
+                <li><strong>Primary Catalyst:</strong> China export restrictions + Fed rate cuts</li>
+                <li><strong>Key Risk:</strong> Overbought technical conditions at all-time highs</li>
+            </ul>
+        </section>
+
+        <!-- Current Price & Key Metrics -->
+        <section class="section">
+            <h2>Current Market Snapshot</h2>
+
+            <div class="two-column">
+                <div>
+                    <table>
+                        <tr>
+                            <th colspan="2">Price Data (Active Contract)</th>
+                        </tr>
+                        <tr>
+                            <td>Current Price</td>
+                            <td><strong>$93.36/oz</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Market Status</td>
+                            <td><span class="metric-pill pill-green">At All-Time Highs</span></td>
+                        </tr>
+                        <tr>
+                            <td>Gold/Silver Ratio</td>
+                            <td>49.7 (below historical 60-80)</td>
+                        </tr>
+                        <tr>
+                            <td>YTD Performance</td>
+                            <td><span class="metric-pill pill-green">Strong Uptrend</span></td>
+                        </tr>
+                        <tr>
+                            <td>Citi Near-term Target</td>
+                            <td>$100/oz by March 2026</td>
+                        </tr>
+                    </table>
+                </div>
+                <div>
+                    <table>
+                        <tr>
+                            <th colspan="2">Supply/Demand Metrics</th>
+                        </tr>
+                        <tr>
+                            <td>2025 Supply Deficit</td>
+                            <td><strong>117M oz</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Cumulative Deficit (2021-25)</td>
+                            <td><strong>820M oz</strong></td>
+                        </tr>
+                        <tr>
+                            <td>COMEX Inventory Change</td>
+                            <td><span class="metric-pill pill-red">-70% since 2020</span></td>
+                        </tr>
+                        <tr>
+                            <td>Solar PV Demand Share</td>
+                            <td><strong>>25% of annual supply</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Consecutive Deficit Years</td>
+                            <td><strong>5 years</strong></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Module Scores Section -->
+        <section class="section">
+            <h2>Analysis Module Scores</h2>
+
+            <div class="chart-container">
+                <canvas id="moduleScoresChart"></canvas>
+            </div>
+
+            <div class="score-grid" style="margin-top: 30px;">
+                <div class="score-card">
+                    <div class="label">Fundamentals</div>
+                    <div class="value score-positive">8.5</div>
+                    <div style="font-size: 0.8rem; color: var(--success);">Bullish</div>
+                </div>
+                <div class="score-card">
+                    <div class="label">News Sentiment</div>
+                    <div class="value score-positive">8.0</div>
+                    <div style="font-size: 0.8rem; color: var(--success);">Bullish</div>
+                </div>
+                <div class="score-card">
+                    <div class="label">Market Views</div>
+                    <div class="value score-positive">8.5</div>
+                    <div style="font-size: 0.8rem; color: var(--success);">Bullish</div>
+                </div>
+                <div class="score-card">
+                    <div class="label">Technical</div>
+                    <div class="value score-positive">7.5</div>
+                    <div style="font-size: 0.8rem; color: var(--warning);">Bullish w/ Caution</div>
+                </div>
+                <div class="score-card">
+                    <div class="label">Market Structure</div>
+                    <div class="value score-positive">7.5</div>
+                    <div style="font-size: 0.8rem; color: var(--success);">Moderately Bullish</div>
+                </div>
+                <div class="score-card">
+                    <div class="label">Positioning</div>
+                    <div class="value score-neutral">7.0</div>
+                    <div style="font-size: 0.8rem; color: var(--warning);">Neutral to Bullish</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fundamentals Section -->
+        <section class="section">
+            <h2>Fundamentals Analysis</h2>
+            <div class="indicator indicator-bullish">Score: 8.5 (Bullish)</div>
+
+            <div class="two-column">
+                <div>
+                    <h3>Supply/Demand Deficit History</h3>
+                    <div class="chart-container">
+                        <canvas id="supplyDeficitChart"></canvas>
+                    </div>
+                </div>
+                <div>
+                    <h3>Key Metrics</h3>
+                    <table>
+                        <tr>
+                            <td>2025 Deficit</td>
+                            <td><strong>117M oz</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Deficit Streak</td>
+                            <td><span class="metric-pill pill-red">5th consecutive year</span></td>
+                        </tr>
+                        <tr>
+                            <td>Cumulative Deficit</td>
+                            <td><strong>820M oz</strong> (since 2021)</td>
+                        </tr>
+                        <tr>
+                            <td>Solar PV Demand</td>
+                            <td><strong>>25%</strong> of annual supply</td>
+                        </tr>
+                        <tr>
+                            <td>COMEX Inventories</td>
+                            <td><span class="metric-pill pill-red">-70% since 2020</span></td>
+                        </tr>
+                        <tr>
+                            <td>China Supply Control</td>
+                            <td><strong>60-70%</strong> of global</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="highlight-box-green">
+                <h4>Structural Supply Squeeze</h4>
+                <p>Silver is experiencing a <strong>five-year cumulative supply deficit of 820 million ounces</strong> - an unprecedented draw on above-ground stocks. With China's new export restrictions (effective January 1, 2026) now limiting 60-70% of global supply, and solar PV demand consuming over 25% of annual production, the structural supply-demand imbalance is expected to persist and potentially intensify.</p>
+            </div>
+
+            <h3>Demand Drivers</h3>
+            <div class="two-column" style="margin-top: 15px;">
+                <div>
+                    <h4 style="color: var(--success); margin-bottom: 10px;">Industrial Demand</h4>
+                    <ul style="margin-left: 20px;">
+                        <li>Solar PV installations accelerating globally</li>
+                        <li>Electric vehicle production growth</li>
+                        <li>5G infrastructure buildout</li>
+                        <li>Electronics and semiconductor demand</li>
+                        <li>Medical device applications</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="color: var(--success); margin-bottom: 10px;">Investment Demand</h4>
+                    <ul style="margin-left: 20px;">
+                        <li>Safe-haven buying amid macro uncertainty</li>
+                        <li>Portfolio diversification demand</li>
+                        <li>Gold/silver ratio normalization thesis</li>
+                        <li>ETF inflows resuming</li>
+                        <li>Central bank diversification</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="debate-box">
+                <h4>Agent Debate Summary</h4>
+                <div class="debate-round">
+                    <p><span class="agent">TM-FUND Initial:</span> Strongly bullish score of 8.5 based on five consecutive years of supply deficits, declining COMEX inventories, and China export restrictions creating supply shock.</p>
+                </div>
+                <div class="debate-round">
+                    <p><span class="agent">SUP-A Challenge:</span> "While fundamentals are compelling, substitution risk in solar PV (copper, aluminum alternatives) and potential recession-driven industrial demand weakness could moderate the deficit."</p>
+                </div>
+                <div class="debate-round">
+                    <p><span class="agent">Final Consensus:</span> Score maintained at 8.5. Substitution risk acknowledged but deemed unlikely to materially impact near-term given solar efficiency requirements. Fundamental supply-demand picture remains decisively bullish.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- News & Policy Section -->
+        <section class="section">
+            <h2>News & Policy Analysis</h2>
+            <div class="indicator indicator-bullish">Sentiment Score: 8.0 (Bullish)</div>
+
+            <h3>Recent Key Events</h3>
+            <div class="news-item">
+                <div class="date">January 1, 2026</div>
+                <div class="title">China Export Restrictions Take Effect</div>
+                <span class="impact impact-bullish">Highly Bullish</span>
+                <p>China's new export controls on silver and silver-containing products become effective, restricting 60-70% of global supply. Market expects significant supply tightening.</p>
+            </div>
+
+            <div class="news-item">
+                <div class="date">January 15, 2026</div>
+                <div class="title">Fed Signals Rate Cuts Expected in 2026</div>
+                <span class="impact impact-bullish">Bullish</span>
+                <p>Federal Reserve communications suggest multiple rate cuts are likely in 2026, supporting precious metals as lower rates reduce opportunity cost of holding non-yielding assets.</p>
+            </div>
+
+            <div class="news-item">
+                <div class="date">January 10, 2026</div>
+                <div class="title">Citi Raises Silver Price Target to $100</div>
+                <span class="impact impact-bullish">Bullish</span>
+                <p>Citi analysts set near-term target of $100/oz by March 2026, with potential for $110/oz by H2 2026 citing supply constraints and industrial demand.</p>
+            </div>
+
+            <div class="news-item">
+                <div class="date">January 8, 2026</div>
+                <div class="title">COMEX Silver Inventories Hit Multi-Year Low</div>
+                <span class="impact impact-bullish">Bullish</span>
+                <p>COMEX registered silver inventories down 70% from 2020 levels, indicating strong physical demand and tight spot market conditions.</p>
+            </div>
+
+            <div class="news-item">
+                <div class="date">January 5, 2026</div>
+                <div class="title">Solar Industry Projects Record Silver Demand</div>
+                <span class="impact impact-bullish">Bullish</span>
+                <p>Solar industry groups project continued growth in photovoltaic installations, with silver demand from solar expected to exceed 25% of annual supply.</p>
+            </div>
+
+            <h3>Policy Environment</h3>
+            <table>
+                <tr>
+                    <th>Policy/Event</th>
+                    <th>Date</th>
+                    <th>Impact</th>
+                </tr>
+                <tr>
+                    <td>China Silver Export Restrictions</td>
+                    <td>Jan 1, 2026</td>
+                    <td><span class="metric-pill pill-green">Highly Bullish</span></td>
+                </tr>
+                <tr>
+                    <td>Fed Rate Cut Expectations</td>
+                    <td>2026 Guidance</td>
+                    <td><span class="metric-pill pill-green">Bullish for Metals</span></td>
+                </tr>
+                <tr>
+                    <td>Green Energy Subsidies (IRA)</td>
+                    <td>Ongoing</td>
+                    <td><span class="metric-pill pill-green">Supports Solar Demand</span></td>
+                </tr>
+                <tr>
+                    <td>EU Green Deal Implementation</td>
+                    <td>Ongoing</td>
+                    <td><span class="metric-pill pill-green">Supports Industrial Demand</span></td>
+                </tr>
+            </table>
+
+            <div class="highlight-box">
+                <h4>China Export Restrictions - Key Development</h4>
+                <p>China's export restrictions effective January 1, 2026 represent a <strong>structural shift</strong> in the global silver market. With China controlling 60-70% of global silver supply, these restrictions significantly constrain non-Chinese access to refined silver, adding urgency to the already tight supply picture and potentially accelerating price appreciation.</p>
+            </div>
+        </section>
+
+        <!-- Market Views Section -->
+        <section class="section">
+            <h2>Market Views & Consensus Analysis</h2>
+            <div class="indicator indicator-bullish">Score: 8.5 (Bullish)</div>
+
+            <h3>Prevailing Market Narrative</h3>
+            <p style="font-size: 1.05rem; padding: 15px; background: var(--bg-light); border-radius: 8px;">
+                "Silver is experiencing a structural supply deficit now in its fifth consecutive year, with China export restrictions, solar demand growth, and Fed rate cuts creating a perfect storm for higher prices. Major banks target $100+ by mid-2026."
+            </p>
+
+            <div class="two-column" style="margin-top: 25px;">
+                <div>
+                    <h3 style="color: var(--success);">Institutional Price Targets</h3>
+                    <table>
+                        <tr>
+                            <td>Citi (Near-term)</td>
+                            <td><strong>$100/oz</strong> by March 2026</td>
+                        </tr>
+                        <tr>
+                            <td>Citi (Medium-term)</td>
+                            <td><strong>$110/oz</strong> by H2 2026</td>
+                        </tr>
+                        <tr>
+                            <td>Consensus Range</td>
+                            <td><strong>$95-110/oz</strong></td>
+                        </tr>
+                    </table>
+                </div>
+                <div>
+                    <h3 style="color: var(--success);">Bull Case Drivers</h3>
+                    <ul style="margin-left: 20px;">
+                        <li>Five consecutive years of supply deficit</li>
+                        <li>China export restrictions (60-70% of supply)</li>
+                        <li>Solar PV demand >25% of annual supply</li>
+                        <li>COMEX inventories -70% since 2020</li>
+                        <li>Gold/silver ratio at 49.7 (vs historical 60-80)</li>
+                        <li>Expected Fed rate cuts in 2026</li>
+                        <li>Industrial + investment demand convergence</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>Logic Soundness Assessment</h3>
+            <div style="padding: 15px; background: #c6f6d5; border-radius: 8px; margin-top: 15px;">
+                <p><strong>Verdict: SOUND - Strong Fundamental Support</strong></p>
+                <p style="margin-top: 10px;">The bullish consensus is well-supported by verifiable supply-demand data. The combination of persistent deficits, declining inventories, China supply restrictions, and structural industrial demand growth creates a compelling fundamental case. The primary caveat is technical overbought conditions at all-time highs, warranting tactical caution on entry timing.</p>
+            </div>
+
+            <h3>Potential Blind Spots</h3>
+            <ul style="margin-left: 20px; margin-top: 15px;">
+                <li><strong>Technical Overbought:</strong> Price at all-time highs may face near-term correction</li>
+                <li><strong>Recession Risk:</strong> Economic downturn could reduce industrial demand</li>
+                <li><strong>Substitution:</strong> Solar manufacturers exploring silver alternatives</li>
+                <li><strong>China Policy Reversal:</strong> Export restrictions could be modified</li>
+            </ul>
+        </section>
+
+        <!-- Technical Analysis Section -->
+        <section class="section">
+            <h2>Technical Analysis</h2>
+            <div class="indicator indicator-bullish">Score: 7.5 (Bullish with Caution)</div>
+
+            <div class="two-column">
+                <div>
+                    <h3>Trend Indicators</h3>
+                    <table>
+                        <tr>
+                            <td>Price Position</td>
+                            <td><span class="metric-pill pill-green">At All-Time Highs</span></td>
+                        </tr>
+                        <tr>
+                            <td>Trend Direction</td>
+                            <td><span class="metric-pill pill-green">Strong Uptrend</span></td>
+                        </tr>
+                        <tr>
+                            <td>Momentum</td>
+                            <td><span class="metric-pill pill-yellow">Overbought RSI</span></td>
+                        </tr>
+                        <tr>
+                            <td>Volume</td>
+                            <td><span class="metric-pill pill-green">Confirming</span></td>
+                        </tr>
+                        <tr>
+                            <td>Pattern</td>
+                            <td><span class="metric-pill pill-green">Breakout Mode</span></td>
+                        </tr>
+                    </table>
+                </div>
+                <div>
+                    <h3>Key Levels</h3>
+                    <div class="key-level resistance">
+                        <span>$110.00 - H2 2026 Target</span>
+                        <span class="price">$110.00</span>
+                    </div>
+                    <div class="key-level resistance">
+                        <span>$100.00 - March Target / Psychological</span>
+                        <span class="price">$100.00</span>
+                    </div>
+                    <div style="padding: 10px; text-align: center; background: linear-gradient(135deg, #c6f6d5 0%, #9ae6b4 100%); margin: 8px 0; border-radius: 6px;">
+                        <strong>Current: $93.36 (All-Time High)</strong>
+                    </div>
+                    <div class="key-level support">
+                        <span>$90.00 - Near Support / Psychological</span>
+                        <span class="price">$90.00</span>
+                    </div>
+                    <div class="key-level support">
+                        <span>$85.00 - Pullback Support</span>
+                        <span class="price">$85.00</span>
+                    </div>
+                    <div class="key-level support">
+                        <span>$80.00 - Major Support / Downside Scenario</span>
+                        <span class="price">$80.00</span>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Technical Verdict</h3>
+            <p>Silver is trading at <strong>all-time highs</strong> with strong upward momentum, confirming the bullish fundamental narrative. However, <strong>overbought technical conditions</strong> suggest near-term caution is warranted. The score of 7.5 reflects bullish trend confirmation tempered by elevated risk of a corrective pullback. Traders should consider scaling into positions or waiting for pullbacks to the $85-90 support zone. A break above $100 would confirm continuation toward the $110 target.</p>
+
+            <div class="highlight-box">
+                <h4>Technical Caution Flag</h4>
+                <p>While the trend is decisively bullish, <strong>buying at all-time highs</strong> carries elevated risk. Prudent positioning would involve scaling into long positions on pullbacks toward $85-90 support rather than chasing at current levels. The fundamental case remains compelling, but technical discipline suggests patience for better entry points.</p>
+            </div>
+        </section>
+
+        <!-- Market Structure Section -->
+        <section class="section">
+            <h2>Market Structure Analysis</h2>
+            <div class="indicator indicator-bullish">Score: 7.5 (Moderately Bullish)</div>
+
+            <div class="two-column">
+                <div>
+                    <h3>Curve Structure</h3>
+                    <table>
+                        <tr>
+                            <td>Current Structure</td>
+                            <td><span class="metric-pill pill-green">Backwardation</span></td>
+                        </tr>
+                        <tr>
+                            <td>Backwardation Since</td>
+                            <td><strong>October 2025</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Structure Signal</td>
+                            <td><span class="metric-pill pill-green">Supply Tightness</span></td>
+                        </tr>
+                        <tr>
+                            <td>Roll Yield</td>
+                            <td><span class="metric-pill pill-green">Positive for Longs</span></td>
+                        </tr>
+                    </table>
+
+                    <h3 style="margin-top: 20px;">Inventory Analysis</h3>
+                    <table>
+                        <tr>
+                            <td>COMEX Inventories</td>
+                            <td><span class="metric-pill pill-red">-70% since 2020</span></td>
+                        </tr>
+                        <tr>
+                            <td>Inventory Trend</td>
+                            <td><span class="metric-pill pill-green">Consistent Draws</span></td>
+                        </tr>
+                        <tr>
+                            <td>Physical Premium</td>
+                            <td><span class="metric-pill pill-green">Elevated</span></td>
+                        </tr>
+                    </table>
+                </div>
+                <div>
+                    <h3>Structural Implications</h3>
+                    <ul style="margin-left: 20px;">
+                        <li><strong>Backwardation</strong> since October 2025 indicates tight spot supply</li>
+                        <li>COMEX inventory decline of 70% reflects strong physical demand</li>
+                        <li>Curve structure supports long positions (positive roll yield)</li>
+                        <li>Physical premiums indicate retail/industrial buying pressure</li>
+                        <li>Supply constraints likely to persist given China restrictions</li>
+                    </ul>
+
+                    <div class="highlight-box-green" style="margin-top: 20px;">
+                        <h4>Backwardation Signal</h4>
+                        <p>The shift to backwardation in October 2025 is a <strong>significant structural bullish signal</strong>, indicating that near-term supply is tighter than forward supply. This structure typically precedes sustained price rallies and benefits long positions through positive roll yield.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Positioning Section -->
+        <section class="section">
+            <h2>Positioning Analysis (COT Report)</h2>
+            <div class="indicator indicator-neutral">Score: 7.0 (Neutral to Bullish)</div>
+
+            <div class="two-column">
+                <div>
+                    <h3>COT Data</h3>
+                    <table>
+                        <tr>
+                            <td>Speculator Net Long</td>
+                            <td><strong>32,060 contracts</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Position Bias</td>
+                            <td><span class="metric-pill pill-green">Net Long</span></td>
+                        </tr>
+                        <tr>
+                            <td>Position vs Historical</td>
+                            <td><span class="metric-pill pill-yellow">Moderate</span></td>
+                        </tr>
+                        <tr>
+                            <td>Room for Addition</td>
+                            <td><span class="metric-pill pill-green">Yes</span></td>
+                        </tr>
+                    </table>
+                </div>
+                <div>
+                    <h3>Positioning Gauge</h3>
+                    <p style="text-align: center; margin-bottom: 10px;">Speculator Positioning (1-Year Range)</p>
+                    <div class="confidence-bar">
+                        <div class="confidence-marker" style="left: 70%;"></div>
+                    </div>
+                    <div class="confidence-labels">
+                        <span>Extreme Short</span>
+                        <span>Neutral</span>
+                        <span>Extreme Long</span>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Positioning Analysis</h3>
+            <p style="margin-top: 15px;">Speculator positioning is <strong>net long at 32,060 contracts</strong>, reflecting bullish sentiment but not at extreme levels. This is constructive as it suggests the market is positioned directionally correct with room for additional long builds. The positioning is not crowded, reducing risk of a sharp unwind. Commercial hedgers remain short (typical for a rising market), while managed money aligns with the bullish fundamental narrative.</p>
+
+            <div class="chart-container">
+                <canvas id="positioningChart"></canvas>
+            </div>
+        </section>
+
+        <!-- Risk Assessment -->
+        <section class="section">
+            <h2>Risk Assessment</h2>
+
+            <div class="risk-matrix">
+                <div class="risk-column upside">
+                    <h4>Upside Risks</h4>
+                    <ul>
+                        <li>China export restrictions tighter than expected</li>
+                        <li>Solar demand acceleration beyond forecasts</li>
+                        <li>Aggressive Fed rate cuts</li>
+                        <li>Gold/silver ratio normalization (currently 49.7 vs 60-80 historical)</li>
+                        <li>Geopolitical safe-haven buying</li>
+                        <li>ETF inflows surge</li>
+                        <li>Industrial demand surprise (EVs, 5G)</li>
+                    </ul>
+                </div>
+                <div class="risk-column downside">
+                    <h4>Downside Risks</h4>
+                    <ul>
+                        <li>Technical correction from overbought levels</li>
+                        <li>Global recession reducing industrial demand</li>
+                        <li>Silver substitution in solar PV</li>
+                        <li>China policy reversal on exports</li>
+                        <li>Dollar strength on risk-off</li>
+                        <li>Mine supply response to high prices</li>
+                        <li>Speculative long liquidation</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 25px;">Price Scenarios</h3>
+            <table>
+                <tr>
+                    <th>Scenario</th>
+                    <th>Timeframe</th>
+                    <th>Price Target</th>
+                    <th>Probability</th>
+                </tr>
+                <tr>
+                    <td>Bull Case (Supply Squeeze)</td>
+                    <td>6 months</td>
+                    <td>$105-115/oz</td>
+                    <td>30%</td>
+                </tr>
+                <tr>
+                    <td>Base Case (Continued Rally)</td>
+                    <td>6 months</td>
+                    <td>$95-110/oz</td>
+                    <td>50%</td>
+                </tr>
+                <tr>
+                    <td>Near-term Range</td>
+                    <td>1-3 months</td>
+                    <td>$90-100/oz</td>
+                    <td>60%</td>
+                </tr>
+                <tr>
+                    <td>Downside Scenario (Correction)</td>
+                    <td>1-3 months</td>
+                    <td>$80-85/oz</td>
+                    <td>20%</td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- Conclusion -->
+        <section class="section">
+            <h2>Conclusion & Trading Implications</h2>
+
+            <div class="score-grid">
+                <div class="score-card">
+                    <div class="label">Overall Outlook</div>
+                    <div class="value" style="font-size: 1.5rem; color: var(--success);">BULLISH</div>
+                </div>
+                <div class="score-card">
+                    <div class="label">Composite Score</div>
+                    <div class="value" style="font-size: 1.5rem;">7.83/10</div>
+                </div>
+                <div class="score-card">
+                    <div class="label">Confidence Level</div>
+                    <div class="value" style="font-size: 1.5rem;">HIGH</div>
+                </div>
+            </div>
+
+            <h3>Synthesis</h3>
+            <p style="font-size: 1.05rem; line-height: 1.7;">
+                CME Silver Futures present a <strong>compelling bullish opportunity</strong> supported by the convergence of multiple positive factors. The fundamental picture is exceptionally strong: a fifth consecutive year of supply deficit (117M oz in 2025), cumulative depletion of 820M oz since 2021, China export restrictions constraining 60-70% of global supply, and solar PV demand now exceeding 25% of annual production.
+            </p>
+            <p style="font-size: 1.05rem; line-height: 1.7; margin-top: 15px;">
+                The macro environment is supportive with expected Fed rate cuts reducing the opportunity cost of holding silver, while the gold/silver ratio at 49.7 remains below the historical 60-80 range, suggesting relative undervaluation. Institutional targets from Citi ($100 by March, $110 by H2) provide a roadmap for price appreciation.
+            </p>
+            <p style="font-size: 1.05rem; line-height: 1.7; margin-top: 15px;">
+                The primary caveat is <strong>technical overbought conditions</strong> at all-time highs, warranting tactical caution on entry timing. The market structure (backwardation since October 2025) and positioning (net long but not crowded at 32,060 contracts) support the bullish thesis without indicating excessive speculation.
+            </p>
+
+            <h3>Trading Considerations</h3>
+            <ul style="margin-left: 20px; font-size: 1.05rem;">
+                <li><strong>Strategic Longs:</strong> Maintain bullish bias with targets of $100-110/oz. Consider scaling into positions on pullbacks to $85-90 support.</li>
+                <li><strong>Tactical Entry:</strong> Avoid chasing at all-time highs. Wait for corrective pullbacks to improve risk/reward.</li>
+                <li><strong>Stop Placement:</strong> Below $80 for strategic positions; tighter stops at $88-90 for tactical trades.</li>
+                <li><strong>Options:</strong> Call spreads attractive given bullish outlook; consider protective puts for existing longs given overbought technicals.</li>
+                <li><strong>Risk Management:</strong> Position size appropriately given volatility potential at all-time highs.</li>
+            </ul>
+
+            <div class="highlight-box-green">
+                <h4>Investment Thesis Summary</h4>
+                <p>Silver's structural supply deficit, China export restrictions, and industrial demand growth create a <strong>multi-year bullish tailwind</strong>. While near-term technical caution is warranted, the fundamental case supports strategic long positioning with targets of $100-110/oz over the next 6 months. Corrections toward $85-90 should be viewed as buying opportunities.</p>
+            </div>
+
+            <div class="disclaimer">
+                <h4>Disclaimer</h4>
+                <p>This report is for informational purposes only and does not constitute investment advice. Commodity futures trading involves substantial risk of loss. Past performance is not indicative of future results. The analysis presented represents the output of an AI-driven multi-agent system and should be independently verified before making investment decisions.</p>
+            </div>
+        </section>
+
+        <!-- Sources -->
+        <section class="section">
+            <h2>Data Sources & References</h2>
+            <ul class="source-list">
+                <li><a href="https://www.cmegroup.com/markets/metals/precious/silver.html" target="_blank">CME Group Silver Futures</a></li>
+                <li><a href="https://www.silverinstitute.org/" target="_blank">The Silver Institute</a></li>
+                <li><a href="https://www.cftc.gov/MarketReports/CommitmentsofTraders/index.htm" target="_blank">CFTC Commitments of Traders</a></li>
+                <li><a href="https://www.comex.com/" target="_blank">COMEX Inventory Data</a></li>
+                <li><a href="https://www.citigroup.com/global/insights" target="_blank">Citi Research</a></li>
+                <li><a href="https://www.federalreserve.gov/" target="_blank">Federal Reserve</a></li>
+                <li><a href="https://www.seia.org/" target="_blank">Solar Energy Industries Association</a></li>
+                <li><a href="https://www.iea.org/" target="_blank">International Energy Agency</a></li>
+                <li><a href="https://www.tradingeconomics.com/commodity/silver" target="_blank">Trading Economics Silver</a></li>
+                <li><a href="https://www.investing.com/commodities/silver" target="_blank">Investing.com Silver</a></li>
+                <li><a href="https://www.kitco.com/silver-price-today-usa/" target="_blank">Kitco Silver Prices</a></li>
+                <li><a href="https://www.worldbank.org/en/research/commodity-markets" target="_blank">World Bank Commodity Markets</a></li>
+            </ul>
+        </section>
+
+        <footer>
+            <p>Report generated by Multi-Agent Commodity Analysis System</p>
+            <p>CME Silver Futures (COMEX) Outlook | January 20, 2026</p>
+            <p style="margin-top: 10px; font-size: 0.8rem;">Powered by Claude AI Multi-Agent Architecture</p>
+        </footer>
+    </div>
+
+    <script>
+        // Module Scores Chart
+        const moduleScoresCtx = document.getElementById('moduleScoresChart').getContext('2d');
+        new Chart(moduleScoresCtx, {
+            type: 'radar',
+            data: {
+                labels: ['Fundamentals', 'News Sentiment', 'Market Views', 'Technical', 'Market Structure', 'Positioning'],
+                datasets: [{
+                    label: 'Module Scores',
+                    data: [8.5, 8.0, 8.5, 7.5, 7.5, 7.0],
+                    fill: true,
+                    backgroundColor: 'rgba(72, 187, 120, 0.2)',
+                    borderColor: '#48bb78',
+                    pointBackgroundColor: '#48bb78',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: '#48bb78'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        angleLines: { display: true },
+                        suggestedMin: 0,
+                        suggestedMax: 10,
+                        ticks: { stepSize: 2 }
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    title: { display: true, text: 'Analysis Module Scores (0-10 Scale)' }
+                }
+            }
+        });
+
+        // Supply Deficit Chart
+        const supplyDeficitCtx = document.getElementById('supplyDeficitChart').getContext('2d');
+        new Chart(supplyDeficitCtx, {
+            type: 'bar',
+            data: {
+                labels: ['2021', '2022', '2023', '2024', '2025'],
+                datasets: [{
+                    label: 'Supply Deficit (M oz)',
+                    data: [-140, -180, -165, -218, -117],
+                    backgroundColor: '#f56565',
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: true, position: 'top' },
+                    title: { display: true, text: 'Annual Supply Deficit (Million Ounces)' }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: { display: true, text: 'Deficit (M oz)' },
+                        ticks: {
+                            callback: function(value) {
+                                return Math.abs(value);
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Positioning Chart
+        const posCtx = document.getElementById('positioningChart').getContext('2d');
+        new Chart(posCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Speculator Net Long', 'Commercial Net Short', 'Other Reportable'],
+                datasets: [{
+                    label: 'Net Position (Contracts)',
+                    data: [32060, -28500, -3560],
+                    backgroundColor: function(context) {
+                        const value = context.raw;
+                        return value > 0 ? '#48bb78' : '#f56565';
+                    },
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y',
+                plugins: {
+                    legend: { display: false },
+                    title: { display: true, text: 'COT Positioning (Latest Report)' }
+                },
+                scales: {
+                    x: {
+                        title: { display: true, text: 'Net Contracts' }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

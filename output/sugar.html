@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ICE Sugar No.11 Futures - Comprehensive Outlook Report</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary: #1a365d;
+            --secondary: #2c5282;
+            --accent: #4299e1;
+            --success: #48bb78;
+            --warning: #ed8936;
+            --danger: #f56565;
+            --neutral: #718096;
+            --bg-light: #f7fafc;
+            --bg-card: #ffffff;
+            --text-primary: #1a202c;
+            --text-secondary: #4a5568;
+            --border: #e2e8f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-light);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 40px 20px;
+            margin-bottom: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        header .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        header .date {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .executive-summary {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--danger);
+        }
+
+        .executive-summary h2 {
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .outlook-badge {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin: 15px 0;
+        }
+
+        .outlook-bearish {
+            background: linear-gradient(135deg, #fc8181 0%, #f56565 100%);
+            color: white;
+        }
+
+        .outlook-neutral {
+            background: linear-gradient(135deg, #fbd38d 0%, #ed8936 100%);
+            color: white;
+        }
+
+        .outlook-bullish {
+            background: linear-gradient(135deg, #68d391 0%, #48bb78 100%);
+            color: white;
+        }
+
+        .score-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .score-card {
+            background: var(--bg-light);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .score-card .label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .score-card .value {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .score-positive { color: var(--success); }
+        .score-negative { color: var(--danger); }
+        .score-neutral { color: var(--warning); }
+
+        .section {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .section h2 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .section h3 {
+            color: var(--secondary);
+            margin: 20px 0 15px 0;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background: var(--bg-light);
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        tr:hover {
+            background: var(--bg-light);
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+            margin: 20px 0;
+        }
+
+        .indicator {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin: 5px;
+        }
+
+        .indicator-bullish {
+            background: #c6f6d5;
+            color: #276749;
+        }
+
+        .indicator-bearish {
+            background: #fed7d7;
+            color: #c53030;
+        }
+
+        .indicator-neutral {
+            background: #fefcbf;
+            color: #975a16;
+        }
+
+        .key-level {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 15px;
+            background: var(--bg-light);
+            border-radius: 6px;
+            margin: 8px 0;
+        }
+
+        .key-level .price {
+            font-weight: bold;
+            font-family: monospace;
+            font-size: 1.1rem;
+        }
+
+        .key-level.support { border-left: 4px solid var(--success); }
+        .key-level.resistance { border-left: 4px solid var(--danger); }
+
+        .news-item {
+            padding: 15px;
+            border-left: 3px solid var(--accent);
+            margin: 15px 0;
+            background: var(--bg-light);
+            border-radius: 0 8px 8px 0;
+        }
+
+        .news-item .date {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .news-item .title {
+            font-weight: 600;
+            margin: 5px 0;
+        }
+
+        .news-item .impact {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+        }
+
+        .impact-bullish { background: #c6f6d5; color: #276749; }
+        .impact-bearish { background: #fed7d7; color: #c53030; }
+        .impact-neutral { background: #e2e8f0; color: #4a5568; }
+
+        .debate-box {
+            background: linear-gradient(135deg, #ebf8ff 0%, #bee3f8 100%);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .debate-box h4 {
+            color: var(--secondary);
+            margin-bottom: 15px;
+        }
+
+        .debate-round {
+            margin: 15px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 6px;
+        }
+
+        .debate-round .agent {
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .risk-matrix {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .risk-column h4 {
+            padding: 10px 15px;
+            border-radius: 6px 6px 0 0;
+            margin-bottom: 0;
+        }
+
+        .risk-column.upside h4 {
+            background: var(--success);
+            color: white;
+        }
+
+        .risk-column.downside h4 {
+            background: var(--danger);
+            color: white;
+        }
+
+        .risk-column ul {
+            background: var(--bg-light);
+            padding: 15px 15px 15px 35px;
+            border-radius: 0 0 6px 6px;
+            min-height: 200px;
+        }
+
+        .risk-column li {
+            margin: 8px 0;
+        }
+
+        .source-list {
+            columns: 2;
+            column-gap: 30px;
+        }
+
+        .source-list li {
+            margin: 8px 0;
+            font-size: 0.9rem;
+            break-inside: avoid;
+        }
+
+        .source-list a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .source-list a:hover {
+            text-decoration: underline;
+        }
+
+        .gauge-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .gauge {
+            width: 200px;
+            height: 100px;
+            position: relative;
+        }
+
+        .confidence-bar {
+            height: 30px;
+            background: linear-gradient(90deg, #f56565 0%, #ed8936 25%, #ecc94b 50%, #48bb78 75%, #38a169 100%);
+            border-radius: 15px;
+            position: relative;
+            margin: 20px 0;
+        }
+
+        .confidence-marker {
+            position: absolute;
+            top: -5px;
+            width: 4px;
+            height: 40px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        .confidence-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .disclaimer {
+            background: #fff5f5;
+            border: 1px solid #fc8181;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 30px;
+            font-size: 0.85rem;
+        }
+
+        .disclaimer h4 {
+            color: #c53030;
+            margin-bottom: 10px;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #faf089 0%, #f6e05e 100%);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .highlight-box h4 {
+            color: #744210;
+            margin-bottom: 10px;
+        }
+
+        .highlight-box-red {
+            background: linear-gradient(135deg, #fed7d7 0%, #fc8181 100%);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .highlight-box-red h4 {
+            color: #742a2a;
+            margin-bottom: 10px;
+        }
+
+        .metric-pill {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin: 2px;
+        }
+
+        .pill-green { background: #c6f6d5; color: #276749; }
+        .pill-red { background: #fed7d7; color: #c53030; }
+        .pill-yellow { background: #fefcbf; color: #975a16; }
+        .pill-blue { background: #bee3f8; color: #2c5282; }
+
+        .overall-score {
+            background: linear-gradient(135deg, #fc8181 0%, #f56565 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .overall-score .score-number {
+            font-size: 4rem;
+            font-weight: bold;
+        }
+
+        .overall-score .score-label {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>ICE Sugar No.11 Futures</h1>
+            <div class="subtitle">Comprehensive Commodity Outlook Report</div>
+            <div class="date">Report Date: January 20, 2026 | Data as of: January 20, 2026</div>
+        </header>
+
+        <!-- Executive Summary -->
+        <section class="executive-summary">
+            <h2>Executive Summary</h2>
+
+            <div class="outlook-badge outlook-bearish">
+                OVERALL OUTLOOK: BEARISH
+            </div>
+
+            <div class="overall-score">
+                <div class="score-number">35</div>
+                <div class="score-label">Overall Score / 100</div>
+            </div>
+
+            <p style="margin: 20px 0; font-size: 1.1rem;">
+                ICE Sugar No.11 futures face significant downward pressure from a <strong>2.6 million tonne global surplus</strong> in the 2025/26 marketing year. Record production from Brazil (45.9M MT, +4% YoY) and a strong Indian recovery (+26% YoY to 35M MT) have flooded the market. Prices are trading below all major moving averages near the 52-week low, with the market structure in contango reflecting ample near-term supply. While the bearish case is compelling, <strong>crowded short positioning</strong> (-168,298 contracts) creates elevated squeeze risk on any bullish catalyst.
+            </p>
+
+            <div class="score-grid">
+                <div class="score-card">
+                    <div class="label">Fundamentals Score</div>
+                    <div class="value score-negative">35</div>
+                </div>
+                <div class="score-card">
+                    <div class="label">News Sentiment</div>
+                    <div class="value score-negative">38</div>
+                </div>
+                <div class="score-card">
+                    <div class="label">Technical Score</div>
+                    <div class="value score-negative">30</div>
+                </div>
+                <div class="score-card">
+                    <div class="label">Market Structure</div>
+                    <div class="value score-neutral">40</div>
+                </div>
+                <div class="score-card">
+                    <div class="label">Positioning</div>
+                    <div class="value score-negative">32</div>
+                </div>
+                <div class="score-card">
+                    <div class="label">Market Views</div>
+                    <div class="value score-negative">35</div>
+                </div>
+            </div>
+
+            <h3>Key Takeaways</h3>
+            <ul style="margin-left: 20px;">
+                <li><strong>Price Range Expectation (1-Month):</strong> 13.80 - 15.00 cents/lb</li>
+                <li><strong>Price Range Expectation (3-Month):</strong> 13.00 - 15.50 cents/lb</li>
+                <li><strong>Primary Risk:</strong> Short-squeeze potential from crowded positioning</li>
+                <li><strong>Critical Support:</strong> 14.04 cents/lb (52-week low)</li>
+                <li><strong>Catalyst Watch:</strong> Brazil sugar/ethanol mix, India export policy, weather disruptions</li>
+            </ul>
+        </section>
+
+        <!-- Current Price & Key Metrics -->
+        <section class="section">
+            <h2>Current Market Snapshot</h2>
+
+            <div class="two-column">
+                <div>
+                    <table>
+                        <tr>
+                            <th colspan="2">Price Data (March 2026 Contract)</th>
+                        </tr>
+                        <tr>
+                            <td>Current Price</td>
+                            <td><strong>14.44 cents/lb</strong></td>
+                        </tr>
+                        <tr>
+                            <td>52-Week High</td>
+                            <td>23.50 cents/lb (est.)</td>
+                        </tr>
+                        <tr>
+                            <td>52-Week Low</td>
+                            <td>14.04 cents/lb</td>
+                        </tr>
+                        <tr>
+                            <td>20-Day MA</td>
+                            <td>14.80 cents/lb (est.)</td>
+                        </tr>
+                        <tr>
+                            <td>50-Day MA</td>
+                            <td>15.60 cents/lb (est.)</td>
+                        </tr>
+                        <tr>
+                            <td>200-Day MA</td>
+                            <td>17.20 cents/lb (est.)</td>
+                        </tr>
+                    </table>
+                </div>
+                <div>
+                    <table>
+                        <tr>
+                            <th colspan="2">Market Structure</th>
+                        </tr>
+                        <tr>
+                            <td>Term Structure</td>
+                            <td><span class="metric-pill pill-red">Contango</span></td>
+                        </tr>
+                        <tr>
+                            <td>Managed Money Net</td>
+                            <td><strong>-168,298 contracts</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Position Signal</td>
+                            <td><span class="metric-pill pill-yellow">Crowded Short</span></td>
+                        </tr>
+                        <tr>
+                            <td>Global Surplus</td>
+                            <td><strong>2.6M tonnes</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Brazil Sugar Mix</td>
+                            <td><strong>52.1%</strong> (high)</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fundamentals Section -->
+        <section class="section">
+            <h2>Fundamentals Analysis</h2>
+            <div class="indicator indicator-bearish">Score: 35/100 (Bearish)</div>
+
+            <div class="two-column">
+                <div>
+                    <h3>Global Supply/Demand Balance</h3>
+                    <div class="chart-container">
+                        <canvas id="supplyDemandChart"></canvas>
+                    </div>
+                </div>
+                <div>
+                    <h3>Key Metrics</h3>
+                    <table>
+                        <tr>
+                            <td>Global Production (2025/26)</td>
+                            <td><strong>188.6M tonnes</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Global Consumption</td>
+                            <td><strong>186.0M tonnes</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Supply Surplus</td>
+                            <td class="score-negative"><strong>2.6M tonnes</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Brazil Production</td>
+                            <td><strong>45.9M MT</strong> (+4% YoY)</td>
+                        </tr>
+                        <tr>
+                            <td>India Production</td>
+                            <td><strong>35.0M MT</strong> (+26% YoY)</td>
+                        </tr>
+                        <tr>
+                            <td>Brazil Sugar Mix</td>
+                            <td><strong>52.1%</strong></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <h3>Production by Major Countries</h3>
+            <div class="chart-container" style="height: 300px;">
+                <canvas id="productionChart"></canvas>
+            </div>
+
+            <div class="highlight-box-red">
+                <h4>Critical Fundamental Factor: Brazil Sugar/Ethanol Mix</h4>
+                <p>Brazilian mills are currently allocating <strong>52.1% of sugarcane to sugar production</strong>, prioritizing sugar over ethanol due to favorable relative economics. This elevated sugar mix, combined with near-record cane output, is the primary driver of the global surplus. Any shift toward ethanol (triggered by higher oil prices or government policy) could quickly tighten the sugar market.</p>
+            </div>
+
+            <div class="debate-box">
+                <h4>Agent Debate Summary</h4>
+                <div class="debate-round">
+                    <p><span class="agent">TM-FUND Initial:</span> Strong bearish score based on 2.6M tonne surplus, record Brazil production, and weak price action near 52-week lows.</p>
+                </div>
+                <div class="debate-round">
+                    <p><span class="agent">SUP-A Challenge:</span> "Crowded short positioning creates asymmetric risk. Brazil ethanol parity around 14.5 cents provides natural floor. Weather risk in India monsoon season not fully priced."</p>
+                </div>
+                <div class="debate-round">
+                    <p><span class="agent">Final Consensus:</span> Maintained bearish outlook at 35/100. Fundamentals clearly support lower prices, but acknowledged positioning risk as key blind spot.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- News & Policy Section -->
+        <section class="section">
+            <h2>News & Policy Analysis</h2>
+            <div class="indicator indicator-bearish">Sentiment Score: 38/100 (Slightly Bearish)</div>
+
+            <h3>Dominant Narrative</h3>
+            <p style="font-size: 1.05rem; padding: 15px; background: var(--bg-light); border-radius: 8px;">
+                The prevailing market narrative centers on <strong>global surplus</strong>. News flow consistently highlights ample supplies from Brazil and India, with limited bullish catalysts. The surplus narrative has dominated headlines, reinforcing bearish sentiment across the market.
+            </p>
+
+            <h3>Recent Key Events</h3>
+            <div class="news-item">
+                <div class="date">January 2026</div>
+                <div class="title">Brazil 2025/26 Center-South Production Revised Higher</div>
+                <span class="impact impact-bearish">Bearish</span>
+                <p>Production estimates raised to 45.9M MT, up 4% from previous year, extending the supply glut.</p>
+            </div>
+
+            <div class="news-item">
+                <div class="date">January 2026</div>
+                <div class="title">India Production Surge Confirmed at 35M MT</div>
+                <span class="impact impact-bearish">Bearish</span>
+                <p>Indian production up 26% YoY following favorable monsoon, adding to global oversupply concerns.</p>
+            </div>
+
+            <div class="news-item">
+                <div class="date">January 2026</div>
+                <div class="title">Brazil Mills Maintain High Sugar Mix</div>
+                <span class="impact impact-bearish">Bearish</span>
+                <p>Sugar/cane mix holding at 52.1% as mills prioritize sugar over ethanol production.</p>
+            </div>
+
+            <div class="news-item">
+                <div class="date">January 2026</div>
+                <div class="title">Speculative Short Positioning Reaches Extreme Levels</div>
+                <span class="impact impact-neutral">Neutral/Contrarian</span>
+                <p>Managed money net short at -168,298 contracts signals crowded trade with squeeze potential.</p>
+            </div>
+
+            <h3>Policy Watch</h3>
+            <table>
+                <tr>
+                    <th>Policy Factor</th>
+                    <th>Status</th>
+                    <th>Impact</th>
+                </tr>
+                <tr>
+                    <td>India Export Restrictions</td>
+                    <td>Monitoring</td>
+                    <td><span class="metric-pill pill-yellow">Potential Bullish Catalyst</span></td>
+                </tr>
+                <tr>
+                    <td>Brazil Ethanol Mandates</td>
+                    <td>Stable</td>
+                    <td><span class="metric-pill pill-blue">Neutral</span></td>
+                </tr>
+                <tr>
+                    <td>Thailand Production Subsidies</td>
+                    <td>Active</td>
+                    <td><span class="metric-pill pill-red">Bearish</span></td>
+                </tr>
+                <tr>
+                    <td>EU Sugar Import Quotas</td>
+                    <td>Unchanged</td>
+                    <td><span class="metric-pill pill-blue">Neutral</span></td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- Technical Analysis Section -->
+        <section class="section">
+            <h2>Technical Analysis</h2>
+            <div class="indicator indicator-bearish">Score: 30/100 (Bearish)</div>
+
+            <div class="two-column">
+                <div>
+                    <h3>Trend Indicators</h3>
+                    <table>
+                        <tr>
+                            <td>Price vs 20-Day MA</td>
+                            <td><span class="metric-pill pill-red">Below</span></td>
+                        </tr>
+                        <tr>
+                            <td>Price vs 50-Day MA</td>
+                            <td><span class="metric-pill pill-red">Below</span></td>
+                        </tr>
+                        <tr>
+                            <td>Price vs 200-Day MA</td>
+                            <td><span class="metric-pill pill-red">Below</span></td>
+                        </tr>
+                        <tr>
+                            <td>Distance from 52-Week Low</td>
+                            <td><span class="metric-pill pill-red">2.8% above</span></td>
+                        </tr>
+                        <tr>
+                            <td>Overall Trend</td>
+                            <td><span class="metric-pill pill-red">Downtrend</span></td>
+                        </tr>
+                        <tr>
+                            <td>Momentum</td>
+                            <td><span class="metric-pill pill-red">Negative</span></td>
+                        </tr>
+                    </table>
+                </div>
+                <div>
+                    <h3>Key Levels</h3>
+                    <div class="key-level resistance">
+                        <span>17.00 - Major Resistance</span>
+                        <span class="price">17.00</span>
+                    </div>
+                    <div class="key-level resistance">
+                        <span>15.50 - Near Resistance / 50-Day MA</span>
+                        <span class="price">15.50</span>
+                    </div>
+                    <div class="key-level resistance">
+                        <span>15.00 - Psychological Level</span>
+                        <span class="price">15.00</span>
+                    </div>
+                    <div style="padding: 10px; text-align: center; background: #e2e8f0; margin: 8px 0; border-radius: 6px;">
+                        <strong>Current: 14.44</strong>
+                    </div>
+                    <div class="key-level support">
+                        <span>14.04 - 52-Week Low / Critical Support</span>
+                        <span class="price">14.04</span>
+                    </div>
+                    <div class="key-level support">
+                        <span>13.50 - Next Support</span>
+                        <span class="price">13.50</span>
+                    </div>
+                    <div class="key-level support">
+                        <span>13.00 - Major Support</span>
+                        <span class="price">13.00</span>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Technical Verdict</h3>
+            <p>Price is in a clear downtrend, trading below all major moving averages and hovering just above the 52-week low of 14.04 cents/lb. The technical picture is decisively bearish with negative momentum. A break below 14.04 would open the door to test 13.50 and potentially 13.00 cents/lb. Bulls need a sustained move above 15.50 to signal any meaningful trend reversal. The proximity to the 52-week low suggests either imminent breakdown or potential for a bounce if support holds.</p>
+        </section>
+
+        <!-- Market Structure Section -->
+        <section class="section">
+            <h2>Market Structure Analysis</h2>
+            <div class="indicator indicator-neutral">Score: 40/100 (Neutral-to-Bearish)</div>
+
+            <div class="two-column">
+                <div>
+                    <h3>Term Structure</h3>
+                    <div class="highlight-box">
+                        <h4>Contango Structure</h4>
+                        <p>The forward curve is in <strong>contango</strong>, with near-month contracts trading at a discount to deferred months. This structure reflects:</p>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>Ample near-term physical supply</li>
+                            <li>Storage costs being priced into forward months</li>
+                            <li>No urgency for nearby delivery</li>
+                            <li>Bearish near-term sentiment</li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <h3>Structure Implications</h3>
+                    <table>
+                        <tr>
+                            <td>Curve Shape</td>
+                            <td><span class="metric-pill pill-red">Contango</span></td>
+                        </tr>
+                        <tr>
+                            <td>Physical Market</td>
+                            <td><span class="metric-pill pill-red">Well-Supplied</span></td>
+                        </tr>
+                        <tr>
+                            <td>Roll Yield</td>
+                            <td><span class="metric-pill pill-red">Negative (Longs)</span></td>
+                        </tr>
+                        <tr>
+                            <td>Storage Economics</td>
+                            <td><span class="metric-pill pill-blue">Profitable</span></td>
+                        </tr>
+                    </table>
+                    <p style="margin-top: 15px;">The contango structure penalizes long positions through negative roll yield, making it costly to maintain bullish exposure. This reinforces the bearish bias from a structural perspective.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Positioning Section -->
+        <section class="section">
+            <h2>Positioning Analysis (COT Report)</h2>
+            <div class="indicator indicator-bearish">Score: 32/100 (Bearish but Crowded)</div>
+
+            <div class="highlight-box">
+                <h4>WARNING: Crowded Short Positioning</h4>
+                <p>Managed money holds a net short position of <strong>-168,298 contracts</strong>, representing an extremely crowded short trade. While this reflects bearish conviction aligned with fundamentals, it creates <strong>elevated squeeze risk</strong>. Any positive catalyst (weather event, policy change, unexpected demand) could trigger aggressive short-covering and a sharp price rally.</p>
+            </div>
+
+            <div class="two-column">
+                <div>
+                    <h3>COT Positioning Summary</h3>
+                    <table>
+                        <tr>
+                            <td>Managed Money Net</td>
+                            <td><strong>-168,298 contracts</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Position Signal</td>
+                            <td><span class="metric-pill pill-yellow">Extreme Short</span></td>
+                        </tr>
+                        <tr>
+                            <td>Crowding Risk</td>
+                            <td><span class="metric-pill pill-red">Elevated</span></td>
+                        </tr>
+                        <tr>
+                            <td>Contrarian Signal</td>
+                            <td><span class="metric-pill pill-yellow">Watch for Squeeze</span></td>
+                        </tr>
+                    </table>
+                </div>
+                <div>
+                    <h3>Positioning Gauge</h3>
+                    <p style="text-align: center; margin-bottom: 10px;">Speculator Positioning (Historical Range)</p>
+                    <div class="confidence-bar">
+                        <div class="confidence-marker" style="left: 12%;"></div>
+                    </div>
+                    <div class="confidence-labels">
+                        <span>Extreme Short</span>
+                        <span>Neutral</span>
+                        <span>Extreme Long</span>
+                    </div>
+                    <p style="margin-top: 20px; font-size: 0.9rem;">Current positioning sits in the <strong>12th percentile</strong> of the historical range - an extremely bearish stance that historically has preceded either continued weakness or violent short-covering rallies.</p>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <canvas id="positioningChart"></canvas>
+            </div>
+        </section>
+
+        <!-- Market Views Section -->
+        <section class="section">
+            <h2>Market Views & Consensus Analysis</h2>
+            <div class="indicator indicator-bearish">Score: 35/100 (Bearish Consensus)</div>
+
+            <h3>Analyst Views</h3>
+            <table>
+                <tr>
+                    <th>Institution</th>
+                    <th>Outlook</th>
+                    <th>Key Thesis</th>
+                </tr>
+                <tr>
+                    <td><strong>Rabobank</strong></td>
+                    <td><span class="metric-pill pill-red">Bearish (Lead)</span></td>
+                    <td>Global surplus, Brazil record output, India recovery</td>
+                </tr>
+                <tr>
+                    <td>Goldman Sachs</td>
+                    <td><span class="metric-pill pill-red">Bearish</span></td>
+                    <td>Oversupply to persist through 2026</td>
+                </tr>
+                <tr>
+                    <td>Czarnikow</td>
+                    <td><span class="metric-pill pill-red">Bearish</span></td>
+                    <td>Structural surplus weighing on prices</td>
+                </tr>
+                <tr>
+                    <td>Wilmar International</td>
+                    <td><span class="metric-pill pill-yellow">Neutral</span></td>
+                    <td>Floor near ethanol parity (~14.5 cents)</td>
+                </tr>
+            </table>
+
+            <div class="two-column" style="margin-top: 25px;">
+                <div>
+                    <h3 style="color: var(--danger);">Bear Case Arguments</h3>
+                    <ul style="margin-left: 20px;">
+                        <li>2.6M tonne global surplus in 2025/26</li>
+                        <li>Brazil production at 45.9M MT (near-record)</li>
+                        <li>India production +26% YoY to 35M MT</li>
+                        <li>Brazil sugar mix at 52.1% (high)</li>
+                        <li>Contango curve structure</li>
+                        <li>Price below all moving averages</li>
+                        <li>Weak demand growth globally</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 style="color: var(--success);">Bull Case Arguments (Contrarian)</h3>
+                    <ul style="margin-left: 20px;">
+                        <li>Crowded short position (-168,298) = squeeze risk</li>
+                        <li>Near 52-week low - limited downside?</li>
+                        <li>Brazil ethanol parity provides floor (~14.5c)</li>
+                        <li>India monsoon risk in coming season</li>
+                        <li>Potential India export restrictions</li>
+                        <li>Low prices may stimulate demand</li>
+                        <li>Currency weakness in producing nations</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>Consensus Assessment</h3>
+            <div style="padding: 15px; background: #fed7d7; border-radius: 8px; margin-top: 15px;">
+                <p><strong>Verdict: BEARISH CONSENSUS - Sound but Crowded</strong></p>
+                <p style="margin-top: 10px;">The bearish consensus is well-supported by fundamental data. However, <strong>Rabobank leads the bearish view</strong> and the market has largely positioned accordingly. The key vulnerability is that the consensus may be "too consensus" - when everyone is already short, who is left to sell? This creates the conditions for sharp counter-trend rallies.</p>
+            </div>
+        </section>
+
+        <!-- Module Scores Chart -->
+        <section class="section">
+            <h2>Module Scores Summary</h2>
+            <div class="chart-container" style="height: 350px;">
+                <canvas id="moduleScoresChart"></canvas>
+            </div>
+            <p style="text-align: center; margin-top: 15px; color: var(--text-secondary);">
+                All modules point bearish (scores below 50), with Technical and Positioning showing the most extreme readings. The consistency across modules reinforces the bearish outlook, while also highlighting the crowded nature of the trade.
+            </p>
+        </section>
+
+        <!-- Risk Assessment -->
+        <section class="section">
+            <h2>Risk Assessment</h2>
+
+            <div class="risk-matrix">
+                <div class="risk-column upside">
+                    <h4>Upside Risks (Short Squeeze Triggers)</h4>
+                    <ul>
+                        <li>Weather disruption in Brazil or India</li>
+                        <li>Short-covering cascade from crowded positioning</li>
+                        <li>India export restrictions or policy changes</li>
+                        <li>Brazil shift toward ethanol production</li>
+                        <li>Higher oil prices boosting ethanol demand</li>
+                        <li>Currency depreciation in Brazil (BRL)</li>
+                        <li>Unexpected demand surge from China/Indonesia</li>
+                        <li>Geopolitical supply disruptions</li>
+                    </ul>
+                </div>
+                <div class="risk-column downside">
+                    <h4>Downside Risks</h4>
+                    <ul>
+                        <li>Production exceeds current estimates</li>
+                        <li>Demand destruction from high prices earlier</li>
+                        <li>Global economic slowdown</li>
+                        <li>Thailand increases production further</li>
+                        <li>Weak crude oil prices (ethanol uncompetitive)</li>
+                        <li>India allows unlimited exports</li>
+                        <li>Strong USD pressures commodity prices</li>
+                        <li>Inventory builds exceed expectations</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 25px;">Price Forecast</h3>
+            <table>
+                <tr>
+                    <th>Timeframe</th>
+                    <th>Low</th>
+                    <th>High</th>
+                    <th>Base Case</th>
+                </tr>
+                <tr>
+                    <td>1-Month</td>
+                    <td>13.80 cents/lb</td>
+                    <td>15.00 cents/lb</td>
+                    <td>14.20 cents/lb</td>
+                </tr>
+                <tr>
+                    <td>3-Month</td>
+                    <td>13.00 cents/lb</td>
+                    <td>15.50 cents/lb</td>
+                    <td>14.00 cents/lb</td>
+                </tr>
+            </table>
+
+            <h3 style="margin-top: 25px;">Scenario Analysis</h3>
+            <table>
+                <tr>
+                    <th>Scenario</th>
+                    <th>Probability</th>
+                    <th>Price Target</th>
+                    <th>Trigger</th>
+                </tr>
+                <tr>
+                    <td>Bull Case (Squeeze)</td>
+                    <td>20%</td>
+                    <td>16.00-17.50 cents</td>
+                    <td>Weather event, policy change</td>
+                </tr>
+                <tr>
+                    <td>Base Case (Range)</td>
+                    <td>55%</td>
+                    <td>13.50-15.00 cents</td>
+                    <td>Status quo fundamentals</td>
+                </tr>
+                <tr>
+                    <td>Bear Case (Breakdown)</td>
+                    <td>25%</td>
+                    <td>12.00-13.50 cents</td>
+                    <td>Production exceeds estimates</td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- Conclusion -->
+        <section class="section">
+            <h2>Conclusion & Trading Implications</h2>
+
+            <div class="score-grid">
+                <div class="score-card">
+                    <div class="label">Overall Outlook</div>
+                    <div class="value" style="font-size: 1.5rem; color: var(--danger);">BEARISH</div>
+                </div>
+                <div class="score-card">
+                    <div class="label">Overall Score</div>
+                    <div class="value" style="font-size: 1.5rem; color: var(--danger);">35/100</div>
+                </div>
+                <div class="score-card">
+                    <div class="label">Confidence Level</div>
+                    <div class="value" style="font-size: 1.5rem;">MEDIUM-HIGH</div>
+                </div>
+            </div>
+
+            <h3>Synthesis</h3>
+            <p style="font-size: 1.05rem; line-height: 1.7;">
+                ICE Sugar No.11 futures face persistent downward pressure from a <strong>well-documented global surplus of 2.6 million tonnes</strong>. Brazil's near-record production (45.9M MT) combined with India's strong recovery (+26% YoY) has created abundant supply that the market is struggling to absorb. The technical picture confirms this bearish backdrop, with prices trading below all major moving averages and hovering near the 52-week low.
+            </p>
+            <p style="font-size: 1.05rem; line-height: 1.7; margin-top: 15px;">
+                The market structure in contango further supports the bearish view, penalizing long positions and reflecting ample near-term supply. All six analytical modules score below 50, indicating broad-based bearish signals across fundamentals, news sentiment, technicals, structure, positioning, and market views.
+            </p>
+            <p style="font-size: 1.05rem; line-height: 1.7; margin-top: 15px;">
+                However, traders should remain vigilant about <strong>positioning risk</strong>. The managed money net short of -168,298 contracts represents an extremely crowded trade. While this positioning reflects sound fundamental reasoning, it creates conditions for violent short-covering rallies on any positive surprise. The Brazil ethanol parity around 14.5 cents/lb also provides a natural floor, as mills would shift production to ethanol if sugar prices fall too far.
+            </p>
+
+            <h3>Trading Considerations</h3>
+            <ul style="margin-left: 20px; font-size: 1.05rem;">
+                <li><strong>Shorts:</strong> Fundamentally justified but crowded. Consider scaling into shorts on rallies toward 15.50+ rather than at current levels near support.</li>
+                <li><strong>Longs:</strong> Contrarian opportunity only on clear reversal signals. Watch for break above 15.50 with volume as potential squeeze trigger.</li>
+                <li><strong>Spreads:</strong> Contango structure favors short calendar spreads (sell near, buy far).</li>
+                <li><strong>Options:</strong> Put spreads for bearish exposure limit squeeze risk. Long strangles may benefit from potential volatility spike.</li>
+                <li><strong>Key Watchpoints:</strong> 14.04 support (52-week low), Brazil sugar/ethanol mix decisions, India monsoon forecasts.</li>
+            </ul>
+
+            <div class="disclaimer">
+                <h4>Disclaimer</h4>
+                <p>This report is for informational purposes only and does not constitute investment advice. Commodity futures trading involves substantial risk of loss. Past performance is not indicative of future results. The analysis presented represents the output of an AI-driven multi-agent system and should be independently verified before making investment decisions.</p>
+            </div>
+        </section>
+
+        <!-- Sources -->
+        <section class="section">
+            <h2>Data Sources & References</h2>
+            <ul class="source-list">
+                <li><a href="https://www.iso.org/publications.html" target="_blank">International Sugar Organization (ISO) Market Reports</a></li>
+                <li><a href="https://www.usda.gov/oce/commodity/wasde" target="_blank">USDA WASDE Report</a></li>
+                <li><a href="https://www.rabobank.com/research/agri-commodity-markets" target="_blank">Rabobank Agri Commodity Markets</a></li>
+                <li><a href="https://www.cftc.gov/MarketReports/CommitmentsofTraders/index.htm" target="_blank">CFTC Commitments of Traders</a></li>
+                <li><a href="https://www.ice.com/products/23/Sugar-No-11-Futures" target="_blank">ICE Sugar No.11 Futures Official Data</a></li>
+                <li><a href="https://www.tradingview.com/symbols/ICEUS-SB1!/" target="_blank">TradingView ICE Sugar</a></li>
+                <li><a href="https://www.czarnikow.com/sugar-market" target="_blank">Czarnikow Sugar Market Analysis</a></li>
+                <li><a href="https://unica.com.br/en/" target="_blank">UNICA (Brazilian Sugarcane Industry Association)</a></li>
+                <li><a href="https://www.conab.gov.br/info-agro/safras" target="_blank">CONAB Brazil Crop Estimates</a></li>
+                <li><a href="https://dfpd.gov.in/" target="_blank">India Department of Food & Public Distribution</a></li>
+                <li><a href="https://www.barchart.com/futures/quotes/SB*0/technical-analysis" target="_blank">Barchart Sugar Technical Analysis</a></li>
+                <li><a href="https://tradingeconomics.com/commodity/sugar" target="_blank">Trading Economics Sugar</a></li>
+            </ul>
+        </section>
+
+        <footer>
+            <p>Report generated by Multi-Agent Commodity Analysis System</p>
+            <p>ICE Sugar No.11 Futures Outlook | January 20, 2026</p>
+            <p style="margin-top: 10px; font-size: 0.8rem;">Powered by Claude AI Multi-Agent Architecture</p>
+        </footer>
+    </div>
+
+    <script>
+        // Supply/Demand Chart
+        const supplyDemandCtx = document.getElementById('supplyDemandChart').getContext('2d');
+        new Chart(supplyDemandCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Global Production', 'Global Consumption', 'Surplus'],
+                datasets: [{
+                    label: 'Million Tonnes',
+                    data: [188.6, 186.0, 2.6],
+                    backgroundColor: ['#f56565', '#48bb78', '#ed8936'],
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: { display: true, text: 'Million Tonnes' }
+                    }
+                }
+            }
+        });
+
+        // Production by Country Chart
+        const productionCtx = document.getElementById('productionChart').getContext('2d');
+        new Chart(productionCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Brazil', 'India', 'Thailand', 'China', 'Australia', 'EU'],
+                datasets: [{
+                    label: 'Production (M Tonnes)',
+                    data: [45.9, 35.0, 10.5, 10.2, 4.8, 15.5],
+                    backgroundColor: '#4299e1',
+                    borderRadius: 6
+                }, {
+                    label: 'YoY Change (%)',
+                    data: [4, 26, 2, -1, 5, 0],
+                    backgroundColor: '#ed8936',
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'top' }
+                },
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+
+        // Positioning Chart
+        const posCtx = document.getElementById('positioningChart').getContext('2d');
+        new Chart(posCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Managed Money Net Position'],
+                datasets: [{
+                    label: 'Net Contracts',
+                    data: [-168298],
+                    backgroundColor: '#f56565',
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y',
+                plugins: {
+                    legend: { display: false },
+                    title: { display: true, text: 'COT Positioning: Managed Money Net Short -168,298 Contracts' }
+                },
+                scales: {
+                    x: {
+                        title: { display: true, text: 'Net Contracts' },
+                        min: -200000,
+                        max: 50000
+                    }
+                }
+            }
+        });
+
+        // Module Scores Radar Chart
+        const moduleCtx = document.getElementById('moduleScoresChart').getContext('2d');
+        new Chart(moduleCtx, {
+            type: 'radar',
+            data: {
+                labels: ['Fundamentals', 'News Sentiment', 'Technical', 'Structure', 'Positioning', 'Market Views'],
+                datasets: [{
+                    label: 'Module Score',
+                    data: [35, 38, 30, 40, 32, 35],
+                    backgroundColor: 'rgba(245, 101, 101, 0.2)',
+                    borderColor: '#f56565',
+                    borderWidth: 2,
+                    pointBackgroundColor: '#f56565',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: '#f56565'
+                }, {
+                    label: 'Neutral Line (50)',
+                    data: [50, 50, 50, 50, 50, 50],
+                    backgroundColor: 'rgba(113, 128, 150, 0.1)',
+                    borderColor: '#718096',
+                    borderWidth: 1,
+                    borderDash: [5, 5],
+                    pointRadius: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'top' },
+                    title: { display: true, text: 'Module Scores (0-100 Scale, Below 50 = Bearish)' }
+                },
+                scales: {
+                    r: {
+                        beginAtZero: true,
+                        max: 100,
+                        ticks: {
+                            stepSize: 20
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Agent Architecture Visualization</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #fff;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+            background: linear-gradient(90deg, #00d4ff, #7b2cbf);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .subtitle {
+            text-align: center;
+            color: #888;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .legend-dot {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+        }
+        .legend-dot.level0 { background: linear-gradient(135deg, #ffd700, #ffaa00); }
+        .legend-dot.level1 { background: linear-gradient(135deg, #00d4ff, #0099cc); }
+        .legend-dot.level2-tm { background: linear-gradient(135deg, #7b2cbf, #5a1d9e); }
+        .legend-dot.level2-sup { background: linear-gradient(135deg, #00ff88, #00cc6a); }
+
+        .architecture {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Level containers */
+        .level {
+            margin-bottom: 40px;
+            position: relative;
+        }
+        .level-label {
+            position: absolute;
+            left: -80px;
+            top: 50%;
+            transform: translateY(-50%) rotate(-90deg);
+            font-size: 0.9em;
+            color: #666;
+            white-space: nowrap;
+            letter-spacing: 2px;
+        }
+        .level-content {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        /* Agent nodes */
+        .agent {
+            padding: 15px 25px;
+            border-radius: 12px;
+            text-align: center;
+            position: relative;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            min-width: 120px;
+        }
+        .agent:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .agent-id {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 5px;
+        }
+        .agent-role {
+            font-size: 0.85em;
+            opacity: 0.9;
+        }
+
+        /* Level 0 - User */
+        .level0 .agent {
+            background: linear-gradient(135deg, #ffd700, #ffaa00);
+            color: #1a1a2e;
+            box-shadow: 0 4px 20px rgba(255, 215, 0, 0.3);
+        }
+
+        /* Level 1 - Strategic */
+        .level1 .agent {
+            background: linear-gradient(135deg, #00d4ff, #0099cc);
+            color: #1a1a2e;
+            box-shadow: 0 4px 20px rgba(0, 212, 255, 0.3);
+        }
+
+        /* Level 2 - Task Managers */
+        .level2-tm .agent {
+            background: linear-gradient(135deg, #7b2cbf, #5a1d9e);
+            box-shadow: 0 4px 20px rgba(123, 44, 191, 0.3);
+        }
+
+        /* Level 2 - Supervisors */
+        .level2-sup .agent {
+            background: linear-gradient(135deg, #00ff88, #00cc6a);
+            color: #1a1a2e;
+            box-shadow: 0 4px 20px rgba(0, 255, 136, 0.3);
+        }
+
+        /* Module groups */
+        .module-group {
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 20px;
+            margin: 10px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .module-group-title {
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 0.9em;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .module-agents {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Connections */
+        .connections {
+            display: flex;
+            justify-content: center;
+            margin: 10px 0;
+        }
+        .connection-line {
+            width: 2px;
+            height: 30px;
+            background: linear-gradient(180deg, rgba(255,255,255,0.5), rgba(255,255,255,0.1));
+        }
+        .connection-spread {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            position: relative;
+        }
+        .connection-spread::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 10%;
+            right: 10%;
+            height: 2px;
+            background: rgba(255,255,255,0.3);
+        }
+
+        /* Debate indicator */
+        .debate-badge {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #ff4757;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-size: 0.7em;
+            font-weight: bold;
+        }
+
+        /* Stats panel */
+        .stats-panel {
+            max-width: 1200px;
+            margin: 40px auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        .stat-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            background: linear-gradient(90deg, #00d4ff, #7b2cbf);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .stat-label {
+            color: #888;
+            margin-top: 5px;
+        }
+
+        /* Commodity section */
+        .commodity-section {
+            max-width: 1400px;
+            margin: 40px auto;
+        }
+        .commodity-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .commodity-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+        }
+        .commodity-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 212, 255, 0.5);
+        }
+        .commodity-name {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #00d4ff;
+        }
+        .commodity-agents {
+            font-size: 0.9em;
+            color: #888;
+        }
+        .commodity-agents span {
+            display: inline-block;
+            background: rgba(123, 44, 191, 0.3);
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin: 2px;
+            font-size: 0.85em;
+        }
+
+        /* Flow diagram */
+        .flow-section {
+            max-width: 1000px;
+            margin: 40px auto;
+            background: rgba(255,255,255,0.03);
+            border-radius: 16px;
+            padding: 30px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .flow-title {
+            text-align: center;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            color: #00d4ff;
+        }
+        .flow-steps {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .flow-step {
+            flex: 1;
+            min-width: 150px;
+            text-align: center;
+            padding: 15px;
+            background: rgba(123, 44, 191, 0.2);
+            border-radius: 8px;
+            position: relative;
+        }
+        .flow-step::after {
+            content: '→';
+            position: absolute;
+            right: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #00d4ff;
+            font-size: 1.5em;
+        }
+        .flow-step:last-child::after {
+            display: none;
+        }
+        .flow-step-num {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #7b2cbf;
+        }
+        .flow-step-text {
+            font-size: 0.85em;
+            margin-top: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .level-label {
+                display: none;
+            }
+            .flow-step::after {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Multi-Agent Architecture</h1>
+    <p class="subtitle">Commodity Trading Analysis System - Hierarchical Agent Structure</p>
+
+    <div class="legend">
+        <div class="legend-item">
+            <div class="legend-dot level0"></div>
+            <span>User Request</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-dot level1"></div>
+            <span>Level 1: Strategic</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-dot level2-tm"></div>
+            <span>Level 2: Task Managers</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-dot level2-sup"></div>
+            <span>Level 2: Supervisors</span>
+        </div>
+    </div>
+
+    <div class="architecture">
+        <!-- Level 0: User -->
+        <div class="level level0">
+            <div class="level-content">
+                <div class="agent">
+                    <div class="agent-id">USER</div>
+                    <div class="agent-role">Analysis Request</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="connections">
+            <div class="connection-line"></div>
+        </div>
+
+        <!-- Level 1: Strategic -->
+        <div class="level level1">
+            <div class="level-content">
+                <div class="agent">
+                    <div class="agent-id">PM</div>
+                    <div class="agent-role">Project Manager</div>
+                </div>
+                <div class="agent">
+                    <div class="agent-id">SUP</div>
+                    <div class="agent-role">Strategic Supervisor</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="connections">
+            <div class="connection-line"></div>
+        </div>
+
+        <!-- Level 2: Task Managers with Supervisors -->
+        <div class="level">
+            <div class="level-content">
+                <!-- Fundamentals Module -->
+                <div class="module-group">
+                    <div class="module-group-title">Fundamentals</div>
+                    <div class="module-agents">
+                        <div class="agent level2-tm">
+                            <div class="debate-badge">3R</div>
+                            <div class="agent-id">TM-FUND</div>
+                            <div class="agent-role">Task Manager</div>
+                        </div>
+                        <div class="agent level2-sup" style="padding: 10px 15px;">
+                            <div class="agent-id">SUP-A</div>
+                            <div class="agent-role">Logic</div>
+                        </div>
+                        <div class="agent level2-sup" style="padding: 10px 15px;">
+                            <div class="agent-id">SUP-B</div>
+                            <div class="agent-role">Data</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- News Module -->
+                <div class="module-group">
+                    <div class="module-group-title">News & Policy</div>
+                    <div class="module-agents">
+                        <div class="agent level2-tm">
+                            <div class="debate-badge">3R</div>
+                            <div class="agent-id">TM-NEWS</div>
+                            <div class="agent-role">Task Manager</div>
+                        </div>
+                        <div class="agent level2-sup" style="padding: 10px 15px;">
+                            <div class="agent-id">SUP-A</div>
+                            <div class="agent-role">Logic</div>
+                        </div>
+                        <div class="agent level2-sup" style="padding: 10px 15px;">
+                            <div class="agent-id">SUP-B</div>
+                            <div class="agent-role">Data</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Technical Module -->
+                <div class="module-group">
+                    <div class="module-group-title">Technical</div>
+                    <div class="module-agents">
+                        <div class="agent level2-tm">
+                            <div class="debate-badge">3R</div>
+                            <div class="agent-id">TM-TECH</div>
+                            <div class="agent-role">Task Manager</div>
+                        </div>
+                        <div class="agent level2-sup" style="padding: 10px 15px;">
+                            <div class="agent-id">SUP-A</div>
+                            <div class="agent-role">Logic</div>
+                        </div>
+                        <div class="agent level2-sup" style="padding: 10px 15px;">
+                            <div class="agent-id">SUP-B</div>
+                            <div class="agent-role">Data</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="level">
+            <div class="level-content">
+                <!-- Structure Module -->
+                <div class="module-group">
+                    <div class="module-group-title">Market Structure</div>
+                    <div class="module-agents">
+                        <div class="agent level2-tm">
+                            <div class="debate-badge">3R</div>
+                            <div class="agent-id">TM-STRUCT</div>
+                            <div class="agent-role">Task Manager</div>
+                        </div>
+                        <div class="agent level2-sup" style="padding: 10px 15px;">
+                            <div class="agent-id">SUP-A</div>
+                            <div class="agent-role">Logic</div>
+                        </div>
+                        <div class="agent level2-sup" style="padding: 10px 15px;">
+                            <div class="agent-id">SUP-B</div>
+                            <div class="agent-role">Data</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Positioning Module -->
+                <div class="module-group">
+                    <div class="module-group-title">Positioning</div>
+                    <div class="module-agents">
+                        <div class="agent level2-tm">
+                            <div class="debate-badge">3R</div>
+                            <div class="agent-id">TM-POS</div>
+                            <div class="agent-role">Task Manager</div>
+                        </div>
+                        <div class="agent level2-sup" style="padding: 10px 15px;">
+                            <div class="agent-id">SUP-A</div>
+                            <div class="agent-role">Logic</div>
+                        </div>
+                        <div class="agent level2-sup" style="padding: 10px 15px;">
+                            <div class="agent-id">SUP-B</div>
+                            <div class="agent-role">Data</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Views Module -->
+                <div class="module-group">
+                    <div class="module-group-title">Market Views</div>
+                    <div class="module-agents">
+                        <div class="agent level2-tm">
+                            <div class="debate-badge">3R</div>
+                            <div class="agent-id">TM-VIEWS</div>
+                            <div class="agent-role">Task Manager</div>
+                        </div>
+                        <div class="agent level2-sup" style="padding: 10px 15px;">
+                            <div class="agent-id">SUP-A</div>
+                            <div class="agent-role">Logic</div>
+                        </div>
+                        <div class="agent level2-sup" style="padding: 10px 15px;">
+                            <div class="agent-id">SUP-B</div>
+                            <div class="agent-role">Data</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="connections">
+            <div class="connection-line"></div>
+        </div>
+
+        <!-- Report Module -->
+        <div class="level level1">
+            <div class="level-content">
+                <div class="agent">
+                    <div class="agent-id">TM-REPORT</div>
+                    <div class="agent-role">Report Generator</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stats Panel -->
+    <div class="stats-panel">
+        <div class="stat-card">
+            <div class="stat-number">6</div>
+            <div class="stat-label">Commodities Analyzed</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">23</div>
+            <div class="stat-label">Unique Agent Roles</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">138</div>
+            <div class="stat-label">Total Agent Instances</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">108</div>
+            <div class="stat-label">Debate Rounds</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">3</div>
+            <div class="stat-label">Hierarchy Levels</div>
+        </div>
+    </div>
+
+    <!-- Debate Flow -->
+    <div class="flow-section">
+        <div class="flow-title">Debate Protocol Flow</div>
+        <div class="flow-steps">
+            <div class="flow-step">
+                <div class="flow-step-num">1</div>
+                <div class="flow-step-text">TM Initial Analysis</div>
+            </div>
+            <div class="flow-step">
+                <div class="flow-step-num">2</div>
+                <div class="flow-step-text">SUP-A Logic Challenge</div>
+            </div>
+            <div class="flow-step">
+                <div class="flow-step-num">3</div>
+                <div class="flow-step-text">TM Response</div>
+            </div>
+            <div class="flow-step">
+                <div class="flow-step-num">4</div>
+                <div class="flow-step-text">SUP-B Data Validation</div>
+            </div>
+            <div class="flow-step">
+                <div class="flow-step-num">5</div>
+                <div class="flow-step-text">Consensus/Escalate</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Commodity Section -->
+    <div class="commodity-section">
+        <h2 style="text-align: center; margin-bottom: 20px; color: #00d4ff;">Commodity Analysis Instances</h2>
+        <div class="commodity-grid">
+            <div class="commodity-card">
+                <div class="commodity-name">ICE Cotton No.2</div>
+                <div class="commodity-agents">
+                    <span>PM</span><span>SUP</span><span>TM-FUND</span><span>TM-NEWS</span>
+                    <span>TM-TECH</span><span>TM-STRUCT</span><span>TM-POS</span><span>TM-VIEWS</span>
+                    <span>SUP-A x6</span><span>SUP-B x6</span><span>TM-REPORT</span>
+                </div>
+                <div style="margin-top: 10px; color: #888;">18 Debate Rounds | Full COT Analysis</div>
+            </div>
+            <div class="commodity-card">
+                <div class="commodity-name">SGX Iron Ore</div>
+                <div class="commodity-agents">
+                    <span>PM</span><span>SUP</span><span>TM-FUND</span><span>TM-NEWS</span>
+                    <span>TM-TECH</span><span>TM-STRUCT</span><span>TM-VIEWS</span>
+                    <span>SUP-A x5</span><span>SUP-B x5</span><span>TM-REPORT</span>
+                </div>
+                <div style="margin-top: 10px; color: #888;">15 Debate Rounds | No COT (Non-US)</div>
+            </div>
+            <div class="commodity-card">
+                <div class="commodity-name">CME Copper</div>
+                <div class="commodity-agents">
+                    <span>PM</span><span>SUP</span><span>TM-FUND</span><span>TM-NEWS</span>
+                    <span>TM-TECH</span><span>TM-STRUCT</span><span>TM-POS</span><span>TM-VIEWS</span>
+                    <span>SUP-A x6</span><span>SUP-B x6</span><span>TM-REPORT</span>
+                </div>
+                <div style="margin-top: 10px; color: #888;">18 Debate Rounds | Full COT Analysis</div>
+            </div>
+            <div class="commodity-card">
+                <div class="commodity-name">CME Silver</div>
+                <div class="commodity-agents">
+                    <span>PM</span><span>SUP</span><span>TM-FUND</span><span>TM-NEWS</span>
+                    <span>TM-TECH</span><span>TM-STRUCT</span><span>TM-POS</span><span>TM-VIEWS</span>
+                    <span>SUP-A x6</span><span>SUP-B x6</span><span>TM-REPORT</span>
+                </div>
+                <div style="margin-top: 10px; color: #888;">18 Debate Rounds | Full COT Analysis</div>
+            </div>
+            <div class="commodity-card">
+                <div class="commodity-name">ICE Sugar No.11</div>
+                <div class="commodity-agents">
+                    <span>PM</span><span>SUP</span><span>TM-FUND</span><span>TM-NEWS</span>
+                    <span>TM-TECH</span><span>TM-STRUCT</span><span>TM-POS</span><span>TM-VIEWS</span>
+                    <span>SUP-A x6</span><span>SUP-B x6</span><span>TM-REPORT</span>
+                </div>
+                <div style="margin-top: 10px; color: #888;">18 Debate Rounds | Full COT Analysis</div>
+            </div>
+            <div class="commodity-card">
+                <div class="commodity-name">GFEX Lithium Carbonate</div>
+                <div class="commodity-agents">
+                    <span>PM</span><span>SUP</span><span>TM-FUND</span><span>TM-NEWS</span>
+                    <span>TM-TECH</span><span>TM-STRUCT</span><span>TM-VIEWS</span>
+                    <span>SUP-A x5</span><span>SUP-B x5</span><span>TM-REPORT</span>
+                </div>
+                <div style="margin-top: 10px; color: #888;">15 Debate Rounds | No COT (Non-US)</div>
+            </div>
+        </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 40px; padding: 20px; color: #666;">
+        <p>Generated: 2026-01-20 | Multi-Agent Commodity Analysis Framework</p>
+        <p><a href="index.html" style="color: #00d4ff; text-decoration: none;">← Back to Index</a></p>
+    </div>
+</body>
+</html>

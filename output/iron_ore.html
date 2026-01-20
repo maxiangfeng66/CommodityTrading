@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGX Iron Ore Futures - Comprehensive Outlook Report</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary: #1a365d;
+            --secondary: #2c5282;
+            --accent: #4299e1;
+            --success: #48bb78;
+            --warning: #ed8936;
+            --danger: #f56565;
+            --neutral: #718096;
+            --bg-light: #f7fafc;
+            --bg-card: #ffffff;
+            --text-primary: #1a202c;
+            --text-secondary: #4a5568;
+            --border: #e2e8f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-light);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 40px 20px;
+            margin-bottom: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        header .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        header .date {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .executive-summary {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--accent);
+        }
+
+        .executive-summary h2 {
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .outlook-badge {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin: 15px 0;
+        }
+
+        .outlook-bearish {
+            background: linear-gradient(135deg, #fc8181 0%, #f56565 100%);
+            color: white;
+        }
+
+        .outlook-neutral {
+            background: linear-gradient(135deg, #fbd38d 0%, #ed8936 100%);
+            color: white;
+        }
+
+        .outlook-bullish {
+            background: linear-gradient(135deg, #68d391 0%, #48bb78 100%);
+            color: white;
+        }
+
+        .score-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .score-card {
+            background: var(--bg-light);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .score-card .label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .score-card .value {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .score-positive { color: var(--success); }
+        .score-negative { color: var(--danger); }
+        .score-neutral { color: var(--warning); }
+
+        .section {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .section h2 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .section h3 {
+            color: var(--secondary);
+            margin: 20px 0 15px 0;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background: var(--bg-light);
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        tr:hover {
+            background: var(--bg-light);
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+            margin: 20px 0;
+        }
+
+        .indicator {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin: 5px;
+        }
+
+        .indicator-bullish {
+            background: #c6f6d5;
+            color: #276749;
+        }
+
+        .indicator-bearish {
+            background: #fed7d7;
+            color: #c53030;
+        }
+
+        .indicator-neutral {
+            background: #fefcbf;
+            color: #975a16;
+        }
+
+        .key-level {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 15px;
+            background: var(--bg-light);
+            border-radius: 6px;
+            margin: 8px 0;
+        }
+
+        .key-level .price {
+            font-weight: bold;
+            font-family: monospace;
+            font-size: 1.1rem;
+        }
+
+        .key-level.support { border-left: 4px solid var(--success); }
+        .key-level.resistance { border-left: 4px solid var(--danger); }
+
+        .news-item {
+            padding: 15px;
+            border-left: 3px solid var(--accent);
+            margin: 15px 0;
+            background: var(--bg-light);
+            border-radius: 0 8px 8px 0;
+        }
+
+        .news-item .date {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .news-item .title {
+            font-weight: 600;
+            margin: 5px 0;
+        }
+
+        .news-item .impact {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+        }
+
+        .impact-bullish { background: #c6f6d5; color: #276749; }
+        .impact-bearish { background: #fed7d7; color: #c53030; }
+        .impact-neutral { background: #e2e8f0; color: #4a5568; }
+
+        .debate-box {
+            background: linear-gradient(135deg, #ebf8ff 0%, #bee3f8 100%);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .debate-box h4 {
+            color: var(--secondary);
+            margin-bottom: 15px;
+        }
+
+        .debate-round {
+            margin: 15px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 6px;
+        }
+
+        .debate-round .agent {
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .risk-matrix {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .risk-column h4 {
+            padding: 10px 15px;
+            border-radius: 6px 6px 0 0;
+            margin-bottom: 0;
+        }
+
+        .risk-column.upside h4 {
+            background: var(--success);
+            color: white;
+        }
+
+        .risk-column.downside h4 {
+            background: var(--danger);
+            color: white;
+        }
+
+        .risk-column ul {
+            background: var(--bg-light);
+            padding: 15px 15px 15px 35px;
+            border-radius: 0 0 6px 6px;
+            min-height: 200px;
+        }
+
+        .risk-column li {
+            margin: 8px 0;
+        }
+
+        .source-list {
+            columns: 2;
+            column-gap: 30px;
+        }
+
+        .source-list li {
+            margin: 8px 0;
+            font-size: 0.9rem;
+            break-inside: avoid;
+        }
+
+        .source-list a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .source-list a:hover {
+            text-decoration: underline;
+        }
+
+        .gauge-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .gauge {
+            width: 200px;
+            height: 100px;
+            position: relative;
+        }
+
+        .confidence-bar {
+            height: 30px;
+            background: linear-gradient(90deg, #f56565 0%, #ed8936 25%, #ecc94b 50%, #48bb78 75%, #38a169 100%);
+            border-radius: 15px;
+            position: relative;
+            margin: 20px 0;
+        }
+
+        .confidence-marker {
+            position: absolute;
+            top: -5px;
+            width: 4px;
+            height: 40px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        .confidence-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .disclaimer {
+            background: #fff5f5;
+            border: 1px solid #fc8181;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 30px;
+            font-size: 0.85rem;
+        }
+
+        .disclaimer h4 {
+            color: #c53030;
+            margin-bottom: 10px;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #faf089 0%, #f6e05e 100%);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .highlight-box h4 {
+            color: #744210;
+            margin-bottom: 10px;
+        }
+
+        .metric-pill {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin: 2px;
+        }
+
+        .pill-green { background: #c6f6d5; color: #276749; }
+        .pill-red { background: #fed7d7; color: #c53030; }
+        .pill-yellow { background: #fefcbf; color: #975a16; }
+        .pill-blue { background: #bee3f8; color: #2c5282; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>SGX Iron Ore Futures</h1>
+            <div class="subtitle">Comprehensive Commodity Outlook Report</div>
+            <div class="date">Report Date: January 20, 2026 | Data as of: January 20, 2026</div>
+        </header>
+
+        <!-- Executive Summary -->
+        <section class="executive-summary">
+            <h2>Executive Summary</h2>
+
+            <div class="outlook-badge outlook-neutral">
+                OVERALL OUTLOOK: NEUTRAL-TO-BEARISH
+            </div>
+
+            <p style="margin: 20px 0; font-size: 1.1rem;">
+                SGX Iron Ore futures face significant headwinds from <strong>structural oversupply</strong> driven by the landmark Simandou mine coming online, combined with <strong>declining Chinese steel production</strong> reaching its lowest level since 2018. While Q1-Q2 may see seasonal support, analyst consensus strongly suggests 12-14% downside from current levels, with average price forecasts of $94/ton for 2026. The market is pricing in optimism that fundamentals do not support.
+            </p>
+
+            <div class="score-grid">
+                <div class="score-card">
+                    <div class="label">Fundamentals Score</div>
+                    <div class="value score-positive">+35</div>
+                </div>
+                <div class="score-card">
+                    <div class="label">News Sentiment</div>
+                    <div class="value score-positive">+25</div>
+                </div>
+                <div class="score-card">
+                    <div class="label">Market Views</div>
+                    <div class="value score-negative">-15</div>
+                </div>
+                <div class="score-card">
+                    <div class="label">Technical Score</div>
+                    <div class="value score-neutral">+10</div>
+                </div>
+                <div class="score-card">
+                    <div class="label">Structure Score</div>
+                    <div class="value score-neutral">+5</div>
+                </div>
+                <div class="score-card">
+                    <div class="label">Composite Score</div>
+                    <div class="value score-neutral">+12</div>
+                </div>
+            </div>
+
+            <h3>Key Takeaways</h3>
+            <ul style="margin-left: 20px;">
+                <li><strong>Price Forecast:</strong> Q1 $100-110, Q2 $95-105, H2 $85-100/ton</li>
+                <li><strong>Primary Risk:</strong> Simandou supply addition + China steel production decline</li>
+                <li><strong>Analyst Consensus:</strong> $94/ton for 2026 (12-14% below current $108.80)</li>
+                <li><strong>Catalyst Watch:</strong> China stimulus measures, environmental regulations, seasonal demand</li>
+            </ul>
+        </section>
+
+        <!-- Current Price & Key Metrics -->
+        <section class="section">
+            <h2>Current Market Snapshot</h2>
+
+            <div class="two-column">
+                <div>
+                    <table>
+                        <tr>
+                            <th colspan="2">Price Data (SGX Iron Ore)</th>
+                        </tr>
+                        <tr>
+                            <td>Current Price</td>
+                            <td><strong>$108.80/ton</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Analyst Consensus (2026)</td>
+                            <td>$94.00/ton</td>
+                        </tr>
+                        <tr>
+                            <td>Implied Downside</td>
+                            <td class="score-negative">-12% to -14%</td>
+                        </tr>
+                        <tr>
+                            <td>Q1 2026 Range</td>
+                            <td>$100-110/ton</td>
+                        </tr>
+                        <tr>
+                            <td>H2 2026 Range</td>
+                            <td>$85-100/ton</td>
+                        </tr>
+                    </table>
+                </div>
+                <div>
+                    <table>
+                        <tr>
+                            <th colspan="2">Market Context</th>
+                        </tr>
+                        <tr>
+                            <td>Exchange</td>
+                            <td><strong>SGX (Singapore Exchange)</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Contract Size</td>
+                            <td>100 metric tons</td>
+                        </tr>
+                        <tr>
+                            <td>Settlement</td>
+                            <td>Cash-settled (TSI index)</td>
+                        </tr>
+                        <tr>
+                            <td>COT Data</td>
+                            <td><span class="metric-pill pill-yellow">Not Available (SGX)</span></td>
+                        </tr>
+                        <tr>
+                            <td>Primary Driver</td>
+                            <td>China Steel Demand</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fundamentals Section -->
+        <section class="section">
+            <h2>Fundamentals Analysis</h2>
+            <div class="indicator indicator-neutral">Score: +35 (Neutral-to-Bearish)</div>
+
+            <div class="two-column">
+                <div>
+                    <h3>Global Supply/Demand Balance</h3>
+                    <div class="chart-container">
+                        <canvas id="supplyDemandChart"></canvas>
+                    </div>
+                </div>
+                <div>
+                    <h3>Key Metrics</h3>
+                    <table>
+                        <tr>
+                            <td>China Steel Production (2025)</td>
+                            <td><strong>961M tons</strong> (lowest since 2018)</td>
+                        </tr>
+                        <tr>
+                            <td>Global Iron Ore Production</td>
+                            <td><strong>~2.5B tons</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Supply Situation</td>
+                            <td class="score-negative"><strong>Production Surplus</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Simandou Status</td>
+                            <td><strong>First cargo Jan 2026</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Simandou Capacity</td>
+                            <td><strong>60-120 Mtpa</strong> (at full ramp)</td>
+                        </tr>
+                        <tr>
+                            <td>China Import Dependency</td>
+                            <td><strong>~80%</strong> of seaborne trade</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <h3>Production by Major Countries</h3>
+            <div class="chart-container" style="height: 250px;">
+                <canvas id="productionChart"></canvas>
+            </div>
+
+            <div class="highlight-box">
+                <h4>Simandou: Game-Changing Supply Addition</h4>
+                <p>The Simandou iron ore project in Guinea shipped its <strong>first cargo in January 2026</strong>, marking one of the most significant supply additions in decades. At full capacity, Simandou is expected to produce <strong>60-120 million tons per annum</strong> of high-grade (65%+ Fe) iron ore. This addition comes at a time when Chinese steel demand is structurally declining, creating a supply overhang that is expected to pressure prices throughout 2026 and beyond.</p>
+            </div>
+
+            <div class="debate-box">
+                <h4>Agent Debate Summary</h4>
+                <div class="debate-round">
+                    <p><span class="agent">TM-FUND Initial:</span> Bearish score of +45 based on production surplus, Simandou coming online, and declining China steel output at 961M tons (lowest since 2018).</p>
+                </div>
+                <div class="debate-round">
+                    <p><span class="agent">SUP-A Challenge:</span> "China stimulus measures could provide temporary support. Seasonal restocking in Q1-Q2 historically supportive. Environmental regulations may limit domestic Chinese production."</p>
+                </div>
+                <div class="debate-round">
+                    <p><span class="agent">Final Consensus:</span> Score moderated to +35 acknowledging short-term seasonal factors. However, structural bearish thesis remains intact with Simandou supply addition overwhelming any demand recovery.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- News & Policy Section -->
+        <section class="section">
+            <h2>News & Policy Analysis</h2>
+            <div class="indicator indicator-neutral">Sentiment Score: +25 (Neutral)</div>
+
+            <h3>Recent Key Events</h3>
+            <div class="news-item">
+                <div class="date">January 2026</div>
+                <div class="title">Simandou Ships First Iron Ore Cargo</div>
+                <span class="impact impact-bearish">Bearish</span>
+                <p>The landmark Simandou project in Guinea shipped its first iron ore cargo, marking the beginning of a major new supply source for global markets. This represents one of the largest undeveloped iron ore deposits globally.</p>
+            </div>
+
+            <div class="news-item">
+                <div class="date">January 2026</div>
+                <div class="title">China Announces New Stimulus Measures</div>
+                <span class="impact impact-bullish">Bullish</span>
+                <p>Chinese authorities announced additional economic stimulus measures targeting the property sector and infrastructure investment, providing short-term support for steel demand expectations.</p>
+            </div>
+
+            <div class="news-item">
+                <div class="date">December 2025</div>
+                <div class="title">China Steel Production Falls to 961M Tons</div>
+                <span class="impact impact-bearish">Bearish</span>
+                <p>China's 2025 steel production fell to 961 million tons, the lowest level since 2018, reflecting structural decline in the property sector and environmental production caps.</p>
+            </div>
+
+            <div class="news-item">
+                <div class="date">December 2025</div>
+                <div class="title">Environmental Regulations Tighten</div>
+                <span class="impact impact-neutral">Neutral</span>
+                <p>China implemented stricter environmental regulations on steel production, potentially limiting output but also reducing iron ore demand. Net impact assessed as neutral.</p>
+            </div>
+
+            <h3>Policy Updates</h3>
+            <table>
+                <tr>
+                    <th>Policy</th>
+                    <th>Date</th>
+                    <th>Impact</th>
+                </tr>
+                <tr>
+                    <td>China Property Sector Support</td>
+                    <td>Jan 2026</td>
+                    <td><span class="metric-pill pill-green">Short-term Supportive</span></td>
+                </tr>
+                <tr>
+                    <td>Steel Production Caps</td>
+                    <td>Ongoing</td>
+                    <td><span class="metric-pill pill-red">Bearish for Demand</span></td>
+                </tr>
+                <tr>
+                    <td>Infrastructure Investment Push</td>
+                    <td>Q1 2026</td>
+                    <td><span class="metric-pill pill-green">Seasonal Support</span></td>
+                </tr>
+                <tr>
+                    <td>Guinea Mining Framework</td>
+                    <td>2025</td>
+                    <td><span class="metric-pill pill-red">Enables Simandou Supply</span></td>
+                </tr>
+            </table>
+
+            <h3>Seasonal Patterns</h3>
+            <div class="highlight-box">
+                <h4>Q1-Q2 Seasonal Support Expected</h4>
+                <p>Historically, iron ore prices receive support in Q1-Q2 from post-Lunar New Year restocking and infrastructure project commencement in China. However, H2 typically sees weakness as construction activity slows and inventory destocking occurs. This pattern suggests front-loaded strength followed by meaningful price weakness in the second half of 2026.</p>
+            </div>
+        </section>
+
+        <!-- Technical Analysis Section -->
+        <section class="section">
+            <h2>Technical Analysis</h2>
+            <div class="indicator indicator-neutral">Score: +10 (Neutral)</div>
+
+            <div class="two-column">
+                <div>
+                    <h3>Trend Indicators</h3>
+                    <table>
+                        <tr>
+                            <td>Current Price</td>
+                            <td><span class="metric-pill pill-yellow">$108.80/ton</span></td>
+                        </tr>
+                        <tr>
+                            <td>Near-term Trend</td>
+                            <td><span class="metric-pill pill-yellow">Consolidating</span></td>
+                        </tr>
+                        <tr>
+                            <td>Key Resistance (CNY)</td>
+                            <td><span class="metric-pill pill-red">CNY 820</span></td>
+                        </tr>
+                        <tr>
+                            <td>Medium-term Bias</td>
+                            <td><span class="metric-pill pill-red">Bearish</span></td>
+                        </tr>
+                        <tr>
+                            <td>Pattern</td>
+                            <td><span class="metric-pill pill-blue">Near Resistance</span></td>
+                        </tr>
+                        <tr>
+                            <td>Volume Analysis</td>
+                            <td><span class="metric-pill pill-yellow">Average</span></td>
+                        </tr>
+                    </table>
+                </div>
+                <div>
+                    <h3>Key Levels (USD/ton)</h3>
+                    <div class="key-level resistance">
+                        <span>$120 - Major Resistance</span>
+                        <span class="price">$120.00</span>
+                    </div>
+                    <div class="key-level resistance">
+                        <span>$115 - Near Resistance</span>
+                        <span class="price">$115.00</span>
+                    </div>
+                    <div class="key-level resistance">
+                        <span>$110 - Immediate Resistance</span>
+                        <span class="price">$110.00</span>
+                    </div>
+                    <div style="padding: 10px; text-align: center; background: #e2e8f0; margin: 8px 0; border-radius: 6px;">
+                        <strong>Current: $108.80</strong>
+                    </div>
+                    <div class="key-level support">
+                        <span>$100 - Psychological Support</span>
+                        <span class="price">$100.00</span>
+                    </div>
+                    <div class="key-level support">
+                        <span>$95 - Q2 Target Zone</span>
+                        <span class="price">$95.00</span>
+                    </div>
+                    <div class="key-level support">
+                        <span>$85 - H2 Downside Target</span>
+                        <span class="price">$85.00</span>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Technical Verdict</h3>
+            <p>Price is currently near resistance at CNY 820 (DCE) / $110 (SGX), suggesting limited upside in the near term. The technical picture aligns with the fundamental view of <strong>H1 stability followed by H2 weakness</strong>. A break above $115 would challenge the bearish thesis, while a break below $100 would confirm the downtrend and open the path to analyst consensus targets around $94. The neutral technical score reflects the market's current consolidation phase before the expected directional move lower.</p>
+        </section>
+
+        <!-- Market Structure Section -->
+        <section class="section">
+            <h2>Market Structure Analysis</h2>
+            <div class="indicator indicator-neutral">Score: +5 (Neutral)</div>
+
+            <div class="two-column">
+                <div>
+                    <h3>Module Scores Breakdown</h3>
+                    <div class="chart-container">
+                        <canvas id="moduleScoreChart"></canvas>
+                    </div>
+                </div>
+                <div>
+                    <h3>Structure Assessment</h3>
+                    <table>
+                        <tr>
+                            <td>COT Data Availability</td>
+                            <td><span class="metric-pill pill-yellow">Not Available (SGX)</span></td>
+                        </tr>
+                        <tr>
+                            <td>Market Liquidity</td>
+                            <td><span class="metric-pill pill-green">High</span></td>
+                        </tr>
+                        <tr>
+                            <td>Primary Exchange</td>
+                            <td>SGX, DCE</td>
+                        </tr>
+                        <tr>
+                            <td>Settlement Type</td>
+                            <td>Cash-settled (TSI)</td>
+                        </tr>
+                        <tr>
+                            <td>China Correlation</td>
+                            <td><span class="metric-pill pill-red">Very High (~95%)</span></td>
+                        </tr>
+                    </table>
+
+                    <h3 style="margin-top: 20px;">Structural Implications</h3>
+                    <ul style="margin-left: 20px;">
+                        <li>No CFTC COT data available for SGX iron ore</li>
+                        <li>Market heavily driven by China steel sector (~70% global demand)</li>
+                        <li>High correlation with DCE iron ore futures</li>
+                        <li>Seaborne trade dominated by Australia and Brazil</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="debate-box">
+                <h4>Market Structure Note</h4>
+                <div class="debate-round">
+                    <p>Unlike US-traded commodities, SGX Iron Ore does not have CFTC Commitments of Traders (COT) reporting. Position analysis relies on exchange-reported data and market flow indicators. The structure score of +5 reflects neutral positioning assumptions in the absence of detailed speculator data.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Market Views Section -->
+        <section class="section">
+            <h2>Market Views & Consensus Analysis</h2>
+            <div class="indicator indicator-bearish">Consensus: Bearish | Score: -15</div>
+
+            <h3>Prevailing Market Narrative</h3>
+            <p style="font-size: 1.05rem; padding: 15px; background: var(--bg-light); border-radius: 8px;">
+                "Simandou supply addition combined with structurally declining Chinese steel production will push iron ore prices toward $94/ton average in 2026, representing 12-14% downside from current levels. Q1-Q2 seasonal support may delay but not prevent the price decline."
+            </p>
+
+            <div class="highlight-box">
+                <h4>Analyst Consensus: $94/ton for 2026</h4>
+                <p>Major investment banks and commodity analysts have converged on an average price target of <strong>$94/ton for 2026</strong>, implying significant downside from the current $108.80 level. This consensus reflects the structural oversupply thesis driven by Simandou and declining Chinese demand.</p>
+            </div>
+
+            <div class="two-column" style="margin-top: 25px;">
+                <div>
+                    <h3 style="color: var(--success);">Bull Case Arguments</h3>
+                    <ul style="margin-left: 20px;">
+                        <li>China stimulus measures supporting short-term demand</li>
+                        <li>Q1-Q2 seasonal restocking patterns</li>
+                        <li>Infrastructure investment push in China</li>
+                        <li>Environmental regulations limiting domestic supply</li>
+                        <li>Potential supply disruptions (weather, logistics)</li>
+                        <li>Currency movements favoring commodities</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 style="color: var(--danger);">Bear Case Arguments</h3>
+                    <ul style="margin-left: 20px;">
+                        <li>Simandou adding 60-120 Mtpa of high-grade supply</li>
+                        <li>China steel production at lowest since 2018</li>
+                        <li>Property sector structural decline</li>
+                        <li>Analyst consensus 12-14% below current price</li>
+                        <li>H2 seasonal weakness expected</li>
+                        <li>Global growth concerns weighing on demand</li>
+                        <li>High inventory levels at Chinese ports</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>Logic Soundness Assessment</h3>
+            <div style="padding: 15px; background: #ebf8ff; border-radius: 8px; margin-top: 15px;">
+                <p><strong>Verdict: SOUND - Bearish thesis well-supported</strong></p>
+                <p style="margin-top: 10px;">The bearish consensus is logically sound and supported by verifiable supply/demand fundamentals. The Simandou supply addition is a structural game-changer, while Chinese steel demand decline is confirmed by official production data. The market appears to be pricing in hope that stimulus measures will offset these headwinds, creating downside risk when reality fails to meet expectations.</p>
+            </div>
+
+            <h3>Identified Blind Spots</h3>
+            <ul style="margin-left: 20px; margin-top: 15px;">
+                <li><strong>Stimulus Surprise:</strong> More aggressive China stimulus than expected could delay price decline</li>
+                <li><strong>Simandou Ramp-up:</strong> Actual production could be slower than projected</li>
+                <li><strong>Supply Disruptions:</strong> Weather or logistics issues in Australia/Brazil</li>
+                <li><strong>Currency Moves:</strong> USD weakness could support commodity prices</li>
+            </ul>
+        </section>
+
+        <!-- Price Forecast Section -->
+        <section class="section">
+            <h2>Price Forecast</h2>
+
+            <div class="chart-container" style="height: 280px;">
+                <canvas id="forecastChart"></canvas>
+            </div>
+
+            <table style="margin-top: 20px;">
+                <tr>
+                    <th>Period</th>
+                    <th>Price Range</th>
+                    <th>Drivers</th>
+                    <th>Confidence</th>
+                </tr>
+                <tr>
+                    <td><strong>Q1 2026</strong></td>
+                    <td>$100-110/ton</td>
+                    <td>Seasonal restocking, stimulus support</td>
+                    <td><span class="metric-pill pill-green">High</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Q2 2026</strong></td>
+                    <td>$95-105/ton</td>
+                    <td>Simandou ramp-up, demand normalization</td>
+                    <td><span class="metric-pill pill-yellow">Medium</span></td>
+                </tr>
+                <tr>
+                    <td><strong>H2 2026</strong></td>
+                    <td>$85-100/ton</td>
+                    <td>Full supply impact, seasonal weakness</td>
+                    <td><span class="metric-pill pill-yellow">Medium</span></td>
+                </tr>
+                <tr>
+                    <td><strong>2026 Average</strong></td>
+                    <td>~$94/ton</td>
+                    <td>Analyst consensus target</td>
+                    <td><span class="metric-pill pill-green">High (consensus)</span></td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- Risk Assessment -->
+        <section class="section">
+            <h2>Risk Assessment</h2>
+
+            <div class="risk-matrix">
+                <div class="risk-column upside">
+                    <h4>Upside Risks</h4>
+                    <ul>
+                        <li>Stronger-than-expected China stimulus response</li>
+                        <li>Simandou production delays or ramp-up issues</li>
+                        <li>Supply disruptions in Australia or Brazil</li>
+                        <li>Faster-than-expected property sector recovery</li>
+                        <li>Currency weakness supporting commodity prices</li>
+                        <li>Inventory restocking exceeding expectations</li>
+                        <li>Environmental production cuts in China</li>
+                    </ul>
+                </div>
+                <div class="risk-column downside">
+                    <h4>Downside Risks</h4>
+                    <ul>
+                        <li>Faster Simandou ramp-up than projected</li>
+                        <li>Deeper China steel production cuts</li>
+                        <li>Global economic slowdown</li>
+                        <li>Property sector deterioration in China</li>
+                        <li>Port inventory build-up in China</li>
+                        <li>Weaker-than-expected infrastructure spending</li>
+                        <li>Additional supply from Vale/BHP expansion</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 25px;">Risk/Reward Assessment</h3>
+            <table>
+                <tr>
+                    <th>Scenario</th>
+                    <th>Probability</th>
+                    <th>Price Target</th>
+                    <th>Return from Current</th>
+                </tr>
+                <tr>
+                    <td>Bull Case (Stimulus Success)</td>
+                    <td>20%</td>
+                    <td>$115-125/ton</td>
+                    <td>+6% to +15%</td>
+                </tr>
+                <tr>
+                    <td>Base Case (Consensus)</td>
+                    <td>55%</td>
+                    <td>$90-100/ton</td>
+                    <td>-8% to -17%</td>
+                </tr>
+                <tr>
+                    <td>Bear Case (Demand Collapse)</td>
+                    <td>25%</td>
+                    <td>$75-85/ton</td>
+                    <td>-22% to -31%</td>
+                </tr>
+            </table>
+
+            <div style="padding: 15px; background: #fed7d7; border-radius: 8px; margin-top: 20px;">
+                <p><strong>Risk/Reward Skew: NEGATIVE</strong></p>
+                <p style="margin-top: 10px;">Based on probability-weighted scenarios, the expected return is negative. The base case (55% probability) points to $90-100/ton, while the bear case (25%) suggests potential for $75-85/ton. Only the bull case (20%) offers upside, and even then limited to +6-15%. The asymmetric risk profile favors defensive positioning.</p>
+            </div>
+        </section>
+
+        <!-- Conclusion -->
+        <section class="section">
+            <h2>Conclusion & Trading Implications</h2>
+
+            <div class="score-grid">
+                <div class="score-card">
+                    <div class="label">Overall Outlook</div>
+                    <div class="value" style="font-size: 1.5rem; color: var(--warning);">NEUTRAL-TO-BEARISH</div>
+                </div>
+                <div class="score-card">
+                    <div class="label">Composite Score</div>
+                    <div class="value" style="font-size: 1.5rem;">+12</div>
+                </div>
+                <div class="score-card">
+                    <div class="label">2026 Avg Target</div>
+                    <div class="value" style="font-size: 1.5rem;">$94/ton</div>
+                </div>
+            </div>
+
+            <h3>Synthesis</h3>
+            <p style="font-size: 1.05rem; line-height: 1.7;">
+                SGX Iron Ore futures face a challenging outlook characterized by <strong>structural oversupply meeting declining demand</strong>. The Simandou mine shipping its first cargo in January 2026 marks the beginning of a significant supply addition that the market has been anticipating for years. Combined with China's steel production falling to 961 million tons - the lowest since 2018 - the fundamental picture strongly supports lower prices.
+            </p>
+            <p style="font-size: 1.05rem; line-height: 1.7; margin-top: 15px;">
+                The analyst consensus of <strong>$94/ton for 2026</strong> implies 12-14% downside from the current $108.80 level. While Q1-Q2 may see seasonal support from restocking and China stimulus measures, H2 is expected to see meaningful price weakness as Simandou volumes ramp up and seasonal factors turn negative.
+            </p>
+            <p style="font-size: 1.05rem; line-height: 1.7; margin-top: 15px;">
+                The composite score of +12 reflects the tension between near-term support factors (fundamentals +35, news +25) and the strongly bearish analyst consensus (views -15). The market appears to be pricing in optimism that the fundamental analysis does not support, creating <strong>negative risk/reward asymmetry</strong> for long positions.
+            </p>
+
+            <h3>Trading Considerations</h3>
+            <ul style="margin-left: 20px; font-size: 1.05rem;">
+                <li><strong>Shorts:</strong> Consider initiating positions on rallies toward $110-115 with targets at $95-100 for Q2 and $85-90 for H2.</li>
+                <li><strong>Longs:</strong> Tactical only, limited to Q1 seasonal bounce plays with tight stops. Risk/reward unfavorable for structural longs.</li>
+                <li><strong>Hedgers:</strong> Producer hedging attractive at current levels given downside consensus. Consumer hedging can wait for lower levels.</li>
+                <li><strong>Spreads:</strong> Calendar spreads may benefit from contango if near-term support holds while deferred contracts price in weakness.</li>
+            </ul>
+
+            <div class="disclaimer">
+                <h4>Disclaimer</h4>
+                <p>This report is for informational purposes only and does not constitute investment advice. Commodity futures trading involves substantial risk of loss. Past performance is not indicative of future results. The analysis presented represents the output of an AI-driven multi-agent system and should be independently verified before making investment decisions.</p>
+            </div>
+        </section>
+
+        <!-- Sources -->
+        <section class="section">
+            <h2>Data Sources & References</h2>
+            <ul class="source-list">
+                <li><a href="https://www.sgx.com/derivatives/products/iron-ore" target="_blank">SGX Iron Ore Futures Official Data</a></li>
+                <li><a href="http://www.dce.com.cn/DCE/Products/Industrial/Iron%20Ore/index.html" target="_blank">DCE Iron Ore Futures</a></li>
+                <li><a href="https://www.worldsteel.org/" target="_blank">World Steel Association</a></li>
+                <li><a href="https://www.mysteel.net/" target="_blank">MySteel Iron Ore Index</a></li>
+                <li><a href="https://www.spglobal.com/commodityinsights/" target="_blank">S&P Global Platts Iron Ore</a></li>
+                <li><a href="https://www.reuters.com/markets/commodities/" target="_blank">Reuters Commodities</a></li>
+                <li><a href="https://www.bloomberg.com/markets/commodities" target="_blank">Bloomberg Commodities</a></li>
+                <li><a href="https://www.bhp.com/" target="_blank">BHP Group</a></li>
+                <li><a href="https://www.riotinto.com/" target="_blank">Rio Tinto</a></li>
+                <li><a href="https://www.vale.com/" target="_blank">Vale S.A.</a></li>
+                <li><a href="https://www.fortescue.com/" target="_blank">Fortescue Metals Group</a></li>
+                <li><a href="https://simandou.com/" target="_blank">Simandou Project</a></li>
+                <li><a href="https://www.stats.gov.cn/" target="_blank">National Bureau of Statistics of China</a></li>
+                <li><a href="https://tradingeconomics.com/commodity/iron-ore" target="_blank">Trading Economics Iron Ore</a></li>
+            </ul>
+        </section>
+
+        <footer>
+            <p>Report generated by Multi-Agent Commodity Analysis System</p>
+            <p>SGX Iron Ore Futures Outlook | January 20, 2026</p>
+            <p style="margin-top: 10px; font-size: 0.8rem;">Powered by Claude AI Multi-Agent Architecture</p>
+        </footer>
+    </div>
+
+    <script>
+        // Supply/Demand Chart
+        const supplyDemandCtx = document.getElementById('supplyDemandChart').getContext('2d');
+        new Chart(supplyDemandCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Global Production', 'China Steel Output', 'Simandou Addition'],
+                datasets: [{
+                    label: 'Million Tons',
+                    data: [2500, 961, 60],
+                    backgroundColor: ['#4299e1', '#f56565', '#ed8936'],
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    title: { display: true, text: 'Iron Ore Supply & China Steel (M tons)' }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: { display: true, text: 'Million Tons' }
+                    }
+                }
+            }
+        });
+
+        // Production by Country Chart
+        const productionCtx = document.getElementById('productionChart').getContext('2d');
+        new Chart(productionCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Australia', 'Brazil', 'China', 'India', 'Russia', 'Guinea (Simandou)'],
+                datasets: [{
+                    label: 'Production (M Tons)',
+                    data: [900, 380, 220, 160, 100, 60],
+                    backgroundColor: '#4299e1',
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y',
+                plugins: {
+                    legend: { display: false },
+                    title: { display: true, text: 'Iron Ore Production by Country (M tons/year)' }
+                },
+                scales: {
+                    x: { beginAtZero: true }
+                }
+            }
+        });
+
+        // Module Score Chart
+        const moduleScoreCtx = document.getElementById('moduleScoreChart').getContext('2d');
+        new Chart(moduleScoreCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Fundamentals', 'News', 'Views', 'Technical', 'Structure'],
+                datasets: [{
+                    label: 'Module Score',
+                    data: [35, 25, -15, 10, 5],
+                    backgroundColor: function(context) {
+                        const value = context.raw;
+                        if (value > 20) return '#48bb78';
+                        if (value < 0) return '#f56565';
+                        return '#ed8936';
+                    },
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    title: { display: true, text: 'Analysis Module Scores' }
+                },
+                scales: {
+                    y: {
+                        min: -50,
+                        max: 50,
+                        title: { display: true, text: 'Score' }
+                    }
+                }
+            }
+        });
+
+        // Price Forecast Chart
+        const forecastCtx = document.getElementById('forecastChart').getContext('2d');
+        new Chart(forecastCtx, {
+            type: 'line',
+            data: {
+                labels: ['Current', 'Q1 2026', 'Q2 2026', 'H2 2026'],
+                datasets: [{
+                    label: 'High Estimate',
+                    data: [108.8, 110, 105, 100],
+                    borderColor: '#48bb78',
+                    backgroundColor: 'rgba(72, 187, 120, 0.1)',
+                    fill: false,
+                    tension: 0.3
+                }, {
+                    label: 'Base Case',
+                    data: [108.8, 105, 100, 92],
+                    borderColor: '#4299e1',
+                    backgroundColor: 'rgba(66, 153, 225, 0.1)',
+                    fill: false,
+                    tension: 0.3,
+                    borderWidth: 3
+                }, {
+                    label: 'Low Estimate',
+                    data: [108.8, 100, 95, 85],
+                    borderColor: '#f56565',
+                    backgroundColor: 'rgba(245, 101, 101, 0.1)',
+                    fill: false,
+                    tension: 0.3
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'top' },
+                    title: { display: true, text: 'Price Forecast Scenarios (USD/ton)' }
+                },
+                scales: {
+                    y: {
+                        min: 80,
+                        max: 120,
+                        title: { display: true, text: 'USD/ton' }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
