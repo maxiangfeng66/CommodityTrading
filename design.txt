@@ -1,0 +1,17 @@
+Fundamentals
+1. big picture balance sheet
+2. 
+
+
+
+
+
+
+
+Technical
+
+big trend: is it above 60 MA? is it above 60Day close?
+
+market structure: 
+is market tracking attention: volume, aggregate OI daily change on 5 day average showing significance?
+is market crowded: Aggregate OI very high percentile within a year?
