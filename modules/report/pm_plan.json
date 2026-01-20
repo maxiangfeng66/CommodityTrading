@@ -1,0 +1,661 @@
+{
+  "project_meta": {
+    "commodity": "ICE Cotton No.2 Futures",
+    "ticker": "CT",
+    "exchange": "ICE (Intercontinental Exchange)",
+    "report_type": "Comprehensive HTML Commodity Outlook",
+    "created_date": "2026-01-20",
+    "version": "1.0"
+  },
+  "modules": {
+    "fundamentals": {
+      "module_id": "TM-FUND",
+      "module_name": "Fundamentals Analysis",
+      "data_requirements": {
+        "usda_wasde": {
+          "description": "USDA World Agricultural Supply and Demand Estimates",
+          "source_url": "https://www.usda.gov/oce/commodity/wasde",
+          "metrics": [
+            "US cotton production (million bales)",
+            "US cotton ending stocks",
+            "World cotton production",
+            "World cotton consumption/mill use",
+            "World ending stocks",
+            "Stocks-to-use ratio (global and US)",
+            "China cotton imports and reserves"
+          ],
+          "frequency": "Monthly",
+          "format": "Extract latest report values and YoY comparisons"
+        },
+        "seasonal_patterns": {
+          "description": "Cotton seasonal production and demand cycles",
+          "metrics": [
+            "US planting progress (March-June)",
+            "US harvest progress (September-December)",
+            "Northern Hemisphere growing season status",
+            "Southern Hemisphere (Brazil, Australia) crop timing"
+          ]
+        },
+        "production_estimates": {
+          "source": "USDA, ICAC (International Cotton Advisory Committee)",
+          "metrics": [
+            "US planted acres vs harvested acres",
+            "US yield per acre (lbs/acre)",
+            "Major producer forecasts (India, China, Brazil, Pakistan)",
+            "Weather impact on crop conditions"
+          ]
+        }
+      },
+      "key_questions": [
+        "What is the current global supply/demand balance outlook for cotton?",
+        "Is the market in surplus or deficit this crop year?",
+        "How do current stocks-to-use ratios compare to historical averages?",
+        "What are the key production risks for the current season?",
+        "How is US export demand trending relative to forecasts?",
+        "What is China's import demand outlook and reserve policy impact?"
+      ],
+      "output_format": {
+        "balance_assessment": {
+          "type": "string",
+          "values": ["Surplus", "Balanced", "Deficit"]
+        },
+        "outlook_score": {
+          "type": "number",
+          "range": [-5, 5],
+          "description": "Negative = bearish fundamentals, Positive = bullish"
+        },
+        "supply_demand_table": {
+          "columns": ["Category", "2024/25", "2025/26E", "Change", "Commentary"]
+        },
+        "key_insights": {
+          "type": "array",
+          "max_items": 5
+        }
+      },
+      "integration_points": {
+        "feeds_to": ["TM-VIEWS", "TM-REPORT"],
+        "receives_from": ["TM-NEWS"]
+      }
+    },
+    "news_policy": {
+      "module_id": "TM-NEWS",
+      "module_name": "News & Policy Analysis",
+      "data_requirements": {
+        "recent_news": {
+          "sources": [
+            "Reuters Commodities",
+            "Bloomberg Agriculture",
+            "Cotton Outlook",
+            "Agrimoney",
+            "USDA press releases"
+          ],
+          "lookback_period": "30 days",
+          "topics": [
+            "Cotton price movements and drivers",
+            "Trade policy (US-China, tariffs)",
+            "Weather events (drought, hurricanes, floods)",
+            "Currency impacts (USD strength)",
+            "Competing fiber developments (polyester)"
+          ]
+        },
+        "policy_changes": {
+          "categories": [
+            "US Farm Bill / cotton subsidy programs",
+            "China cotton reserve releases/purchases",
+            "India export policies",
+            "Trade agreement developments",
+            "Environmental regulations affecting cotton production"
+          ]
+        },
+        "weather_data": {
+          "sources": ["NOAA", "Drought Monitor", "AccuWeather Agriculture"],
+          "regions": [
+            "US Southwest (Texas)",
+            "US Southeast (Georgia, Mississippi Delta)",
+            "Brazil Mato Grosso",
+            "India Gujarat/Maharashtra",
+            "Australia NSW/Queensland",
+            "Pakistan Punjab/Sindh"
+          ],
+          "metrics": [
+            "Drought conditions",
+            "Excessive moisture/flooding",
+            "Temperature anomalies",
+            "Tropical storm threats"
+          ]
+        }
+      },
+      "key_questions": [
+        "What recent news events are driving cotton price action?",
+        "Are there any policy changes that could materially impact supply or demand?",
+        "What is the current weather risk assessment for major producing regions?",
+        "How are geopolitical tensions affecting cotton trade flows?",
+        "Are there any emerging themes the market has not yet priced in?"
+      ],
+      "output_format": {
+        "news_summary": {
+          "type": "object",
+          "fields": ["headline", "date", "source", "impact_rating", "category"]
+        },
+        "event_timeline": {
+          "type": "array",
+          "sorted_by": "date_descending"
+        },
+        "impact_assessment": {
+          "severity_scale": [1, 2, 3, 4, 5],
+          "labels": ["Negligible", "Minor", "Moderate", "Significant", "Major"]
+        },
+        "key_themes": {
+          "type": "array",
+          "max_items": 5
+        }
+      },
+      "integration_points": {
+        "feeds_to": ["TM-FUND", "TM-VIEWS", "TM-REPORT"],
+        "receives_from": []
+      }
+    },
+    "market_views": {
+      "module_id": "TM-VIEWS",
+      "module_name": "Market Views Analysis",
+      "data_requirements": {
+        "analyst_reports": {
+          "sources": [
+            "Major investment bank research (Goldman Sachs, Morgan Stanley, Citi)",
+            "Commodity specialist firms (Rabobank, StoneX)",
+            "Cotton industry reports (Cotlook, Cotton Outlook)",
+            "Brokerage commentary"
+          ],
+          "focus_areas": [
+            "Price forecasts and targets",
+            "Fundamental narratives",
+            "Risk scenarios"
+          ]
+        },
+        "market_commentary": {
+          "sources": [
+            "ICE Cotton market commentary",
+            "Trade publications",
+            "Social media sentiment (Cotton Twitter/X)",
+            "Producer/merchant surveys"
+          ]
+        },
+        "consensus_data": {
+          "metrics": [
+            "Average analyst price forecast",
+            "Bull/bear case scenarios",
+            "Key consensus assumptions"
+          ]
+        }
+      },
+      "key_questions": [
+        "What is the prevailing market logic/narrative for cotton prices?",
+        "Is the consensus bullish, bearish, or neutral?",
+        "What are the key assumptions underlying market views?",
+        "Are there logical flaws or blind spots in the consensus view?",
+        "What would invalidate the current market narrative?",
+        "What contrarian indicators exist?"
+      ],
+      "output_format": {
+        "consensus_summary": {
+          "type": "string",
+          "description": "2-3 sentence summary of prevailing market view"
+        },
+        "sentiment_score": {
+          "type": "number",
+          "range": [-100, 100],
+          "description": "Bearish (-100) to Bullish (+100)"
+        },
+        "logic_assessment": {
+          "soundness_rating": ["Weak", "Moderate", "Strong"],
+          "vulnerabilities": "array of identified logical weaknesses"
+        },
+        "contrarian_signals": {
+          "type": "array"
+        }
+      },
+      "integration_points": {
+        "feeds_to": ["TM-REPORT"],
+        "receives_from": ["TM-FUND", "TM-NEWS", "TM-POS"]
+      }
+    },
+    "technical": {
+      "module_id": "TM-TECH",
+      "module_name": "Technical Analysis",
+      "data_requirements": {
+        "price_data": {
+          "source": "ICE, Barchart, TradingView",
+          "ticker": "CT (front month, CT1, or specific contract CTH26, etc.)",
+          "timeframes": ["Daily", "Weekly"],
+          "metrics": [
+            "OHLC prices",
+            "Settlement/close prices",
+            "Price history (minimum 1 year)"
+          ]
+        },
+        "moving_averages": {
+          "required": [
+            "60-day simple moving average (60 SMA)",
+            "60-day closing price reference",
+            "20-day SMA",
+            "200-day SMA"
+          ],
+          "calculations": "Use daily settlement prices"
+        },
+        "technical_levels": {
+          "types": [
+            "Support levels (recent lows, Fibonacci retracements)",
+            "Resistance levels (recent highs, prior breakdown points)",
+            "Trendlines",
+            "Pivot points"
+          ]
+        }
+      },
+      "key_questions": [
+        "Is price currently above or below the 60-day moving average?",
+        "Is current price above or below the close from 60 trading days ago?",
+        "What is the primary trend direction (up, down, sideways)?",
+        "What are the key support and resistance levels near current price?",
+        "Are there converging technical levels that could trigger significant moves?",
+        "What is the trend strength based on price structure?"
+      ],
+      "output_format": {
+        "trend_assessment": {
+          "direction": ["Bullish", "Neutral", "Bearish"],
+          "strength": ["Weak", "Moderate", "Strong"]
+        },
+        "ma_analysis": {
+          "above_60ma": "boolean",
+          "above_60day_close": "boolean",
+          "current_price": "number",
+          "ma_60_value": "number",
+          "close_60days_ago": "number"
+        },
+        "key_levels": {
+          "type": "array",
+          "format": {
+            "level": "number",
+            "type": ["Support", "Resistance"],
+            "significance": ["Minor", "Major", "Critical"]
+          }
+        },
+        "trigger_zones": {
+          "description": "Clustered technical levels that could cascade",
+          "type": "array"
+        }
+      },
+      "integration_points": {
+        "feeds_to": ["TM-STRUCT", "TM-REPORT"],
+        "receives_from": []
+      }
+    },
+    "market_structure": {
+      "module_id": "TM-STRUCT",
+      "module_name": "Market Structure Analysis",
+      "data_requirements": {
+        "volume_data": {
+          "source": "ICE, Barchart",
+          "metrics": [
+            "Daily trading volume",
+            "5-day average volume",
+            "Volume relative to 20-day average",
+            "Volume by contract month"
+          ]
+        },
+        "open_interest": {
+          "source": "ICE, CFTC",
+          "metrics": [
+            "Aggregate open interest (all contracts)",
+            "Daily OI change",
+            "5-day average OI change",
+            "OI by contract month",
+            "1-year OI percentile"
+          ]
+        },
+        "term_structure": {
+          "metrics": [
+            "Front month vs deferred spreads",
+            "Contango/backwardation assessment",
+            "Roll yield implications"
+          ]
+        }
+      },
+      "key_questions": [
+        "Is market attention increasing (volume/OI trends)?",
+        "What does the 5-day average daily OI change indicate about market participation?",
+        "Is the market crowded (aggregate OI in high percentile)?",
+        "What does the term structure indicate about market expectations?",
+        "Are there signs of new money entering or exiting the market?"
+      ],
+      "output_format": {
+        "attention_metrics": {
+          "volume_5d_avg": "number",
+          "volume_vs_20d_avg": "percentage",
+          "oi_daily_change_5d_avg": "number",
+          "attention_signal": ["Low", "Normal", "Elevated", "High"]
+        },
+        "crowding_assessment": {
+          "aggregate_oi": "number",
+          "oi_percentile_1yr": "number (0-100)",
+          "crowding_risk": ["Low", "Moderate", "High", "Extreme"]
+        },
+        "structure_summary": {
+          "term_structure": ["Contango", "Flat", "Backwardation"],
+          "interpretation": "string"
+        }
+      },
+      "integration_points": {
+        "feeds_to": ["TM-POS", "TM-REPORT"],
+        "receives_from": ["TM-TECH"]
+      }
+    },
+    "positioning": {
+      "module_id": "TM-POS",
+      "module_name": "Positioning Analysis",
+      "data_requirements": {
+        "cot_report": {
+          "source": "CFTC Commitments of Traders",
+          "url": "https://www.cftc.gov/MarketReports/CommitmentsofTraders/index.htm",
+          "report_type": "Legacy report for ICE Cotton No. 2",
+          "metrics": [
+            "Non-commercial (speculator) net position",
+            "Non-commercial long contracts",
+            "Non-commercial short contracts",
+            "Commercial (hedger) net position",
+            "Week-over-week change in net positions",
+            "Historical percentile of positioning"
+          ],
+          "frequency": "Weekly (released Tuesday for prior Tuesday data)"
+        },
+        "positioning_analytics": {
+          "metrics": [
+            "Net spec position as % of open interest",
+            "Z-score of current positioning vs 1-year history",
+            "Positioning delta (change) over 1, 4, 13 weeks",
+            "Extreme positioning thresholds"
+          ]
+        },
+        "cta_positioning": {
+          "source": "Estimated from trend-following models",
+          "methodology": [
+            "Momentum signals (price vs MAs)",
+            "Breakout indicators",
+            "Estimated CTA allocation direction"
+          ],
+          "metrics": [
+            "Estimated CTA position direction (long/short/flat)",
+            "Signal strength",
+            "Key flip levels"
+          ]
+        }
+      },
+      "key_questions": [
+        "What is the current net speculator position in cotton futures?",
+        "How does current positioning compare to historical norms (percentile)?",
+        "What has been the recent change in speculator positioning (delta)?",
+        "Are speculators at an extreme that could indicate a reversal?",
+        "What is the estimated CTA positioning and near what levels might they flip?",
+        "Is positioning crowded on one side, creating reversal risk?"
+      ],
+      "output_format": {
+        "cot_summary": {
+          "report_date": "date",
+          "net_spec_position": "number (contracts)",
+          "net_spec_change_1w": "number",
+          "net_spec_change_4w": "number",
+          "net_spec_percentile_1yr": "number (0-100)",
+          "positioning_assessment": ["Extremely Short", "Short", "Neutral", "Long", "Extremely Long"]
+        },
+        "cta_estimate": {
+          "direction": ["Short", "Flat", "Long"],
+          "signal_strength": "number (0-100)",
+          "flip_level_up": "number (price)",
+          "flip_level_down": "number (price)"
+        },
+        "crowding_risk": {
+          "level": ["Low", "Moderate", "High", "Extreme"],
+          "vulnerability": "string description"
+        }
+      },
+      "integration_points": {
+        "feeds_to": ["TM-VIEWS", "TM-REPORT"],
+        "receives_from": ["TM-STRUCT"]
+      }
+    },
+    "report_generation": {
+      "module_id": "TM-REPORT",
+      "module_name": "Report Generation",
+      "data_requirements": {
+        "module_outputs": {
+          "required_inputs": [
+            "TM-FUND output (fundamentals analysis)",
+            "TM-NEWS output (news and policy)",
+            "TM-VIEWS output (market views)",
+            "TM-TECH output (technical analysis)",
+            "TM-STRUCT output (market structure)",
+            "TM-POS output (positioning analysis)"
+          ]
+        },
+        "visualization_data": {
+          "charts_required": [
+            "Price chart with 60 MA overlay",
+            "Supply/demand balance bar chart",
+            "COT net positioning time series",
+            "Open interest vs price chart",
+            "Seasonal price pattern overlay"
+          ]
+        },
+        "formatting_specs": {
+          "format": "HTML",
+          "styling": "Professional, clean, dark/light mode compatible",
+          "responsive": true,
+          "output_path": "output/cotton_outlook_report.html"
+        }
+      },
+      "key_questions": [
+        "Is the overall narrative coherent and internally consistent?",
+        "Do the fundamental, technical, and positioning views align or conflict?",
+        "What is the synthesized outlook for cotton prices?",
+        "What are the key risks to the base case view?",
+        "What would change the outlook?",
+        "What is the confidence level in the analysis?"
+      ],
+      "output_format": {
+        "html_report_structure": {
+          "sections": [
+            {
+              "id": "executive_summary",
+              "title": "Executive Summary",
+              "content": [
+                "Overall outlook (Bullish/Neutral/Bearish with conviction level)",
+                "Key drivers summary (3-5 bullets)",
+                "Primary risk factors (3-5 bullets)",
+                "Price target range if applicable"
+              ]
+            },
+            {
+              "id": "fundamentals",
+              "title": "Fundamentals Analysis",
+              "content": [
+                "Supply/demand balance table",
+                "Balance trend chart",
+                "Key fundamental insights",
+                "Seasonal considerations"
+              ]
+            },
+            {
+              "id": "news_policy",
+              "title": "News & Policy",
+              "content": [
+                "Event timeline",
+                "Impact assessment table",
+                "Key themes"
+              ]
+            },
+            {
+              "id": "market_views",
+              "title": "Market Views",
+              "content": [
+                "Consensus summary",
+                "Logic assessment",
+                "Contrarian indicators"
+              ]
+            },
+            {
+              "id": "technical",
+              "title": "Technical Analysis",
+              "content": [
+                "Price chart with MA overlay",
+                "Trend assessment",
+                "Key levels table",
+                "Trigger zone analysis"
+              ]
+            },
+            {
+              "id": "market_structure",
+              "title": "Market Structure",
+              "content": [
+                "Volume and OI analysis",
+                "Attention metrics",
+                "Crowding assessment",
+                "Term structure analysis"
+              ]
+            },
+            {
+              "id": "positioning",
+              "title": "Positioning Analysis",
+              "content": [
+                "COT positioning chart",
+                "Speculator positioning summary",
+                "CTA positioning estimate",
+                "Crowding risk assessment"
+              ]
+            },
+            {
+              "id": "conclusion",
+              "title": "Conclusion & Trading Implications",
+              "content": [
+                "Synthesized view",
+                "Trading implications",
+                "Key levels to watch",
+                "Confidence level and caveats"
+              ]
+            }
+          ]
+        }
+      },
+      "integration_points": {
+        "feeds_to": ["Final HTML output"],
+        "receives_from": ["TM-FUND", "TM-NEWS", "TM-VIEWS", "TM-TECH", "TM-STRUCT", "TM-POS"]
+      }
+    }
+  },
+  "execution_plan": {
+    "phase_1_parallel": {
+      "description": "Data collection and initial analysis (can run in parallel)",
+      "modules": ["TM-FUND", "TM-NEWS", "TM-TECH", "TM-STRUCT", "TM-POS"],
+      "estimated_duration": "Primary analysis phase"
+    },
+    "phase_2_synthesis": {
+      "description": "Market views synthesis (requires Phase 1 outputs)",
+      "modules": ["TM-VIEWS"],
+      "dependencies": ["TM-FUND", "TM-NEWS", "TM-POS"]
+    },
+    "phase_3_report": {
+      "description": "Final report compilation (requires all prior phases)",
+      "modules": ["TM-REPORT"],
+      "dependencies": ["TM-FUND", "TM-NEWS", "TM-VIEWS", "TM-TECH", "TM-STRUCT", "TM-POS"]
+    }
+  },
+  "quality_gates": {
+    "data_completeness": {
+      "description": "All required data fetched and validated",
+      "checklist": [
+        "USDA WASDE data current",
+        "COT report within 7 days",
+        "Price data current to latest session",
+        "News search covers last 30 days"
+      ]
+    },
+    "logic_validation": {
+      "description": "Analysis logic reviewed through debate rounds",
+      "minimum_rounds": 2,
+      "escalation_trigger": "Unresolved disagreements after 3 rounds"
+    },
+    "integration_check": {
+      "description": "Cross-module consistency verified",
+      "checklist": [
+        "No contradictory statements between modules",
+        "Data points consistent across sections",
+        "Outlook synthesizes all module inputs"
+      ]
+    },
+    "final_review": {
+      "description": "HTML report renders correctly and passes review",
+      "checklist": [
+        "All sections populated",
+        "Charts render correctly",
+        "No broken links or missing data",
+        "Mobile responsive",
+        "Accessible formatting"
+      ]
+    }
+  },
+  "data_sources_reference": {
+    "primary_sources": {
+      "usda": {
+        "name": "USDA",
+        "url": "https://www.usda.gov",
+        "data_types": ["WASDE", "Crop Progress", "Export Sales"]
+      },
+      "ice": {
+        "name": "ICE Futures",
+        "url": "https://www.ice.com/products/254/Cotton-No-2-Futures",
+        "data_types": ["Prices", "Volume", "Open Interest"]
+      },
+      "cftc": {
+        "name": "CFTC",
+        "url": "https://www.cftc.gov/MarketReports/CommitmentsofTraders/index.htm",
+        "data_types": ["COT Reports"]
+      },
+      "barchart": {
+        "name": "Barchart",
+        "url": "https://www.barchart.com/futures/quotes/CT*0",
+        "data_types": ["Technical Data", "Charts", "Historical Prices"]
+      }
+    },
+    "secondary_sources": {
+      "news": ["Reuters", "Bloomberg", "Agrimoney", "Cotton Outlook"],
+      "weather": ["NOAA", "US Drought Monitor", "AccuWeather"],
+      "research": ["Rabobank", "StoneX", "Major Investment Banks"]
+    }
+  },
+  "cotton_specific_metrics": {
+    "contract_specs": {
+      "exchange": "ICE",
+      "ticker": "CT",
+      "contract_size": "50,000 pounds",
+      "price_quotation": "Cents per pound",
+      "tick_size": "0.01 cents/lb ($5.00)",
+      "delivery_months": ["March (H)", "May (K)", "July (N)", "October (V)", "December (Z)"]
+    },
+    "key_price_references": {
+      "a_index": "Cotlook A Index (physical cotton benchmark)",
+      "ice_ct1": "ICE Cotton front month",
+      "china_cc_index": "China Cotton Index (domestic reference)"
+    },
+    "seasonal_patterns": {
+      "planting": "March-June (US)",
+      "growing": "June-September (US)",
+      "harvest": "September-December (US)",
+      "typical_price_seasonality": "Often stronger in spring planting uncertainty, weaker post-harvest"
+    },
+    "fundamental_ratios": {
+      "stocks_to_use": {
+        "tight": "< 50%",
+        "balanced": "50-70%",
+        "ample": "> 70%"
+      }
+    }
+  }
+}

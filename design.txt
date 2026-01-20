@@ -1,6 +1,7 @@
 Fundamentals
-1. big picture balance sheet
-2. 
+big picture balance outlook
+recent news : policy , weather etc
+market views: what is market logic,views and outlook on this commodity? is the logic sound?
 
 
 
@@ -13,5 +14,14 @@ Technical
 big trend: is it above 60 MA? is it above 60Day close?
 
 market structure: 
+
 is market tracking attention: volume, aggregate OI daily change on 5 day average showing significance?
+
 is market crowded: Aggregate OI very high percentile within a year?
+
+COT report: non-commercial positioning : delta change and absolute value in percentile
+
+
+CTA positioning
+
+are there key technical points close to current level that could trigger one another?

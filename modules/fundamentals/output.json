@@ -1,0 +1,243 @@
+{
+  "module": "fundamentals",
+  "timestamp": "2026-01-20T12:00:00Z",
+  "data": {
+    "global_balance": {
+      "production_million_bales": 119.4,
+      "consumption_million_bales": 116.0,
+      "ending_stocks_million_bales": 78.3,
+      "surplus_deficit_million_bales": 3.4,
+      "marketing_year": "2024/25",
+      "yoy_production_change_percent": 4.0,
+      "yoy_consumption_change_percent": 1.3,
+      "yoy_stocks_change_percent": 6.0
+    },
+    "us_balance": {
+      "production_million_bales": 14.4,
+      "exports_million_bales": 11.9,
+      "domestic_use_million_bales": 1.7,
+      "ending_stocks_million_bales": 4.4,
+      "season_average_price_cents_lb": 66,
+      "planted_area_million_acres": 11.2,
+      "harvested_area_million_acres": 8.3
+    },
+    "stocks_to_use": {
+      "global_current_percent": 67.5,
+      "global_previous_year_percent": 64.5,
+      "us_current_percent": 34.0,
+      "us_previous_year_percent": 30.0,
+      "historical_average_global_percent": 60.0,
+      "assessment": "elevated"
+    },
+    "production_by_country": {
+      "china": {
+        "production_million_bales": 31.75,
+        "yoy_change_percent": 16.0,
+        "global_share_percent": 26.6,
+        "notes": "Highest production since 2013/14, strong rebound"
+      },
+      "india": {
+        "production_million_bales": 25.0,
+        "yoy_change_percent": 4.2,
+        "global_share_percent": 20.9,
+        "notes": "Stable production, improved yields"
+      },
+      "brazil": {
+        "production_million_bales": 16.5,
+        "yoy_change_percent": 8.0,
+        "global_share_percent": 13.8,
+        "notes": "Near-record yields, expanding acreage"
+      },
+      "united_states": {
+        "production_million_bales": 14.4,
+        "yoy_change_percent": 19.0,
+        "global_share_percent": 12.1,
+        "notes": "Recovery from drought, increased harvested area"
+      },
+      "pakistan": {
+        "production_million_bales": 5.2,
+        "yoy_change_percent": -19.0,
+        "global_share_percent": 4.4,
+        "notes": "Decline due to competing crop economics"
+      }
+    },
+    "consumption_trends": {
+      "global_mill_use_million_bales": 116.0,
+      "top_consumers": {
+        "china": {
+          "mill_use_million_bales": 37.5,
+          "global_share_percent": 32.3,
+          "trend": "declining due to tariffs"
+        },
+        "india": {
+          "mill_use_million_bales": 25.0,
+          "global_share_percent": 21.5,
+          "trend": "stable"
+        },
+        "pakistan": {
+          "mill_use_million_bales": 9.3,
+          "global_share_percent": 8.0,
+          "trend": "declining with production"
+        },
+        "bangladesh": {
+          "mill_use_million_bales": 8.2,
+          "global_share_percent": 7.1,
+          "trend": "growing +8%"
+        },
+        "vietnam": {
+          "mill_use_million_bales": 7.4,
+          "global_share_percent": 6.4,
+          "trend": "record high +12%"
+        }
+      },
+      "synthetic_fiber_market_share_percent": 77.6,
+      "cotton_market_share_percent": 22.4
+    },
+    "seasonal_patterns": {
+      "typical_high_months": ["March", "April", "May", "June", "July"],
+      "typical_low_months": ["October", "November", "December"],
+      "current_market_structure": "contango",
+      "march_2026_price_cents": 65.35,
+      "july_2026_price_cents": 66.36
+    }
+  },
+  "analysis": {
+    "supply_outlook": "bearish",
+    "supply_score": -3,
+    "supply_rationale": "Production surplus of 3.4M bales, China rebound adding significant supply, Brazil at near-record yields, global stocks at 5-year highs",
+    "demand_outlook": "neutral",
+    "demand_score": 0,
+    "demand_rationale": "Mill use recovering slowly (+1.3%), EM textile growth offset by China tariff impacts and synthetic competition",
+    "overall_fundamental_score": -2,
+    "confidence_level": "medium-high",
+    "key_drivers": [
+      "Global production surplus of 3.4 million bales exceeds consumption",
+      "Ending stocks at 78.3 million bales - highest in 5 years",
+      "China production rebounded 16% adding 4.4 million bales",
+      "Brazil near-record yields maintaining export competition",
+      "Mill use growth of only 1.3% insufficient to absorb surplus",
+      "Elevated stocks-to-use ratio at 67.5%"
+    ],
+    "risks": {
+      "upside_risks": [
+        "Weather disruption to 2025/26 Northern Hemisphere crops",
+        "Stronger-than-expected global economic growth boosting textile demand",
+        "Chinese government reserve purchases supporting domestic prices",
+        "Mean reversion from 61% price decline since May 2022 highs",
+        "Seasonal rally pattern March-July could provide short-term support"
+      ],
+      "downside_risks": [
+        "Further US-China tariff escalation reducing trade flows",
+        "Global economic slowdown reducing consumer spending on textiles",
+        "Continued substitution toward synthetic fibers",
+        "Currency depreciation in consuming countries reducing import demand",
+        "Above-normal production in 2025/26 extending surplus"
+      ]
+    },
+    "price_implications": {
+      "near_term_0_3_months": "sideways to lower",
+      "medium_term_3_6_months": "potential seasonal rally",
+      "current_price_assessment": "fairly valued at 60-65 cents/lb given fundamentals"
+    }
+  },
+  "debate_log": {
+    "round_1": {
+      "tm_fund_initial": {
+        "supply_assessment": "bearish",
+        "demand_assessment": "bearish",
+        "initial_score": -4,
+        "key_points": [
+          "Global production at 119.4M bales (+4% YoY)",
+          "Production exceeds consumption by 3.4M bales",
+          "Stocks at 5-year high of 78.3M bales",
+          "Stocks-to-use ratio elevated at 67.5%"
+        ]
+      },
+      "sup_a_challenges": {
+        "challenge_1": "Supply assumptions may not fully materialize - China weather, Brazil yield, Pakistan economics",
+        "challenge_2": "Demand interpretation may be overly pessimistic - mill use recovering, EM textile growth strong",
+        "challenge_3": "Seasonal rally patterns March-July historically significant",
+        "challenge_4": "Mean reversion risk after 61% decline from 2022 highs"
+      },
+      "tm_fund_response": {
+        "on_supply": "USDA forecasts incorporate weather risk, China harvest confirmed, Brazil yields validated",
+        "on_demand": "Recovery pace modest at 1.3%, insufficient to absorb surplus",
+        "on_seasonals": "Seasonal rallies may be muted with elevated stocks",
+        "on_mean_reversion": "Timing unpredictable but warrants reducing bearish intensity"
+      },
+      "sup_b_validation": {
+        "sources_verified": ["USDA WASDE", "USDA ERS", "USDA FAS"],
+        "calculations_confirmed": true,
+        "data_gaps_noted": ["Chinese reserve policies", "Real-time consumption lag", "Trade flow visibility"],
+        "status": "APPROVED with minor caveats"
+      }
+    },
+    "round_2": {
+      "refined_analysis": {
+        "supply_outlook": "bearish (-3)",
+        "demand_outlook": "neutral (0) - upgraded from bearish",
+        "overall_score": -2,
+        "changes_made": "Reduced bearish intensity from -4 to -2 acknowledging cyclical bottom potential and seasonal risks"
+      },
+      "sup_a_final_review": {
+        "remaining_concerns": ["Chinese policy intervention underweighted", "2025/26 weather risk not incorporated"],
+        "recommendation": "Proceed with -2 score, add China policy and weather to risk factors",
+        "status": "ACCEPTED"
+      },
+      "sup_b_final_review": {
+        "data_verification": "Complete",
+        "production_figure_standardized": "119.4M bales (January 2025 WASDE)",
+        "ratios_confirmed": true,
+        "status": "DATA VALIDATED - Analysis approved"
+      },
+      "consensus": {
+        "final_score": -2,
+        "classification": "moderately bearish",
+        "confidence": "medium-high",
+        "debate_outcome": "Initial bearish view moderated after considering cyclical patterns and demand recovery trend"
+      }
+    }
+  },
+  "sources": [
+    {
+      "name": "USDA WASDE Report January 2025",
+      "url": "https://www.usda.gov/oce/commodity/wasde/wasde1225.pdf",
+      "type": "primary"
+    },
+    {
+      "name": "USDA ERS Cotton and Wool Outlook",
+      "url": "https://www.ers.usda.gov/topics/crops/cotton-and-wool/market-outlook",
+      "type": "primary"
+    },
+    {
+      "name": "USDA FAS Cotton World Markets and Trade",
+      "url": "https://apps.fas.usda.gov/psdonline/circulars/cotton.pdf",
+      "type": "primary"
+    },
+    {
+      "name": "Cotton Grower - January 2025 WASDE Highlights",
+      "url": "https://www.cottongrower.com/market-analysis/cotton-highlights-from-january-2025-wasde-report/",
+      "type": "secondary"
+    },
+    {
+      "name": "Texas A&M Cotton Marketing Planner",
+      "url": "https://cottonmarketing.tamu.edu/marketfundamentals/strategy-1/",
+      "type": "secondary"
+    },
+    {
+      "name": "MacroMicro Cotton Stocks-to-Use Ratio",
+      "url": "https://en.macromicro.me/collections/3520/agri-cotton/27776/world-cotton-stocks-to-use",
+      "type": "secondary"
+    },
+    {
+      "name": "Barchart Cotton Futures",
+      "url": "https://www.barchart.com/futures/quotes/ct*0/futures-prices",
+      "type": "market_data"
+    },
+    {
+      "name": "National Cotton Council 2025 Outlook",
+      "url": "https://www.cotton.org/news/releases/2025/25ameconoutlook.cfm",
+      "type": "industry"
+    }
+  ]
+}

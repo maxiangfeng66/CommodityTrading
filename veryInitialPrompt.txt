@@ -1,0 +1,23 @@
+read design.txt. let's use ICE Cotton No.2 Futures as an example. 
+
+The deliverable is an html that gives thorough analysis of this commodity outlook, with visual supports
+
+i want you to build multiple agents:
+Level 1: 
+1 Overall project manager, design the project
+2 Supervisor agent , that check design manager step by step
+Level 2:
+individual task managers
+each individual task mangers have 2 supervising agents, challenge logics, data and implementation
+try to have reasonable sufficient rounds of debates as possible
+
+Create blueprint.md to record key architect design , rules, and sources
+create log.md for logs
+create tidyup.md for folder management, file deletion, archive rules
+
+Principles：
+maximize parellelism and efficiency
+make the project modular, so that we can easily make  modification
+this project can be repeatable with the same standard and layout, we may need to update this report daily (manually with a button)
+
+Get all the non dangerous permissions upfront, then work on your own without interfereing me too much

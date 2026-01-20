@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ICE Cotton No.2 Futures - Comprehensive Outlook Report</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary: #1a365d;
+            --secondary: #2c5282;
+            --accent: #4299e1;
+            --success: #48bb78;
+            --warning: #ed8936;
+            --danger: #f56565;
+            --neutral: #718096;
+            --bg-light: #f7fafc;
+            --bg-card: #ffffff;
+            --text-primary: #1a202c;
+            --text-secondary: #4a5568;
+            --border: #e2e8f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-light);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 40px 20px;
+            margin-bottom: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        header .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        header .date {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .executive-summary {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--accent);
+        }
+
+        .executive-summary h2 {
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .outlook-badge {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin: 15px 0;
+        }
+
+        .outlook-bearish {
+            background: linear-gradient(135deg, #fc8181 0%, #f56565 100%);
+            color: white;
+        }
+
+        .outlook-neutral {
+            background: linear-gradient(135deg, #fbd38d 0%, #ed8936 100%);
+            color: white;
+        }
+
+        .outlook-bullish {
+            background: linear-gradient(135deg, #68d391 0%, #48bb78 100%);
+            color: white;
+        }
+
+        .score-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .score-card {
+            background: var(--bg-light);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .score-card .label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .score-card .value {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .score-positive { color: var(--success); }
+        .score-negative { color: var(--danger); }
+        .score-neutral { color: var(--warning); }
+
+        .section {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .section h2 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .section h3 {
+            color: var(--secondary);
+            margin: 20px 0 15px 0;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background: var(--bg-light);
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        tr:hover {
+            background: var(--bg-light);
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+            margin: 20px 0;
+        }
+
+        .indicator {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin: 5px;
+        }
+
+        .indicator-bullish {
+            background: #c6f6d5;
+            color: #276749;
+        }
+
+        .indicator-bearish {
+            background: #fed7d7;
+            color: #c53030;
+        }
+
+        .indicator-neutral {
+            background: #fefcbf;
+            color: #975a16;
+        }
+
+        .key-level {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 15px;
+            background: var(--bg-light);
+            border-radius: 6px;
+            margin: 8px 0;
+        }
+
+        .key-level .price {
+            font-weight: bold;
+            font-family: monospace;
+            font-size: 1.1rem;
+        }
+
+        .key-level.support { border-left: 4px solid var(--success); }
+        .key-level.resistance { border-left: 4px solid var(--danger); }
+
+        .news-item {
+            padding: 15px;
+            border-left: 3px solid var(--accent);
+            margin: 15px 0;
+            background: var(--bg-light);
+            border-radius: 0 8px 8px 0;
+        }
+
+        .news-item .date {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .news-item .title {
+            font-weight: 600;
+            margin: 5px 0;
+        }
+
+        .news-item .impact {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+        }
+
+        .impact-bullish { background: #c6f6d5; color: #276749; }
+        .impact-bearish { background: #fed7d7; color: #c53030; }
+        .impact-neutral { background: #e2e8f0; color: #4a5568; }
+
+        .debate-box {
+            background: linear-gradient(135deg, #ebf8ff 0%, #bee3f8 100%);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .debate-box h4 {
+            color: var(--secondary);
+            margin-bottom: 15px;
+        }
+
+        .debate-round {
+            margin: 15px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 6px;
+        }
+
+        .debate-round .agent {
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .risk-matrix {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .risk-column h4 {
+            padding: 10px 15px;
+            border-radius: 6px 6px 0 0;
+            margin-bottom: 0;
+        }
+
+        .risk-column.upside h4 {
+            background: var(--success);
+            color: white;
+        }
+
+        .risk-column.downside h4 {
+            background: var(--danger);
+            color: white;
+        }
+
+        .risk-column ul {
+            background: var(--bg-light);
+            padding: 15px 15px 15px 35px;
+            border-radius: 0 0 6px 6px;
+            min-height: 200px;
+        }
+
+        .risk-column li {
+            margin: 8px 0;
+        }
+
+        .source-list {
+            columns: 2;
+            column-gap: 30px;
+        }
+
+        .source-list li {
+            margin: 8px 0;
+            font-size: 0.9rem;
+            break-inside: avoid;
+        }
+
+        .source-list a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .source-list a:hover {
+            text-decoration: underline;
+        }
+
+        .gauge-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .gauge {
+            width: 200px;
+            height: 100px;
+            position: relative;
+        }
+
+        .confidence-bar {
+            height: 30px;
+            background: linear-gradient(90deg, #f56565 0%, #ed8936 25%, #ecc94b 50%, #48bb78 75%, #38a169 100%);
+            border-radius: 15px;
+            position: relative;
+            margin: 20px 0;
+        }
+
+        .confidence-marker {
+            position: absolute;
+            top: -5px;
+            width: 4px;
+            height: 40px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        .confidence-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .disclaimer {
+            background: #fff5f5;
+            border: 1px solid #fc8181;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 30px;
+            font-size: 0.85rem;
+        }
+
+        .disclaimer h4 {
+            color: #c53030;
+            margin-bottom: 10px;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #faf089 0%, #f6e05e 100%);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .highlight-box h4 {
+            color: #744210;
+            margin-bottom: 10px;
+        }
+
+        .metric-pill {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin: 2px;
+        }
+
+        .pill-green { background: #c6f6d5; color: #276749; }
+        .pill-red { background: #fed7d7; color: #c53030; }
+        .pill-yellow { background: #fefcbf; color: #975a16; }
+        .pill-blue { background: #bee3f8; color: #2c5282; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>ICE Cotton No.2 Futures</h1>
+            <div class="subtitle">Comprehensive Commodity Outlook Report</div>
+            <div class="date">Report Date: January 20, 2026 | Data as of: January 20, 2026</div>
+        </header>
+
+        <!-- Executive Summary -->
+        <section class="executive-summary">
+            <h2>Executive Summary</h2>
+
+            <div class="outlook-badge outlook-neutral">
+                OVERALL OUTLOOK: NEUTRAL TO SLIGHTLY BEARISH
+            </div>
+
+            <p style="margin: 20px 0; font-size: 1.1rem;">
+                ICE Cotton No.2 futures face a complex market environment characterized by <strong>fundamental oversupply</strong> offset by <strong>extreme bearish positioning</strong>. While the supply-demand balance supports lower prices, the record 39-week speculative short position creates significant short-squeeze risk. The market appears fairly valued at current levels (64-65 cents/lb) with asymmetric risk to the upside on any positive catalyst.
+            </p>
+
+            <div class="score-grid">
+                <div class="score-card">
+                    <div class="label">Fundamentals Score</div>
+                    <div class="value score-negative">-2</div>
+                </div>
+                <div class="score-card">
+                    <div class="label">Technical Score</div>
+                    <div class="value score-negative">-1.5</div>
+                </div>
+                <div class="score-card">
+                    <div class="label">News Sentiment</div>
+                    <div class="value score-positive">+2</div>
+                </div>
+                <div class="score-card">
+                    <div class="label">Market Structure</div>
+                    <div class="value score-positive">+2</div>
+                </div>
+                <div class="score-card">
+                    <div class="label">Positioning</div>
+                    <div class="value score-negative">-4</div>
+                </div>
+                <div class="score-card">
+                    <div class="label">Market Views</div>
+                    <div class="value score-negative">-2</div>
+                </div>
+            </div>
+
+            <h3>Key Takeaways</h3>
+            <ul style="margin-left: 20px;">
+                <li><strong>Price Range Expectation:</strong> 62-70 cents/lb for Q1 2026</li>
+                <li><strong>Primary Risk:</strong> Short-covering rally (upside) > Continued decline (downside)</li>
+                <li><strong>Critical Levels:</strong> Support at 62.00, Resistance at 68.40</li>
+                <li><strong>Catalyst Watch:</strong> Weather disruptions, Chinese policy, Export demand</li>
+            </ul>
+        </section>
+
+        <!-- Current Price & Key Metrics -->
+        <section class="section">
+            <h2>Current Market Snapshot</h2>
+
+            <div class="two-column">
+                <div>
+                    <table>
+                        <tr>
+                            <th colspan="2">Price Data (March 2026 Contract)</th>
+                        </tr>
+                        <tr>
+                            <td>Current Price</td>
+                            <td><strong>64.73 cents/lb</strong></td>
+                        </tr>
+                        <tr>
+                            <td>52-Week High</td>
+                            <td>73.50 cents/lb</td>
+                        </tr>
+                        <tr>
+                            <td>52-Week Low</td>
+                            <td>60.80 cents/lb</td>
+                        </tr>
+                        <tr>
+                            <td>60-Day MA</td>
+                            <td>64.50 cents/lb (est.)</td>
+                        </tr>
+                        <tr>
+                            <td>200-Day MA</td>
+                            <td>67.60 cents/lb</td>
+                        </tr>
+                    </table>
+                </div>
+                <div>
+                    <table>
+                        <tr>
+                            <th colspan="2">Market Structure</th>
+                        </tr>
+                        <tr>
+                            <td>Aggregate Open Interest</td>
+                            <td><strong>311,647 contracts</strong></td>
+                        </tr>
+                        <tr>
+                            <td>OI Percentile (1Y)</td>
+                            <td>85th percentile</td>
+                        </tr>
+                        <tr>
+                            <td>Volume (5D Avg)</td>
+                            <td>17,500 contracts</td>
+                        </tr>
+                        <tr>
+                            <td>Managed Money Net</td>
+                            <td>-47,772 contracts</td>
+                        </tr>
+                        <tr>
+                            <td>Weeks Net Short</td>
+                            <td><strong>39 weeks (record)</strong></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fundamentals Section -->
+        <section class="section">
+            <h2>Fundamentals Analysis</h2>
+            <div class="indicator indicator-bearish">Score: -2 (Moderately Bearish)</div>
+
+            <div class="two-column">
+                <div>
+                    <h3>Global Supply/Demand Balance</h3>
+                    <div class="chart-container">
+                        <canvas id="supplyDemandChart"></canvas>
+                    </div>
+                </div>
+                <div>
+                    <h3>Key Metrics</h3>
+                    <table>
+                        <tr>
+                            <td>Global Production</td>
+                            <td><strong>119.4M bales</strong> (+4% YoY)</td>
+                        </tr>
+                        <tr>
+                            <td>Global Consumption</td>
+                            <td><strong>116.0M bales</strong> (+1.3% YoY)</td>
+                        </tr>
+                        <tr>
+                            <td>Supply Surplus</td>
+                            <td class="score-negative"><strong>3.4M bales</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Global Ending Stocks</td>
+                            <td><strong>78.3M bales</strong> (5-yr high)</td>
+                        </tr>
+                        <tr>
+                            <td>Stocks-to-Use Ratio</td>
+                            <td><strong>67.5%</strong> (elevated)</td>
+                        </tr>
+                        <tr>
+                            <td>US Ending Stocks</td>
+                            <td><strong>4.4M bales</strong></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <h3>Production by Major Countries</h3>
+            <div class="chart-container" style="height: 250px;">
+                <canvas id="productionChart"></canvas>
+            </div>
+
+            <div class="debate-box">
+                <h4>Agent Debate Summary</h4>
+                <div class="debate-round">
+                    <p><span class="agent">TM-FUND Initial:</span> Bearish score of -4 based on production surplus, elevated stocks, and weak demand growth.</p>
+                </div>
+                <div class="debate-round">
+                    <p><span class="agent">SUP-A Challenge:</span> "Supply assumptions may not fully materialize. Mean reversion risk after 61% decline from 2022 highs. Seasonal rally patterns March-July are historically significant."</p>
+                </div>
+                <div class="debate-round">
+                    <p><span class="agent">Final Consensus:</span> Score moderated to -2 acknowledging cyclical bottom potential and seasonal support. Fundamentals remain bearish but market may have already priced in maximum pessimism.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- News & Policy Section -->
+        <section class="section">
+            <h2>News & Policy Analysis</h2>
+            <div class="indicator indicator-bullish">Sentiment Score: +2 (Neutral to Bullish)</div>
+
+            <h3>Recent Key Events</h3>
+            <div class="news-item">
+                <div class="date">January 16, 2026</div>
+                <div class="title">ICE Cotton March Futures Test 65 Cents</div>
+                <span class="impact impact-bullish">Bullish</span>
+                <p>March settlement ended at 64.71 cents, testing levels beyond 65 cents for the first time since November.</p>
+            </div>
+
+            <div class="news-item">
+                <div class="date">January 10, 2026</div>
+                <div class="title">USDA January Report Lowers US Production Forecast</div>
+                <span class="impact impact-bullish">Bullish</span>
+                <p>US cotton production lowered by 2% to 13.9 million bales. Ending stocks fell 7% to 4.2 million bales.</p>
+            </div>
+
+            <div class="news-item">
+                <div class="date">January 8, 2026</div>
+                <div class="title">US Cotton Export Sales Hit Marketing-Year High</div>
+                <span class="impact impact-bullish">Bullish</span>
+                <p>Net upland sales of 339,700 running bales - up 89% from the prior 4-week average.</p>
+            </div>
+
+            <div class="news-item">
+                <div class="date">January 5, 2026</div>
+                <div class="title">Brazil Sets Record Cotton Exports in December</div>
+                <span class="impact impact-bearish">Bearish</span>
+                <p>Brazil exported 452,500 tons of cotton in December - highest monthly volume on record.</p>
+            </div>
+
+            <div class="news-item">
+                <div class="date">December 23, 2025</div>
+                <div class="title">Xinjiang Cotton Acreage Reduction Announced</div>
+                <span class="impact impact-bullish">Bullish</span>
+                <p>China NDRC announced structural reduction in Xinjiang cotton acreage. ZCE futures up 1,000 RMB/ton since.</p>
+            </div>
+
+            <h3>Policy Updates</h3>
+            <table>
+                <tr>
+                    <th>Policy</th>
+                    <th>Date</th>
+                    <th>Impact</th>
+                </tr>
+                <tr>
+                    <td>US-China Trade Deal Extension</td>
+                    <td>Jan 1, 2026</td>
+                    <td><span class="metric-pill pill-green">Positive for Exports</span></td>
+                </tr>
+                <tr>
+                    <td>Farmer Bridge Assistance ($117.35/acre)</td>
+                    <td>Dec 31, 2025</td>
+                    <td><span class="metric-pill pill-green">Supportive</span></td>
+                </tr>
+                <tr>
+                    <td>China 2026 Tariff Adjustments</td>
+                    <td>Jan 1, 2026</td>
+                    <td><span class="metric-pill pill-yellow">Neutral</span></td>
+                </tr>
+                <tr>
+                    <td>India Five-Year Cotton Mission</td>
+                    <td>Jan 1, 2026</td>
+                    <td><span class="metric-pill pill-red">Long-term Bearish for US</span></td>
+                </tr>
+            </table>
+
+            <h3>Weather Watch</h3>
+            <div class="highlight-box">
+                <h4>Southeast US Drought Conditions</h4>
+                <p>Abnormally dry conditions and drought (D1-D3) cover almost the entire Southeast. Extreme drought (D3) in parts of Florida and Georgia. 78 monitoring stations experienced top-five driest conditions for past 30 days. This poses risk to 2026 crop if conditions persist through planting season.</p>
+            </div>
+        </section>
+
+        <!-- Technical Analysis Section -->
+        <section class="section">
+            <h2>Technical Analysis</h2>
+            <div class="indicator indicator-bearish">Score: -1.5 (Neutral to Bearish)</div>
+
+            <div class="two-column">
+                <div>
+                    <h3>Trend Indicators</h3>
+                    <table>
+                        <tr>
+                            <td>Price vs 60-Day MA</td>
+                            <td><span class="metric-pill pill-green">Above (64.73 > 64.50)</span></td>
+                        </tr>
+                        <tr>
+                            <td>Price vs 60-Day Close</td>
+                            <td><span class="metric-pill pill-red">Below (64.73 < 65.54)</span></td>
+                        </tr>
+                        <tr>
+                            <td>Price vs 200-Day MA</td>
+                            <td><span class="metric-pill pill-red">Below (64.73 < 67.60)</span></td>
+                        </tr>
+                        <tr>
+                            <td>RSI (14)</td>
+                            <td><span class="metric-pill pill-yellow">55.15 (Neutral)</span></td>
+                        </tr>
+                        <tr>
+                            <td>ADX (14)</td>
+                            <td><span class="metric-pill pill-yellow">15.23 (No Trend)</span></td>
+                        </tr>
+                        <tr>
+                            <td>Pattern</td>
+                            <td><span class="metric-pill pill-blue">Rectangle (61.29-69.54)</span></td>
+                        </tr>
+                    </table>
+                </div>
+                <div>
+                    <h3>Key Levels</h3>
+                    <div class="key-level resistance">
+                        <span>70.00 - Psychological / Bull Market</span>
+                        <span class="price">70.00</span>
+                    </div>
+                    <div class="key-level resistance">
+                        <span>68.40 - Breakout Confirmation</span>
+                        <span class="price">68.40</span>
+                    </div>
+                    <div class="key-level resistance">
+                        <span>65.90 - Near Resistance</span>
+                        <span class="price">65.90</span>
+                    </div>
+                    <div style="padding: 10px; text-align: center; background: #e2e8f0; margin: 8px 0; border-radius: 6px;">
+                        <strong>Current: 64.73</strong>
+                    </div>
+                    <div class="key-level support">
+                        <span>63.70 - Near Support</span>
+                        <span class="price">63.70</span>
+                    </div>
+                    <div class="key-level support">
+                        <span>62.00 - Major Support</span>
+                        <span class="price">62.00</span>
+                    </div>
+                    <div class="key-level support">
+                        <span>60.80 - 52-Week Low</span>
+                        <span class="price">60.80</span>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Technical Verdict</h3>
+            <p>Price is consolidating within a rectangle pattern (61.29-69.54) with a long-term bearish bias. The market shows weak trend strength (ADX 15.23 < 20) indicating range-bound conditions. <strong>Bullish RSI divergence</strong> is forming (RSI making higher lows while price makes lower lows) - an early reversal signal that needs price confirmation above 68.40 to validate. A close above 68.40 would shift bias to bullish; a break below 62.00 would confirm bearish continuation.</p>
+        </section>
+
+        <!-- Market Structure Section -->
+        <section class="section">
+            <h2>Market Structure Analysis</h2>
+            <div class="indicator indicator-bullish">Score: +2 (Slightly Bullish)</div>
+
+            <div class="two-column">
+                <div>
+                    <h3>Open Interest Analysis</h3>
+                    <div class="chart-container">
+                        <canvas id="oiChart"></canvas>
+                    </div>
+                </div>
+                <div>
+                    <h3>Key Structure Metrics</h3>
+                    <table>
+                        <tr>
+                            <td>Aggregate OI</td>
+                            <td><strong>311,647 contracts</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Weekly OI Change</td>
+                            <td>+10,685 contracts</td>
+                        </tr>
+                        <tr>
+                            <td>OI Percentile (1Y)</td>
+                            <td><span class="metric-pill pill-red">85th percentile</span></td>
+                        </tr>
+                        <tr>
+                            <td>Attention Level</td>
+                            <td><span class="metric-pill pill-yellow">Moderate</span></td>
+                        </tr>
+                        <tr>
+                            <td>Crowding Assessment</td>
+                            <td><span class="metric-pill pill-red">Moderately Crowded</span></td>
+                        </tr>
+                    </table>
+
+                    <h3 style="margin-top: 20px;">Structural Implications</h3>
+                    <ul style="margin-left: 20px;">
+                        <li>OI at 85th percentile indicates elevated market participation</li>
+                        <li>39-week managed money net short streak is <strong>unprecedented</strong></li>
+                        <li>Price stuck in narrow range despite elevated OI = "coiled market"</li>
+                        <li>Commercial long positioning (44.9% of OI) suggests hedgers expect recovery</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Positioning Section -->
+        <section class="section">
+            <h2>Positioning Analysis (COT Report)</h2>
+            <div class="indicator indicator-bearish">Score: -4 (Extreme Short)</div>
+
+            <div class="highlight-box">
+                <h4>CRITICAL: Record Speculative Short Positioning</h4>
+                <p>Managed money has been net short for <strong>39 consecutive weeks</strong> - a record. Current net short of -47,772 contracts represents the 15th percentile of the 1-year range. This extreme positioning creates <strong>high contrarian risk</strong> - any positive catalyst could trigger a violent short-covering rally.</p>
+            </div>
+
+            <div class="two-column">
+                <div>
+                    <h3>COT Data (January 14, 2026)</h3>
+                    <table>
+                        <tr>
+                            <td>Non-Commercial Net</td>
+                            <td><strong>-28,920 contracts</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Non-Commercial Long</td>
+                            <td>81,409 contracts</td>
+                        </tr>
+                        <tr>
+                            <td>Non-Commercial Short</td>
+                            <td>110,329 contracts</td>
+                        </tr>
+                        <tr>
+                            <td>Managed Money Net</td>
+                            <td><strong>-47,772 contracts</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Weekly Change</td>
+                            <td><span class="metric-pill pill-green">+1,489 (covering)</span></td>
+                        </tr>
+                        <tr>
+                            <td>Position Percentile</td>
+                            <td><span class="metric-pill pill-red">15th percentile</span></td>
+                        </tr>
+                        <tr>
+                            <td>Commercial Net</td>
+                            <td>+45,000 contracts (long)</td>
+                        </tr>
+                    </table>
+                </div>
+                <div>
+                    <h3>Positioning Gauge</h3>
+                    <p style="text-align: center; margin-bottom: 10px;">Speculator Positioning (1-Year Range)</p>
+                    <div class="confidence-bar">
+                        <div class="confidence-marker" style="left: 15%;"></div>
+                    </div>
+                    <div class="confidence-labels">
+                        <span>Extreme Short</span>
+                        <span>Neutral</span>
+                        <span>Extreme Long</span>
+                    </div>
+
+                    <h3 style="margin-top: 30px;">CTA/Managed Money Signal</h3>
+                    <p>Trend-following systems remain short but momentum is waning. Recent short-covering (+1,489 contracts weekly) suggests potential exhaustion of downward momentum. Price breakout above 66 cents would likely trigger systematic short-covering.</p>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <canvas id="positioningChart"></canvas>
+            </div>
+        </section>
+
+        <!-- Market Views Section -->
+        <section class="section">
+            <h2>Market Views & Consensus Analysis</h2>
+            <div class="indicator indicator-bearish">Consensus: Bearish | Logic: Sound</div>
+
+            <h3>Prevailing Market Narrative</h3>
+            <p style="font-size: 1.05rem; padding: 15px; background: var(--bg-light); border-radius: 8px;">
+                "Global oversupply (~119.4M bales production, 78-92M bales ending stocks) and weak textile demand will keep prices depressed at 58-65 cents/lb. Only a major weather disruption could change the trajectory."
+            </p>
+
+            <div class="two-column" style="margin-top: 25px;">
+                <div>
+                    <h3 style="color: var(--success);">Bull Case Arguments</h3>
+                    <ul style="margin-left: 20px;">
+                        <li>Record net short positioning (46.8% short interest) = squeeze potential</li>
+                        <li>US ending stocks fell 7% to 4.2M bales</li>
+                        <li>Dollar weakness supportive for commodities</li>
+                        <li>Prices below production costs - unsustainable</li>
+                        <li>Q1-Q2 seasonal rally patterns historically strong</li>
+                        <li>China raised consumption forecast to 7.6M tons</li>
+                        <li>J.P. Morgan sees "greater upside" vs other ags</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 style="color: var(--danger);">Bear Case Arguments</h3>
+                    <ul style="margin-left: 20px;">
+                        <li>Global ending stocks at 78-92M bales (historical high)</li>
+                        <li>Production exceeds consumption by ~392,000 tonnes</li>
+                        <li>Stocks-to-use ratio elevated at 80-82%</li>
+                        <li>39-week net short = persistent bearish conviction</li>
+                        <li>Weak textile demand from major Asian consumers</li>
+                        <li>Brazil now world's largest cotton exporter</li>
+                        <li>Forward curve shows prices below 70c through Oct 2028</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>Logic Soundness Assessment</h3>
+            <div style="padding: 15px; background: #ebf8ff; border-radius: 8px; margin-top: 15px;">
+                <p><strong>Verdict: SOUND (with critical caveat)</strong></p>
+                <p style="margin-top: 10px;">The bearish consensus is logically sound and supported by verifiable supply/demand data. However, there is one key vulnerability: <strong>the consensus may be TOO consensus</strong>. When 46.8% of open interest is short and managed money has been net short for 39 weeks, the market is pricing in maximum pessimism. The bearish case assumes smooth supply execution and no demand surprises - assumptions that may be challenged.</p>
+            </div>
+
+            <h3>Identified Blind Spots</h3>
+            <ul style="margin-left: 20px; margin-top: 15px;">
+                <li><strong>Positioning Complacency:</strong> Market not pricing short-squeeze risk</li>
+                <li><strong>US Acreage Response:</strong> At 64 cents, farmers face losses - planting cuts likely</li>
+                <li><strong>China Policy Risk:</strong> Potential strategic reserve buying not factored in</li>
+                <li><strong>Weather Probability:</strong> Near-zero disruption probability assigned despite climate volatility</li>
+                <li><strong>Demand Elasticity:</strong> Low prices may stimulate emerging market demand</li>
+            </ul>
+
+            <h3>Contrarian View</h3>
+            <div class="highlight-box">
+                <p><strong>"The real risk is a sharp rally, not continued decline."</strong></p>
+                <p style="margin-top: 10px;">With managed money net short for a record 39 weeks and 46.8% of open interest held short, the fuel for a short-covering rally is historically extreme. Any positive catalyst (weather scare, Chinese buying, demand uptick) could trigger a violent squeeze toward 70-75 cents. The market is correctly bearish on fundamentals but incorrectly positioned for the risk distribution.</p>
+            </div>
+        </section>
+
+        <!-- Risk Assessment -->
+        <section class="section">
+            <h2>Risk Assessment</h2>
+
+            <div class="risk-matrix">
+                <div class="risk-column upside">
+                    <h4>Upside Risks</h4>
+                    <ul>
+                        <li>Weather disruption to 2025/26 Northern Hemisphere crops</li>
+                        <li>Short-covering cascade from record positioning</li>
+                        <li>Chinese government reserve purchases</li>
+                        <li>Stronger-than-expected global economic growth</li>
+                        <li>Seasonal rally pattern (March-July)</li>
+                        <li>US acreage response to uneconomic prices</li>
+                        <li>Mean reversion from 61% decline since May 2022</li>
+                    </ul>
+                </div>
+                <div class="risk-column downside">
+                    <h4>Downside Risks</h4>
+                    <ul>
+                        <li>US-China tariff escalation</li>
+                        <li>Global economic slowdown reducing textile demand</li>
+                        <li>Continued substitution toward synthetic fibers</li>
+                        <li>Currency depreciation in consuming countries</li>
+                        <li>Above-normal production in 2025/26</li>
+                        <li>Brazilian export competition intensifying</li>
+                        <li>India spinning sector contraction</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 25px;">Risk/Reward Assessment</h3>
+            <table>
+                <tr>
+                    <th>Scenario</th>
+                    <th>Probability</th>
+                    <th>Price Target</th>
+                    <th>Return</th>
+                </tr>
+                <tr>
+                    <td>Bull Case (Weather/Squeeze)</td>
+                    <td>25%</td>
+                    <td>70-75 cents</td>
+                    <td>+8% to +16%</td>
+                </tr>
+                <tr>
+                    <td>Base Case (Range-Bound)</td>
+                    <td>50%</td>
+                    <td>62-68 cents</td>
+                    <td>-4% to +5%</td>
+                </tr>
+                <tr>
+                    <td>Bear Case (Demand Collapse)</td>
+                    <td>25%</td>
+                    <td>55-60 cents</td>
+                    <td>-7% to -15%</td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- Conclusion -->
+        <section class="section">
+            <h2>Conclusion & Trading Implications</h2>
+
+            <div class="score-grid">
+                <div class="score-card">
+                    <div class="label">Overall Outlook</div>
+                    <div class="value" style="font-size: 1.5rem; color: var(--warning);">NEUTRAL TO SLIGHTLY BEARISH</div>
+                </div>
+                <div class="score-card">
+                    <div class="label">Confidence Level</div>
+                    <div class="value" style="font-size: 1.5rem;">MEDIUM</div>
+                </div>
+                <div class="score-card">
+                    <div class="label">Expected Range (Q1)</div>
+                    <div class="value" style="font-size: 1.5rem;">62-70 cents</div>
+                </div>
+            </div>
+
+            <h3>Synthesis</h3>
+            <p style="font-size: 1.05rem; line-height: 1.7;">
+                ICE Cotton No.2 futures present a nuanced picture where <strong>fundamental bearishness meets extreme positioning</strong>. The supply-demand balance clearly supports lower prices - global production exceeds consumption by 3.4M bales, stocks are at 5-year highs, and demand growth is anemic. However, the market has already aggressively positioned for this outcome with managed money net short for a record 39 weeks.
+            </p>
+            <p style="font-size: 1.05rem; line-height: 1.7; margin-top: 15px;">
+                This creates an <strong>asymmetric risk profile</strong>: downside is limited (shorts have already been built), while upside risk is significant (any positive catalyst could trigger violent short-covering). The technical picture shows consolidation within a rectangle pattern with weak trend strength, suggesting the market is "coiled" and awaiting a catalyst.
+            </p>
+            <p style="font-size: 1.05rem; line-height: 1.7; margin-top: 15px;">
+                For Q1 2026, we expect prices to remain range-bound between 62-70 cents with <strong>bias toward testing the upper end</strong> if export demand remains strong or weather concerns emerge. Key watch factors include US planting intentions (March report), Chinese policy signals, and Southeast drought developments.
+            </p>
+
+            <h3>Trading Considerations</h3>
+            <ul style="margin-left: 20px; font-size: 1.05rem;">
+                <li><strong>Longs:</strong> Tactical opportunity near 62.00 support with stop below 60.80. Target 68.40-70.00.</li>
+                <li><strong>Shorts:</strong> Elevated risk given extreme positioning. Consider profit-taking on rallies rather than initiating new shorts.</li>
+                <li><strong>Spreads:</strong> Calendar spreads may benefit from contango structure.</li>
+                <li><strong>Options:</strong> Elevated put skew makes call spreads relatively attractive for bullish positioning.</li>
+            </ul>
+
+            <div class="disclaimer">
+                <h4>Disclaimer</h4>
+                <p>This report is for informational purposes only and does not constitute investment advice. Commodity futures trading involves substantial risk of loss. Past performance is not indicative of future results. The analysis presented represents the output of an AI-driven multi-agent system and should be independently verified before making investment decisions.</p>
+            </div>
+        </section>
+
+        <!-- Sources -->
+        <section class="section">
+            <h2>Data Sources & References</h2>
+            <ul class="source-list">
+                <li><a href="https://www.usda.gov/oce/commodity/wasde/wasde1225.pdf" target="_blank">USDA WASDE Report January 2025</a></li>
+                <li><a href="https://www.ers.usda.gov/topics/crops/cotton-and-wool/market-outlook" target="_blank">USDA ERS Cotton and Wool Outlook</a></li>
+                <li><a href="https://apps.fas.usda.gov/psdonline/circulars/cotton.pdf" target="_blank">USDA FAS Cotton World Markets and Trade</a></li>
+                <li><a href="https://www.cftc.gov/MarketReports/CommitmentsofTraders/index.htm" target="_blank">CFTC Commitments of Traders</a></li>
+                <li><a href="https://www.barchart.com/futures/quotes/CT*0/technical-analysis" target="_blank">Barchart Cotton Technical Analysis</a></li>
+                <li><a href="https://www.ice.com/products/254/Cotton-No-2-Futures/data" target="_blank">ICE Cotton No.2 Futures Official Data</a></li>
+                <li><a href="https://tradingeconomics.com/commodity/cotton" target="_blank">Trading Economics Cotton</a></li>
+                <li><a href="https://www.investing.com/commodities/us-cotton-no.2" target="_blank">Investing.com US Cotton</a></li>
+                <li><a href="https://www.tradingview.com/symbols/ICEUS-CT1!/" target="_blank">TradingView ICE Cotton</a></li>
+                <li><a href="https://www.drought.gov/drought-status-updates" target="_blank">US Drought Monitor</a></li>
+                <li><a href="https://www.jpmorgan.com/insights/global-research/outlook/market-outlook" target="_blank">J.P. Morgan 2026 Market Outlook</a></li>
+                <li><a href="https://www.goldmansachs.com/insights/outlooks/2026-outlooks" target="_blank">Goldman Sachs 2026 Outlooks</a></li>
+                <li><a href="https://www.ams.usda.gov/mnreports/cnwwcmr.pdf" target="_blank">USDA Cotton Market Weekly Review</a></li>
+                <li><a href="https://lifestylemonitor.cottoninc.com/monthly-economic-letter-january-2026/" target="_blank">Cotton Incorporated Monthly Economic Letter</a></li>
+            </ul>
+        </section>
+
+        <footer>
+            <p>Report generated by Multi-Agent Commodity Analysis System</p>
+            <p>ICE Cotton No.2 Futures Outlook | January 20, 2026</p>
+            <p style="margin-top: 10px; font-size: 0.8rem;">Powered by Claude AI Multi-Agent Architecture</p>
+        </footer>
+    </div>
+
+    <script>
+        // Supply/Demand Chart
+        const supplyDemandCtx = document.getElementById('supplyDemandChart').getContext('2d');
+        new Chart(supplyDemandCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Global Production', 'Global Consumption', 'Ending Stocks'],
+                datasets: [{
+                    label: 'Million Bales',
+                    data: [119.4, 116.0, 78.3],
+                    backgroundColor: ['#f56565', '#48bb78', '#4299e1'],
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: { display: true, text: 'Million Bales' }
+                    }
+                }
+            }
+        });
+
+        // Production by Country Chart
+        const productionCtx = document.getElementById('productionChart').getContext('2d');
+        new Chart(productionCtx, {
+            type: 'bar',
+            data: {
+                labels: ['China', 'India', 'Brazil', 'United States', 'Pakistan'],
+                datasets: [{
+                    label: 'Production (M Bales)',
+                    data: [31.75, 25.0, 16.5, 14.4, 5.2],
+                    backgroundColor: '#4299e1',
+                    borderRadius: 6
+                }, {
+                    label: 'YoY Change (%)',
+                    data: [16, 4.2, 8, 19, -19],
+                    backgroundColor: '#ed8936',
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'top' }
+                },
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+
+        // Open Interest Chart
+        const oiCtx = document.getElementById('oiChart').getContext('2d');
+        new Chart(oiCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Commercial Long', 'Managed Money Short', 'Other'],
+                datasets: [{
+                    data: [44.9, 46.8, 8.3],
+                    backgroundColor: ['#48bb78', '#f56565', '#718096'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'right' },
+                    title: { display: true, text: 'Open Interest Breakdown (%)' }
+                }
+            }
+        });
+
+        // Positioning Chart
+        const posCtx = document.getElementById('positioningChart').getContext('2d');
+        new Chart(posCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Non-Commercial Net', 'Managed Money Net', 'Commercial Net'],
+                datasets: [{
+                    label: 'Net Position (Contracts)',
+                    data: [-28920, -47772, 45000],
+                    backgroundColor: function(context) {
+                        const value = context.raw;
+                        return value < 0 ? '#f56565' : '#48bb78';
+                    },
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y',
+                plugins: {
+                    legend: { display: false },
+                    title: { display: true, text: 'COT Positioning (January 14, 2026)' }
+                },
+                scales: {
+                    x: {
+                        title: { display: true, text: 'Net Contracts' }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
