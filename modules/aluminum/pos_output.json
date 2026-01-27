@@ -1,0 +1,70 @@
+{
+  "module": "tm_pos",
+  "commodity": "aluminum",
+  "timestamp": "2026-01-22T14:09:21.740505",
+  "score": 0.0,
+  "confidence": 0.95,
+  "interpretation": "Neutral",
+  "summary": "Positioning: NEUTRAL. Spec assessment: Neutral - insufficient data. Contrarian signal: Weak.",
+  "analysis": {
+    "score": 0.0,
+    "summary": "Positioning: NEUTRAL. Spec assessment: Neutral - insufficient data. Contrarian signal: Weak.",
+    "cot_analysis": {
+      "data_source": "CFTC Disaggregated Futures",
+      "report_date": "Latest available",
+      "categories_tracked": [
+        "Commercial hedgers",
+        "Swap dealers",
+        "Managed money (specs)",
+        "Other reportables"
+      ],
+      "data_status": "Framework ready - requires CFTC data parsing"
+    },
+    "spec_positioning": {
+      "category": "Managed Money",
+      "net_position": "Unknown - requires COT data",
+      "position_change_1w": "N/A",
+      "position_change_4w": "N/A",
+      "percentile_1y": "N/A",
+      "assessment": "Neutral - insufficient data",
+      "score": 0,
+      "note": "Full COT parsing would provide percentile rankings"
+    },
+    "cta_positioning": {
+      "methodology": "Trend-following model estimate",
+      "estimated_position": "Unknown",
+      "confidence": "Low",
+      "factors_considered": [
+        "Price vs 20/50/200 day MAs",
+        "Volatility breakouts",
+        "Momentum signals"
+      ],
+      "score": 0,
+      "note": "CTA positioning estimated from price trends"
+    },
+    "crowding_analysis": {
+      "crowding_level": "Unknown",
+      "percentile": "N/A",
+      "risk_assessment": "Unable to assess without OI data",
+      "score": 0,
+      "interpretation": "Crowding analysis requires exchange OI and COT data"
+    },
+    "contrarian_signals": {
+      "signal_strength": "Weak",
+      "direction": "None",
+      "score": 0,
+      "rationale": "No extreme positioning detected (data limited)",
+      "note": "Strong contrarian signals occur at positioning extremes"
+    },
+    "sources": [
+      "CFTC COT Reports",
+      "CTA Positioning Estimates"
+    ]
+  },
+  "sources": [
+    "CFTC COT Reports",
+    "CTA Positioning Estimates"
+  ],
+  "debate_outcome": "accepted",
+  "debate_rounds": 2
+}

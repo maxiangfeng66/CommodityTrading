@@ -1,0 +1,151 @@
+{
+  "agent": "PM",
+  "timestamp": "2026-01-22T14:00:00Z",
+  "commodity": "ICE Cotton No.2 Futures",
+  "exchange": "ICE Futures US",
+  "contract_symbol": "CT",
+
+  "design_phase": {
+    "objective": "Produce comprehensive HTML analysis report for Cotton combining Fundamentals Outlook and Technical Analysis",
+
+    "modules_to_execute": [
+      {
+        "id": "TM-FUND",
+        "name": "Fundamentals Analysis",
+        "scope": [
+          "Global supply/demand balance (USDA WASDE)",
+          "US production and exports",
+          "Stocks-to-use ratio analysis",
+          "Major producer country analysis (China, India, Brazil, US, Pakistan)",
+          "Consumption trends and mill use",
+          "Seasonal patterns"
+        ],
+        "data_sources": ["USDA WASDE", "USDA ERS", "USDA FAS", "ICE"],
+        "key_metrics": ["stocks_to_use_ratio", "surplus_deficit", "yoy_production_change"],
+        "supervisors": ["SUP-A (Logic)", "SUP-B (Data)"],
+        "min_debate_rounds": 2
+      },
+      {
+        "id": "TM-NEWS",
+        "name": "News & Policy Analysis",
+        "scope": [
+          "Recent policy changes (tariffs, subsidies)",
+          "Weather impacts on production",
+          "Trade policy developments",
+          "Currency impacts on competitiveness"
+        ],
+        "data_sources": ["Reuters", "Bloomberg", "USDA announcements", "Trade publications"],
+        "key_metrics": ["impact_severity_1_5", "event_timeline"],
+        "supervisors": ["SUP-A (Logic)", "SUP-B (Data)"],
+        "min_debate_rounds": 2
+      },
+      {
+        "id": "TM-VIEWS",
+        "name": "Market Views Analysis",
+        "scope": [
+          "Analyst consensus and forecasts",
+          "Market logic assessment",
+          "Contrarian indicators",
+          "Sentiment analysis"
+        ],
+        "data_sources": ["Analyst reports", "Market commentary", "Trade publications"],
+        "key_metrics": ["bullish_bearish_score", "consensus_direction"],
+        "supervisors": ["SUP-A (Logic)", "SUP-B (Data)"],
+        "min_debate_rounds": 2
+      },
+      {
+        "id": "TM-TECH",
+        "name": "Technical Analysis",
+        "scope": [
+          "Trend analysis (above/below 60MA, 60-day close)",
+          "Key support/resistance levels",
+          "Moving average analysis",
+          "Momentum indicators",
+          "Chart patterns"
+        ],
+        "data_sources": ["Barchart", "TradingView", "ICE"],
+        "key_metrics": ["trend_direction", "ma_position", "key_levels"],
+        "supervisors": ["SUP-A (Logic)", "SUP-B (Data)"],
+        "min_debate_rounds": 2
+      },
+      {
+        "id": "TM-STRUCT",
+        "name": "Market Structure Analysis",
+        "scope": [
+          "Volume analysis (5-day average significance)",
+          "Open Interest analysis (aggregate OI daily change)",
+          "Market crowding assessment (OI percentile within year)",
+          "Term structure (contango/backwardation)"
+        ],
+        "data_sources": ["ICE", "Barchart", "CFTC"],
+        "key_metrics": ["volume_5d_avg", "oi_percentile", "oi_daily_change"],
+        "supervisors": ["SUP-A (Logic)", "SUP-B (Data)"],
+        "min_debate_rounds": 2
+      },
+      {
+        "id": "TM-POS",
+        "name": "Positioning Analysis",
+        "scope": [
+          "COT report analysis (non-commercial positioning)",
+          "Net position delta change",
+          "Absolute value percentile",
+          "CTA positioning estimates",
+          "Key technical trigger points"
+        ],
+        "data_sources": ["CFTC COT", "InvestMacro", "CTA tracking services"],
+        "key_metrics": ["net_spec_position", "cot_percentile", "weekly_change"],
+        "supervisors": ["SUP-A (Logic)", "SUP-B (Data)"],
+        "min_debate_rounds": 2
+      }
+    ],
+
+    "execution_plan": {
+      "parallelism": "TM-FUND, TM-NEWS, TM-VIEWS, TM-TECH, TM-STRUCT, TM-POS execute in parallel",
+      "sequence": [
+        "1. All 6 analysis modules execute concurrently",
+        "2. Each module completes min 2 debate rounds with supervisors",
+        "3. TM-REPORT waits for all modules to complete",
+        "4. TM-REPORT synthesizes into HTML",
+        "5. Level 1 SUP + APPROVAL final review"
+      ]
+    },
+
+    "output_specification": {
+      "format": "HTML",
+      "filename": "cotton.html",
+      "location": "output/",
+      "sections": [
+        "Executive Summary",
+        "Fundamentals Analysis",
+        "News & Policy",
+        "Market Views",
+        "Technical Analysis",
+        "Market Structure",
+        "Positioning",
+        "Conclusion & Trading Implications"
+      ],
+      "visual_elements": [
+        "Price chart with key levels",
+        "Supply/demand balance chart",
+        "COT positioning chart",
+        "Score summary cards"
+      ]
+    },
+
+    "quality_gates": {
+      "per_module": [
+        "Data sources cited",
+        "Min 2 debate rounds completed",
+        "Both supervisors sign off"
+      ],
+      "final_report": [
+        "All modules integrated",
+        "HTML renders correctly",
+        "Narrative coherence verified",
+        "Level 1 APPROVAL sign-off"
+      ]
+    }
+  },
+
+  "status": "PENDING_SUP_REVIEW"
+}

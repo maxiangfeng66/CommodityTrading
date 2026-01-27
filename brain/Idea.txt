@@ -1,0 +1,94 @@
+What do I want:
+
+The deliverable is an html that gives thorough commodity analysis for the products from the list, with visual supports
+
+
+How to Design:
+
+
+
+BigIdea
+
+
+1) Fundamentals outlook: this serves as the logical chain of thoughts, it provides paths/predictions/outlook based on factors impacting the price setting of this commodity
+
+below are not exhausitive,you should help me think of more:
+
+Big picture balance outlook
+Recent news : policy , weather etc
+Market views: what is market logic,views and outlook on this commodity? is the logic sound?
+
+
+
+2)Technical Analysis: this tells us the past: what has happened to price so far; what is the balance of force between long and shorts? is market showing signs of getting out of balance zone? is market too crowded? has market overshot? etc etc
+
+below are not exhausitive,you should help me think of more:
+
+big trend: is it above 60 MA? is it above 60Day close? anything else that's reflect trend and long term momentum
+
+Market structure: 
+
+is market tracking attention: volume, aggregate OI daily change on 5 day average showing significance?
+
+is market crowded: Aggregate OI very high percentile within a year?
+
+COT report: non-commercial positioning : delta change and absolute value in percentile
+
+
+CTA positioning
+
+are there key technical points close to current level that could trigger one another?
+
+
+
+Architect
+
+i want you to build multiple level code-based agents (NOT LLM agents).  Agents are allowed to spawn new agents for its tasks (always balance quality and efficiency). You need to carefully design agents system to be efficient.
+Level 1: 
+1 Overall project manager, design the project
+3 Supervisor agent , that check design manager step by step
+3 Approval agent, evaluate the whole project, check design, logic and factual
+ 
+Level 2:
+individual task managers
+each individual task mangers have 2 supervising agents, challenge logics, data and implementation
+try to have reasonable sufficient rounds of debates as possible
+
+
+
+Principles
+maximize parellelism and efficiency
+make the project modular, so that we can easily make  modification
+this project can be repeatable with the same standard and layout, we may need to update this report daily (manually with a button)
+
+
+
+HARD Rules:
+Create Agents(code based) like Military Police to ensure the following rules:
+
+Create folder management rules: file creation and deletion, archive rules. Incorporate this rule each time we run the programme. Create "housecleaning supervisors" agent to enforce this rule. 
+Create flowchart of this whole project. Immediately create supervising agents, checking agents, approval agents to evaluate the flowchart, whether it matches the "BigIdea" "Principles""Architect" of this project
+Whenever, we make a change to flowchart, log the flowchart in blueprint.md (keep the older version for future reverting back) 
+Blueprint.md is the blueprint of this project. Keep it always concise, accurate,upto date It should not be used as "log". It is in "brain" folder.
+You need to ensure your report consistence each time we run the report. i don't want the template and content to change each time we rerun the programme.
+When start running, always show flowchart, and your plan in details, ask for my approval before proceed. 
+
+
+Execution:
+
+Allow claude all access except for super super risky operation.
+Understand, think, plan before execute.
+Create folder management rules: file creation and deletion, archive rules. Incorporate this rule each time we run the programme. Create "housecleaning supervisors" agent to enforce this rule. 
+Create flowchart of this whole project. Immediately create supervising agents, checking agents, approval agents to evaluate the flowchart, whether it matches the "BigIdea" "Principles""Architect" of this project
+Create a programme or html or some other visual report that reflects the actual workflow chart of the programme that is going to be carried out. For me to approve. Also for me to monitor. Treat this as a control room.
+
+Create log.md for logs
+Create a separate "tidyup" executable for me to manual click (following folder management rules)
+
+
+Specific detailed request:
+in html report:
+include an interactive price candlestick chart.
+report needs to show key details. not just key words and score. they are good, but i need more bullet points.
+
+

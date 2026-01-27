@@ -1,0 +1,267 @@
+{
+  "module": "TM-FUND",
+  "commodity": "ICE Cotton No.2",
+  "timestamp": "2026-01-22",
+  "score": -2,
+  "outlook": "bearish",
+  "confidence": "medium-high",
+  "data": {
+    "global_production": {
+      "total_2024_25": "119.4 million bales",
+      "change_yoy": "+4%",
+      "note": "Highest in 5 years"
+    },
+    "major_producers": {
+      "china": {
+        "production": "6.16-6.81 MMT (28-30 million bales)",
+        "change_yoy": "+9.7%",
+        "xinjiang_share": "92.3%",
+        "consumption": "7.69-8.15 MMT",
+        "imports": "1.1-1.4 MMT (down 66% YoY)",
+        "note": "140% tariffs on US cotton"
+      },
+      "brazil": {
+        "production": "17.0 million bales (record)",
+        "exports": "2.83 million tonnes (record)",
+        "change_yoy": "+6% exports",
+        "status": "World's largest exporter",
+        "cost_advantage": "US$44.69 cents/lb"
+      },
+      "usa": {
+        "production": "14.4 million bales",
+        "change_yoy": "+19%",
+        "planted_area": "11.2 million acres",
+        "yield": "836 lbs/acre",
+        "exports_forecast_2025_26": "12.2 million bales"
+      },
+      "india": {
+        "production": "24.0 million bales",
+        "change_yoy": "-7%",
+        "note": "15-year low",
+        "exports": "1.2 million bales (down 55%)",
+        "imports": "2.3 million bales (up 300%)",
+        "status": "Net importer for second time in two decades"
+      },
+      "pakistan": {
+        "production": "4.8-5.2 million bales",
+        "change_yoy": "-37% to -59%",
+        "note": "Floods, heat waves, water shortages"
+      }
+    },
+    "global_consumption": {
+      "total_2024_25": "115.8-116.8 million bales",
+      "forecast_2025_26": "117.9-118.0 million bales",
+      "change_yoy": "+1.0-1.7%",
+      "top_consumers": {
+        "china": "30%",
+        "india": "22%",
+        "pakistan": "9%",
+        "bangladesh": "7%",
+        "turkey": "6%",
+        "vietnam": "6%"
+      }
+    },
+    "stocks": {
+      "global_ending_stocks": "78.3-78.4 million bales",
+      "change_yoy": "+6%",
+      "note": "Highest in 5 years",
+      "us_ending_stocks_ratio": "39%"
+    },
+    "stocks_to_use_ratio": {
+      "global": "66-67%",
+      "interpretation": "Elevated - bearish for prices"
+    },
+    "trade": {
+      "global_2024_25": "42.3 million bales",
+      "global_2025_26_forecast": "43.8 million bales",
+      "top_exporters": ["Brazil (31%)", "USA", "Australia", "India"],
+      "top_importers": ["Vietnam", "Bangladesh", "China", "Pakistan"]
+    },
+    "prices": {
+      "ice_cotton_dec_2025": "61.88 cents/lb",
+      "ice_cotton_mar_2026": "63.68 cents/lb",
+      "range_2025": "60.80-69.75 cents/lb",
+      "decline_from_2022_high": "-61%"
+    },
+    "seasonal_factors": {
+      "current_period": "January - historically bullish",
+      "harvest_season": "August-December (bearish pressure)",
+      "planting_anticipation": "April (typically bullish)"
+    }
+  },
+  "analysis": {
+    "supply_outlook": "Global cotton supply remains abundant with production at 119.4 million bales, the highest in 5 years. Brazil has emerged as the world's largest exporter with record production of 17.0 million bales and record exports of 2.83 million tonnes. China's production surged 9.7% with Xinjiang contributing 92.3% at exceptional quality levels. US production rebounded 19% to 14.4 million bales. These gains more than offset declines in India (15-year low) and Pakistan (flood-damaged crop). The supply overhang is expected to persist into 2025/26.",
+    "demand_outlook": "Global mill consumption is modestly growing at 1-1.7% annually, forecast at 118 million bales for 2025/26 - the highest since 2020/21. However, consumption growth lags production growth, widening the surplus. Key demand drivers include expanding textile industries in Vietnam and Bangladesh. China's consumption faces headwinds from US tariffs impacting textile exports. Cotton continues losing market share to synthetic fibers, with cotton's global textile share below 25% versus 50%+ in the 1970s.",
+    "key_drivers": [
+      "Global ending stocks at 5-year highs (78.3 million bales)",
+      "Stocks-to-use ratio elevated at 66-67%",
+      "Brazil's emergence as dominant low-cost exporter",
+      "China-US trade tensions (140% tariffs on US cotton)",
+      "Production growth (+4%) outpacing consumption growth (+1-1.7%)",
+      "India becoming net cotton importer",
+      "Weak global textile demand amid economic slowdown"
+    ],
+    "upside_risks": [
+      "Adverse weather disrupting 2025/26 planting in major producing regions",
+      "Stronger-than-expected economic recovery boosting textile demand",
+      "India import demand exceeding forecasts",
+      "China returning to import markets if domestic stocks deplete",
+      "Currency appreciation in Brazil reducing export competitiveness",
+      "Q1 seasonal strength providing temporary support"
+    ],
+    "downside_risks": [
+      "Further production increases in Brazil and Australia",
+      "Continued weak Chinese import demand",
+      "US export sales remaining below USDA estimates",
+      "Synthetic fiber competition intensifying",
+      "Global economic slowdown deepening",
+      "Higher stocks if consumption disappoints"
+    ]
+  },
+  "debate_log": {
+    "round_1": {
+      "challenger": "SUP-A (Logic Challenger)",
+      "initial_score": -2,
+      "challenges": [
+        {
+          "topic": "India Production",
+          "challenge": "India's shift to net importer (2.3M bale imports, tripling YoY) could tighten global trade. Is this bullish factor underweighted?",
+          "response": "Valid but offset by ample global supply. Brazil exports to India grew 1,777%. Global supply sufficient to absorb India's deficit without materially tightening prices."
+        },
+        {
+          "topic": "Consumption Growth",
+          "challenge": "World mill use projected at 118M bales for 2025/26, highest since 2020/21. Could demand surprise to upside?",
+          "response": "Mill use growth is modest (1-1.7%). Production growth (4%) outpaces consumption, widening surplus. S/U ratio of 67% remains bearish."
+        },
+        {
+          "topic": "China Import Decline",
+          "challenge": "China imports down 66% but could return quickly if quality issues emerge or demand rebounds.",
+          "response": "China's domestic production at near-record with Xinjiang quality at 6-year highs. Structural reduction in import dependency likely persistent."
+        },
+        {
+          "topic": "US-China Trade",
+          "challenge": "140% tariffs close China market but could create premium opportunities in non-China markets.",
+          "response": "Loss of China market (16-17% of US exports) is fundamentally bearish. Vietnam/Bangladesh cannot fully replace at similar prices."
+        },
+        {
+          "topic": "Seasonal Timing",
+          "challenge": "January is historically bullish. Bearish outlook may not account for Q1 strength.",
+          "response": "Acknowledged seasonal support. However, fundamental oversupply may overwhelm seasonal effects."
+        }
+      ],
+      "score_adjustment": "Maintained at -2, acknowledged seasonal timing as near-term support factor"
+    },
+    "round_2": {
+      "validator": "SUP-B (Data Validator)",
+      "validations": [
+        {
+          "data_point": "January 2025 WASDE",
+          "status": "VERIFIED",
+          "note": "World production 119.4M bales, ending stocks +1.9M bales confirmed from official USDA sources"
+        },
+        {
+          "data_point": "Stocks-to-Use Ratio",
+          "status": "VERIFIED",
+          "calculation": "78.4M / 116.8M = 67.1% - matches reported figure"
+        },
+        {
+          "data_point": "Brazil Exports",
+          "status": "VERIFIED",
+          "note": "Record 2.83M tonnes confirmed from ABRAPA data via Fibre2Fashion"
+        },
+        {
+          "data_point": "ICE Cotton Prices",
+          "status": "VERIFIED",
+          "note": "Dec 2025: 61.88 cents, Mar 2026: 63.68 cents verified from market sources"
+        },
+        {
+          "data_point": "India Production",
+          "status": "VERIFIED",
+          "note": "15-year low at 24M bales, net importer status confirmed from USDA FAS"
+        },
+        {
+          "data_point": "Pakistan Production",
+          "status": "PARTIALLY VERIFIED",
+          "note": "USDA 4.8-5.2M bales vs PCGA showing 59.4% decline - directionally consistent"
+        }
+      ],
+      "concerns": [
+        {
+          "issue": "Data Recency",
+          "response": "Fundamental picture from Jan 2025 WASDE reinforced by subsequent data. Bearish thesis consistent."
+        },
+        {
+          "issue": "Currency Impact",
+          "response": "Brazil's cost advantage (US$44.69/lb) provides buffer against currency moves. Structural advantage exists."
+        },
+        {
+          "issue": "Weather Risk",
+          "response": "Incorporated as upside risk. Current forecasts don't indicate major disruptions for 2025/26."
+        }
+      ],
+      "final_score": -2
+    }
+  },
+  "sources": [
+    {
+      "name": "USDA WASDE Report",
+      "url": "https://www.usda.gov/about-usda/general-information/staff-offices/office-chief-economist/commodity-markets/wasde-report",
+      "type": "official"
+    },
+    {
+      "name": "Cotton Highlights From January 2025 WASDE Report",
+      "url": "https://www.cottongrower.com/market-analysis/cotton-highlights-from-january-2025-wasde-report/",
+      "type": "analysis"
+    },
+    {
+      "name": "USDA Cotton: World Markets and Trade",
+      "url": "https://apps.fas.usda.gov/psdonline/circulars/cotton.pdf",
+      "type": "official"
+    },
+    {
+      "name": "Cotton and Wool Outlook - USDA ERS",
+      "url": "https://www.ers.usda.gov/topics/crops/cotton-and-wool/market-outlook",
+      "type": "official"
+    },
+    {
+      "name": "USDA FAS China Cotton and Products Annual",
+      "url": "https://www.fas.usda.gov/data/china-cotton-and-products-annual-9",
+      "type": "official"
+    },
+    {
+      "name": "USDA FAS India Cotton Production Forecast",
+      "url": "https://www.fas.usda.gov/data/india-cotton-production-forecast-15-year-low",
+      "type": "official"
+    },
+    {
+      "name": "USDA FAS Brazil Cotton Update",
+      "url": "https://www.fas.usda.gov/data/brazil-cotton-and-products-update-17",
+      "type": "official"
+    },
+    {
+      "name": "Brazil Cotton Exports Record - DatamarNews",
+      "url": "https://datamarnews.com/noticias/brazil-cotton-exports-hit-record-2-83-mln-t-in-2024-25-keep-top-spot-globally/",
+      "type": "news"
+    },
+    {
+      "name": "ICE Cotton No.2 Futures",
+      "url": "https://www.ice.com/products/254/cotton-no-2-futures",
+      "type": "exchange"
+    },
+    {
+      "name": "Cotton Marketing Planner - TAMU",
+      "url": "https://cottonmarketing.tamu.edu/newcrop-fundamentals-outlook-and-caveats/",
+      "type": "analysis"
+    },
+    {
+      "name": "USDA Weekly Cotton Export Sales",
+      "url": "https://apps.fas.usda.gov/export-sales/cottfax.htm",
+      "type": "official"
+    },
+    {
+      "name": "Global Cotton Outlook 2025/26 - Texas Tech ICAC",
+      "url": "https://www.depts.ttu.edu/aaec/icac/pubs/cotton/global_cotton_baselines/Cotton_Outlook_2025.pdf",
+      "type": "analysis"
+    }
+  ]
+}

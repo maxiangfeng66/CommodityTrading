@@ -1,0 +1,18 @@
+{
+  "approved_at": "2026-01-22T14:09:21.743498",
+  "commodity": "aluminum",
+  "decision": "REJECTED",
+  "checks_passed": [
+    "Weighted score calculated",
+    "Report template consistency verified"
+  ],
+  "checks_failed": [
+    "SUP validation status: rejected",
+    "Insufficient modules: 0/6"
+  ],
+  "conditions": [
+    "Improve module documentation"
+  ],
+  "final_score": 0.5,
+  "ready_for_delivery": false
+}

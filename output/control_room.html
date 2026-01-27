@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CommodityTrading Control Room</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: #0a0a0f;
+            color: #e0e0e0;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            padding: 20px 0 30px;
+            border-bottom: 1px solid #333;
+            margin-bottom: 30px;
+        }
+        .header h1 { color: #4ecdc4; font-size: 2em; margin-bottom: 5px; }
+        .header p { color: #888; }
+
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 1400px; margin: 0 auto; }
+
+        .panel {
+            background: #12121a;
+            border: 1px solid #2a2a3a;
+            border-radius: 8px;
+            padding: 20px;
+        }
+        .panel h2 {
+            color: #4ecdc4;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #2a2a3a;
+        }
+
+        /* Flowchart */
+        .flowchart { grid-column: 1 / -1; }
+        .flow-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            padding: 20px;
+        }
+        .flow-row { display: flex; gap: 15px; align-items: center; }
+        .flow-box {
+            background: #1a1a2e;
+            border: 2px solid #4ecdc4;
+            border-radius: 6px;
+            padding: 10px 20px;
+            text-align: center;
+            min-width: 100px;
+        }
+        .flow-box.level1 { border-color: #ff6b6b; }
+        .flow-box.level2 { border-color: #4ecdc4; }
+        .flow-box.support { border-color: #ffd93d; }
+        .flow-box small { display: block; color: #888; font-size: 0.75em; }
+        .flow-arrow { color: #555; font-size: 1.5em; }
+        .flow-label {
+            background: #2a2a3a;
+            padding: 5px 15px;
+            border-radius: 4px;
+            font-size: 0.9em;
+            color: #888;
+        }
+
+        /* Agent Status */
+        .agent-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+        .agent {
+            background: #1a1a2e;
+            border-radius: 6px;
+            padding: 12px;
+            text-align: center;
+        }
+        .agent .name { font-weight: bold; margin-bottom: 5px; }
+        .agent .role { font-size: 0.8em; color: #888; }
+        .agent .status {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.75em;
+            margin-top: 8px;
+        }
+        .status.ready { background: #2d4a3e; color: #4ecdc4; }
+        .status.running { background: #4a3d2d; color: #ffd93d; }
+        .status.complete { background: #2d4a2d; color: #6bcf6b; }
+
+        /* Reports */
+        .report-list { list-style: none; }
+        .report-list li {
+            padding: 10px;
+            background: #1a1a2e;
+            margin-bottom: 8px;
+            border-radius: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .report-list a { color: #4ecdc4; text-decoration: none; }
+        .report-list a:hover { text-decoration: underline; }
+        .report-list .date { color: #666; font-size: 0.85em; }
+
+        /* Principles */
+        .principles { list-style: none; }
+        .principles li {
+            padding: 8px 0;
+            border-bottom: 1px solid #2a2a3a;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .principles li:last-child { border: none; }
+        .check { color: #4ecdc4; }
+
+        /* Hard Rules */
+        .rules { list-style: none; counter-reset: rule; }
+        .rules li {
+            padding: 8px 0;
+            border-bottom: 1px solid #2a2a3a;
+            display: flex;
+            gap: 10px;
+        }
+        .rules li::before {
+            counter-increment: rule;
+            content: counter(rule);
+            background: #ff6b6b;
+            color: #000;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75em;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        /* Execution Flow */
+        .exec-flow { display: flex; flex-direction: column; gap: 8px; }
+        .exec-step {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 12px;
+            background: #1a1a2e;
+            border-radius: 6px;
+            border-left: 3px solid #333;
+        }
+        .exec-step.active { border-left-color: #ffd93d; background: #2a2a1e; }
+        .exec-step.done { border-left-color: #4ecdc4; }
+        .exec-step .num {
+            background: #333;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8em;
+        }
+        .exec-step.done .num { background: #4ecdc4; color: #000; }
+        .exec-step.active .num { background: #ffd93d; color: #000; }
+
+        .full-width { grid-column: 1 / -1; }
+
+        footer {
+            text-align: center;
+            padding: 30px 0 10px;
+            color: #555;
+            font-size: 0.85em;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>CommodityTrading Control Room</h1>
+        <p>Multi-Agent System Workflow Monitor</p>
+    </div>
+
+    <div class="grid">
+        <!-- Flowchart -->
+        <div class="panel flowchart">
+            <h2>System Flowchart</h2>
+            <div class="flow-container">
+                <div class="flow-label">USER REQUEST</div>
+                <div class="flow-arrow">|</div>
+                <div class="flow-label">[Understand, Think, Plan]</div>
+                <div class="flow-arrow">v</div>
+
+                <div class="flow-label" style="background:#3a2a2a; color:#ff6b6b;">LEVEL 1: STRATEGIC</div>
+                <div class="flow-row">
+                    <div class="flow-box level1"><strong>PM</strong><small>Design</small></div>
+                    <div class="flow-arrow">-></div>
+                    <div class="flow-box level1"><strong>SUP</strong><small>Challenge</small></div>
+                    <div class="flow-arrow">-></div>
+                    <div class="flow-box level1"><strong>APPROVAL</strong><small>Verify</small></div>
+                </div>
+                <div class="flow-arrow">v</div>
+
+                <div class="flow-label" style="background:#2a3a3a; color:#4ecdc4;">LEVEL 2: TACTICAL (PARALLEL)</div>
+                <div class="flow-row">
+                    <div class="flow-box level2"><strong>TM-FUND</strong><small>Fundamentals</small></div>
+                    <div class="flow-box level2"><strong>TM-NEWS</strong><small>News</small></div>
+                    <div class="flow-box level2"><strong>TM-VIEWS</strong><small>Views</small></div>
+                    <div class="flow-box level2"><strong>TM-TECH</strong><small>Technical</small></div>
+                    <div class="flow-box level2"><strong>TM-STRUCT</strong><small>Structure</small></div>
+                    <div class="flow-box level2"><strong>TM-POS</strong><small>Positioning</small></div>
+                </div>
+                <div class="flow-arrow">v</div>
+
+                <div class="flow-box level2"><strong>TM-REPORT</strong><small>Synthesis</small></div>
+                <div class="flow-arrow">v</div>
+
+                <div class="flow-box support"><strong>HOUSEKEEPER</strong><small>Cleanup</small></div>
+                <div class="flow-arrow">v</div>
+
+                <div class="flow-label" style="background:#2d4a2d; color:#6bcf6b;">DELIVERABLES</div>
+            </div>
+        </div>
+
+        <!-- Agent Status -->
+        <div class="panel">
+            <h2>Level 1 Agents</h2>
+            <div class="agent-grid">
+                <div class="agent">
+                    <div class="name">PM</div>
+                    <div class="role">Project Manager</div>
+                    <div class="status ready">READY</div>
+                </div>
+                <div class="agent">
+                    <div class="name">SUP</div>
+                    <div class="role">Supervisor</div>
+                    <div class="status ready">READY</div>
+                </div>
+                <div class="agent">
+                    <div class="name">APPROVAL</div>
+                    <div class="role">Evaluator</div>
+                    <div class="status ready">READY</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Execution Flow -->
+        <div class="panel">
+            <h2>Execution Flow</h2>
+            <div class="exec-flow">
+                <div class="exec-step"><span class="num">1</span> UNDERSTAND - Read commodity, gather context</div>
+                <div class="exec-step"><span class="num">2</span> THINK - PM designs analysis plan</div>
+                <div class="exec-step"><span class="num">3</span> PLAN - SUP challenges, APPROVAL verifies</div>
+                <div class="exec-step"><span class="num">4</span> EXECUTE - Level 2 parallel with debates</div>
+                <div class="exec-step"><span class="num">5</span> SYNTHESIZE - TM-REPORT compiles HTML</div>
+                <div class="exec-step"><span class="num">6</span> REVIEW - Final evaluation</div>
+                <div class="exec-step"><span class="num">7</span> DELIVER - Output report</div>
+                <div class="exec-step"><span class="num">8</span> CLEANUP - HOUSEKEEPER runs</div>
+            </div>
+        </div>
+
+        <!-- Reports -->
+        <div class="panel">
+            <h2>Generated Reports</h2>
+            <ul class="report-list">
+                <li><a href="cotton_new.html">Cotton (ICE No.2)</a><span class="date">2026-01-22</span></li>
+                <li><a href="copper.html">Copper</a><span class="date">2026-01-20</span></li>
+                <li><a href="silver.html">Silver</a><span class="date">2026-01-20</span></li>
+                <li><a href="sugar.html">Sugar</a><span class="date">2026-01-20</span></li>
+                <li><a href="iron_ore.html">Iron Ore</a><span class="date">2026-01-20</span></li>
+                <li><a href="lithium_carbonate.html">Lithium Carbonate</a><span class="date">2026-01-20</span></li>
+            </ul>
+        </div>
+
+        <!-- Principles -->
+        <div class="panel">
+            <h2>Principles</h2>
+            <ul class="principles">
+                <li><span class="check">✓</span> Think Before Execute</li>
+                <li><span class="check">✓</span> Maximize Parallelism</li>
+                <li><span class="check">✓</span> Efficiency</li>
+                <li><span class="check">✓</span> Modularity</li>
+                <li><span class="check">✓</span> Repeatability</li>
+                <li><span class="check">✓</span> Quality via Debate</li>
+            </ul>
+        </div>
+
+        <!-- Hard Rules -->
+        <div class="panel">
+            <h2>Hard Rules</h2>
+            <ul class="rules">
+                <li>Folder Management - HOUSEKEEPER enforces tidyup.md</li>
+                <li>Flowchart Validation - SUP + APPROVAL verify</li>
+                <li>Blueprint Versioning - Log changes with history</li>
+                <li>Blueprint Discipline - Concise, accurate, up-to-date</li>
+                <li>Report Consistency - Template must not change</li>
+            </ul>
+        </div>
+
+        <!-- Level 2 Agents -->
+        <div class="panel full-width">
+            <h2>Level 2 Task Managers (Each with SUP-A + SUP-B)</h2>
+            <div class="agent-grid" style="grid-template-columns: repeat(7, 1fr);">
+                <div class="agent">
+                    <div class="name">TM-FUND</div>
+                    <div class="role">Fundamentals</div>
+                    <div class="status ready">READY</div>
+                </div>
+                <div class="agent">
+                    <div class="name">TM-NEWS</div>
+                    <div class="role">News/Policy</div>
+                    <div class="status ready">READY</div>
+                </div>
+                <div class="agent">
+                    <div class="name">TM-VIEWS</div>
+                    <div class="role">Market Views</div>
+                    <div class="status ready">READY</div>
+                </div>
+                <div class="agent">
+                    <div class="name">TM-TECH</div>
+                    <div class="role">Technical</div>
+                    <div class="status ready">READY</div>
+                </div>
+                <div class="agent">
+                    <div class="name">TM-STRUCT</div>
+                    <div class="role">Structure</div>
+                    <div class="status ready">READY</div>
+                </div>
+                <div class="agent">
+                    <div class="name">TM-POS</div>
+                    <div class="role">Positioning</div>
+                    <div class="status ready">READY</div>
+                </div>
+                <div class="agent">
+                    <div class="name">TM-REPORT</div>
+                    <div class="role">Synthesis</div>
+                    <div class="status ready">READY</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        CommodityTrading Multi-Agent System | Blueprint v2.2 | Control Room v1.0
+    </footer>
+</body>
+</html>

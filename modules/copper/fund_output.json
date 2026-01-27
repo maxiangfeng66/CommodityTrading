@@ -1,0 +1,93 @@
+{
+  "module": "tm_fund",
+  "commodity": "copper",
+  "timestamp": "2026-01-27T11:30:27.142268",
+  "score": 0.0,
+  "confidence": 0.95,
+  "interpretation": "Neutral",
+  "summary": "Fundamental outlook: NEUTRAL. Supply/demand: Slight surplus expected in China-dominated market. Market activity: Volume trend: increasing; market activity elevated.",
+  "analysis": {
+    "score": 0.0,
+    "summary": "Fundamental outlook: NEUTRAL. Supply/demand: Slight surplus expected in China-dominated market. Market activity: Volume trend: increasing; market activity elevated.",
+    "supply_demand": {
+      "global_production": 25000000,
+      "top_producers": [
+        "Chile (27%)",
+        "Peru (10%)",
+        "China (8%)",
+        "DRC (8%)"
+      ],
+      "top_consumers": [
+        "China (54%)",
+        "Europe (12%)",
+        "North America (8%)"
+      ],
+      "key_drivers": [
+        "Construction demand",
+        "EV/renewables",
+        "Mine supply"
+      ],
+      "demand_outlook": "Construction season peaks Q2-Q3",
+      "balance": "Slight surplus expected in China-dominated market",
+      "score": -0.3,
+      "rationale": "Global production 25000000; market Slight surplus expected in China-dominated market"
+    },
+    "inventory_analysis": {
+      "volume_trend": "increasing",
+      "latest_volume": 8664,
+      "avg_20day_volume": 1579.0,
+      "exchange_data": "Available",
+      "score": 0.2,
+      "rationale": "Volume trend: increasing; market activity elevated"
+    },
+    "seasonal_analysis": {
+      "current_quarter": "Q1",
+      "seasonal_factor": "Moderate (China restocking)",
+      "historical_pattern": {
+        "Q1": "Moderate (China restocking)",
+        "Q2": "Construction peak",
+        "Q3": "Steady demand",
+        "Q4": "Seasonal slowdown"
+      },
+      "score": 0.3,
+      "rationale": "Current quarter (Q1): Moderate (China restocking)"
+    },
+    "cost_analysis": {
+      "key_drivers": [
+        "Mining costs",
+        "Energy",
+        "Labor",
+        "Ore grades"
+      ],
+      "cost_outlook": "Production costs provide price floor support",
+      "score": 0,
+      "rationale": "Key cost drivers: Mining costs, Energy, Labor"
+    },
+    "macro_factors": {
+      "usd_index": 97.02,
+      "usd_change_1m": -1.02,
+      "assessment": "USD stable, neutral impact",
+      "score": 0,
+      "rationale": "USD stable, neutral impact"
+    },
+    "sources": [
+      "International Copper Study Group (ICSG)",
+      "World Bureau of Metal Statistics",
+      "LME/COMEX Warehouse Data",
+      "World Bank Commodity Markets",
+      "World Bank Commodity Markets",
+      "FRED Economic Data"
+    ],
+    "data_quality": "high"
+  },
+  "sources": [
+    "International Copper Study Group (ICSG)",
+    "World Bureau of Metal Statistics",
+    "LME/COMEX Warehouse Data",
+    "World Bank Commodity Markets",
+    "World Bank Commodity Markets",
+    "FRED Economic Data"
+  ],
+  "debate_outcome": "accepted",
+  "debate_rounds": 2
+}

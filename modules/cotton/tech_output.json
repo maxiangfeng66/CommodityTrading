@@ -1,0 +1,153 @@
+{
+  "module": "TM-TECH",
+  "commodity": "ICE Cotton No.2",
+  "timestamp": "2026-01-22",
+  "score": -1,
+  "outlook": "neutral",
+  "confidence": "medium",
+  "current_price": {
+    "value": 64.65,
+    "unit": "cents/lb",
+    "date": "2026-01-22",
+    "daily_change_percent": 0.22
+  },
+  "key_levels": {
+    "resistance": [
+      {"level": 65.72, "type": "100-Day MA", "significance": "high"},
+      {"level": 67.56, "type": "200-Day MA", "significance": "high"},
+      {"level": 68.40, "type": "Breakout Level", "significance": "critical"},
+      {"level": 69.54, "type": "Rectangle Top", "significance": "major"},
+      {"level": 73.50, "type": "52-Week High", "significance": "major"}
+    ],
+    "support": [
+      {"level": 64.29, "type": "50-Day MA", "significance": "moderate"},
+      {"level": 62.00, "type": "Near-term Support", "significance": "moderate"},
+      {"level": 61.29, "type": "Rectangle Bottom", "significance": "major"},
+      {"level": 60.80, "type": "52-Week Low", "significance": "critical"}
+    ]
+  },
+  "moving_averages": {
+    "5_day": {"value": 64.46, "price_vs_ma": "above", "signal": "bullish"},
+    "20_day": {"value": 64.51, "price_vs_ma": "above", "signal": "bullish"},
+    "50_day": {"value": 64.29, "price_vs_ma": "above", "signal": "bullish"},
+    "100_day": {"value": 65.72, "price_vs_ma": "below", "signal": "bearish"},
+    "200_day": {"value": 67.56, "price_vs_ma": "below", "signal": "bearish"},
+    "overall_signal": "mixed - short-term bullish, long-term bearish"
+  },
+  "trend_analysis": {
+    "short_term": "neutral to slightly bullish",
+    "medium_term": "bearish",
+    "long_term": "bearish",
+    "adx_value": 12.56,
+    "adx_interpretation": "No clear trend - market in consolidation",
+    "price_pattern": "Rectangle/consolidation between 61.29-69.54",
+    "trend_strength": "weak",
+    "60_day_assessment": "Price trading below 60-day approximate level, range-bound"
+  },
+  "momentum_indicators": {
+    "rsi": {
+      "9_day": 43.71,
+      "14_day": 46.87,
+      "20_day": 47.01,
+      "interpretation": "Neutral territory, slight bearish bias, not oversold"
+    },
+    "stochastic": {
+      "14_day_k": 30.29,
+      "14_day_d": 36.16,
+      "20_day_k": 35.37,
+      "20_day_d": 43.02,
+      "interpretation": "Approaching oversold territory, potential bounce"
+    },
+    "volatility": {
+      "historic_14_day": 7.47,
+      "atr_14_day": 0.55,
+      "interpretation": "Low volatility, compressed range"
+    }
+  },
+  "52_week_range": {
+    "high": 73.50,
+    "low": 60.80,
+    "range": 12.70,
+    "current_position_percent": 30.3,
+    "interpretation": "Trading in lower third of 52-week range"
+  },
+  "analysis": {
+    "trend_assessment": "ICE Cotton No.2 is in a prolonged consolidation phase within a well-defined rectangle pattern (61.29-69.54). Price is trading above short-term MAs (5, 20, 50-day) but remains firmly below longer-term MAs (100, 200-day), indicating bearish structural bias. The ADX at 12.56 confirms absence of trending conditions.",
+    "momentum": "RSI readings in the 43-47 range suggest neutral momentum with slight bearish undertone. Stochastic indicators approaching oversold territory (30.29 %K) hint at potential near-term bounce. However, the lack of bullish divergence limits upside conviction.",
+    "key_levels_nearby": [
+      "Immediate resistance at 65.72 (100-Day MA) - critical test",
+      "Support at 64.29 (50-Day MA) providing floor",
+      "Breakout above 68.40 needed for bullish reversal signal",
+      "Breakdown below 61.29 would target 60.80 (52-week low)"
+    ],
+    "upside_risks": [
+      "Seasonal Q1/Q2 rally pattern historically supportive",
+      "Price near 52-week lows creates mean-reversion potential",
+      "Short-term MA alignment turning positive",
+      "Stochastic nearing oversold could trigger technical bounce",
+      "Speculative shorts at elevated levels (50,372 contracts) - short-covering potential"
+    ],
+    "downside_risks": [
+      "Price below 100-day and 200-day MAs indicates bearish trend",
+      "No clear trending conditions (ADX 12.56)",
+      "Managed money net short positioning increasing",
+      "Strong dollar pressure on commodity prices",
+      "Weak export demand fundamentals"
+    ]
+  },
+  "debate_log": {
+    "round_1": {
+      "tm_tech_initial": {
+        "position": "Slightly Bearish (Score: -1)",
+        "rationale": "Price below 100-day and 200-day MAs indicates structural bearish bias. Despite short-term MA support, the inability to break above 65.72 resistance and low ADX (12.56) suggests continued range-bound to bearish action. RSI neutral at 46.87 provides no directional conviction."
+      },
+      "sup_a_challenge": {
+        "role": "Logic Challenger",
+        "challenges": [
+          "Challenge 1: You emphasize bearish MA structure, but price is ABOVE 5, 20, and 50-day MAs. Isn't that three bullish signals vs two bearish? Why weight longer-term MAs more heavily?",
+          "Challenge 2: Stochastic at 30.29 is approaching oversold. Combined with price at lower third of 52-week range, doesn't this suggest asymmetric risk/reward favoring upside?",
+          "Challenge 3: You note seasonal Q1/Q2 rally patterns are historically supportive. If we're in Q1 2026, shouldn't this factor into a more bullish score?"
+        ]
+      },
+      "tm_tech_response": {
+        "response_to_challenge_1": "Valid point on MA count. However, weighting longer-term MAs more heavily reflects their greater significance in establishing primary trend direction. The 200-day MA at 67.56 represents a 4.5% premium to current price - a substantial hurdle. Short-term bullish alignment is necessary but insufficient for trend reversal.",
+        "response_to_challenge_2": "Acknowledged. The stochastic approaching oversold (30.29) does create bounce potential. However, oversold can become more oversold in downtrends. The lack of bullish RSI divergence limits confidence in a sustained reversal. I'll adjust to recognize this asymmetry.",
+        "response_to_challenge_3": "Seasonality is a valid consideration. Historical Q1/Q2 strength provides a tailwind. However, this is a technical analysis focused on price action, and seasonal factors are secondary to price structure. I'll incorporate this as an upside risk factor."
+      }
+    },
+    "round_2": {
+      "sup_b_validation": {
+        "role": "Data Validator",
+        "validations": [
+          "Price Data: Confirmed 64.65 cents/lb current, within 24-hour window - VALID",
+          "52-Week Range: 60.80-73.50 confirmed - VALID",
+          "Moving Averages: 5-day 64.46, 20-day 64.51, 50-day 64.29, 100-day 65.72, 200-day 67.56 - VALID",
+          "RSI 14-day: 46.87 - VALID (neutral territory definition correct)",
+          "ADX: 12.56 - VALID (below 20 indicates no trend - interpretation correct)",
+          "Position Calculation: (64.65-60.80)/(73.50-60.80) = 30.3% - VALID"
+        ],
+        "concerns": [
+          "Concern 1: MACD values not obtained from sources. Analysis incomplete without MACD confirmation.",
+          "Concern 2: Volume analysis absent. Price moves without volume context lack validation.",
+          "Concern 3: Score of -1 seems conservative given price above 3 of 5 MAs. Justify weighting."
+        ]
+      },
+      "tm_tech_refinement": {
+        "response_to_concern_1": "Acknowledged. MACD specific values were not available in sources. However, multiple sources indicated MACD showing 'buy' signals. This is incorporated qualitatively. Confidence reduced from high to medium due to this gap.",
+        "response_to_concern_2": "Volume data shows 6.07K with open interest at 180.29K. While specific volume analysis is limited, the stable open interest suggests orderly market. Noted as limitation.",
+        "response_to_concern_3": "Score rationale: While 3 of 5 MAs are bullish (short-term), the price position below 100-day and 200-day MAs, combined with trading in lower third of 52-week range and increasing speculative shorts, justifies -1. The neutral RSI and low ADX prevent a more bearish score. Score maintained at -1 with 'neutral' outlook rather than 'bearish' to reflect mixed signals.",
+        "final_adjustments": "Upgraded outlook label from 'slightly bearish' to 'neutral' to better reflect the genuine mixed signals. Score remains -1 to capture the structural bearish bias from longer-term MAs while acknowledging short-term bullish support."
+      }
+    }
+  },
+  "sources": [
+    {"name": "Barchart Cotton Technical Analysis", "url": "https://www.barchart.com/futures/quotes/CT*0/technical-analysis", "type": "technical_data"},
+    {"name": "ICE Cotton Futures Data", "url": "https://www.ice.com/products/254/Cotton-No-2-Futures/data", "type": "exchange_data"},
+    {"name": "TradingView CT1! Charts", "url": "https://www.tradingview.com/symbols/ICEUS-CT1!/", "type": "charting"},
+    {"name": "Investing.com Cotton Historical", "url": "https://www.investing.com/commodities/us-cotton-no.2-historical-data", "type": "historical_data"},
+    {"name": "MacroMicro Cotton Series", "url": "https://en.macromicro.me/series/1615/cotton-futures", "type": "price_data"},
+    {"name": "USDA Cotton Market Report", "url": "https://www.ams.usda.gov/mnreports/cnwwcmr.pdf", "type": "fundamental_data"},
+    {"name": "Trading Economics Cotton", "url": "https://tradingeconomics.com/commodity/cotton", "type": "market_overview"},
+    {"name": "AInvest Cotton Analysis", "url": "https://www.ainvest.com/news/cotton-post-holiday-rally-strategic-buying-opportunity-strengthening-fundamentals-2601/", "type": "analysis"}
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "module": "tm_struct",
+  "commodity": "copper",
+  "timestamp": "2026-01-27T11:30:26.693880",
+  "score": 0.3,
+  "confidence": 0.95,
+  "interpretation": "Neutral",
+  "summary": "Market Structure: NEUTRAL. Volume trend: Elevated. Attention: High (volume spike detected).",
+  "analysis": {
+    "score": 0.3,
+    "summary": "Market Structure: NEUTRAL. Volume trend: Elevated. Attention: High (volume spike detected).",
+    "volume_analysis": {
+      "avg_5d_volume": 2384.6,
+      "avg_20d_volume": 1579.35,
+      "volume_ratio": 1.51,
+      "trend": "Elevated",
+      "score": 0.5,
+      "interpretation": "5-day volume 151.0% of 20-day average"
+    },
+    "attention_analysis": {
+      "attention_level": "High (volume spike detected)",
+      "volume_spike_ratio": 5.14,
+      "score": 0.5,
+      "interpretation": "Market attention based on volume patterns"
+    },
+    "liquidity_analysis": {
+      "average_volume": 1579.35,
+      "liquidity_assessment": "Adequate",
+      "score": 0,
+      "note": "Liquidity appears adequate for normal trading"
+    },
+    "crowding_analysis": {
+      "oi_available": false,
+      "crowding_assessment": "Requires exchange OI data",
+      "percentile": "N/A",
+      "score": 0,
+      "note": "Full crowding analysis requires COT/exchange OI data"
+    },
+    "sources": [
+      "Yahoo Finance",
+      "Exchange Data"
+    ]
+  },
+  "sources": [
+    "Yahoo Finance",
+    "Exchange Data"
+  ],
+  "debate_outcome": "accepted",
+  "debate_rounds": 2
+}

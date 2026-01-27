@@ -1,0 +1,78 @@
+{
+  "module": "tm_pos",
+  "commodity": "copper",
+  "timestamp": "2026-01-27T11:30:27.761815",
+  "score": 0.1,
+  "confidence": 0.95,
+  "interpretation": "Neutral",
+  "summary": "Positioning: NEUTRAL. Spec assessment: Flat positioning. Contrarian signal: Weak (None).",
+  "analysis": {
+    "score": 0.1,
+    "summary": "Positioning: NEUTRAL. Spec assessment: Flat positioning. Contrarian signal: Weak (None).",
+    "cot_analysis": {
+      "data_source": "CFTC Disaggregated Futures",
+      "report_date": "Unknown",
+      "data_status": "Live data from CFTC",
+      "categories_tracked": [
+        "Commercial hedgers",
+        "Swap dealers",
+        "Managed money (specs)",
+        "Other reportables"
+      ],
+      "managed_money_net": 0,
+      "producer_net": 0,
+      "swap_dealer_net": 0,
+      "open_interest": 0,
+      "historical_weeks": 1
+    },
+    "spec_positioning": {
+      "category": "Managed Money",
+      "net_position": 0,
+      "position_change": 0,
+      "percentile_52w": null,
+      "long_contracts": 0,
+      "short_contracts": 0,
+      "assessment": "Flat positioning",
+      "score": 0
+    },
+    "cta_positioning": {
+      "methodology": "Trend-following model estimate",
+      "estimated_position": "Long",
+      "confidence": "High",
+      "factors_considered": [
+        "Price vs 20-day MA: Above",
+        "Price vs 50-day MA: Above",
+        "Price vs 200-day MA: Above"
+      ],
+      "bullish_signals": 3,
+      "bearish_signals": 0,
+      "score": 0.3
+    },
+    "crowding_analysis": {
+      "crowding_level": "Unknown",
+      "percentile": null,
+      "open_interest": 0,
+      "risk_assessment": "Unable to assess",
+      "score": 0,
+      "interpretation": "Percentile data unavailable"
+    },
+    "contrarian_signals": {
+      "signal_strength": "Weak",
+      "direction": "None",
+      "percentile_trigger": null,
+      "score": 0,
+      "rationale": "Insufficient data for contrarian signals"
+    },
+    "sources": [
+      "CFTC COT Reports",
+      "CTA Positioning Estimates"
+    ],
+    "data_available": true
+  },
+  "sources": [
+    "CFTC COT Reports",
+    "CTA Positioning Estimates"
+  ],
+  "debate_outcome": "accepted",
+  "debate_rounds": 2
+}

@@ -1,0 +1,114 @@
+{
+  "module": "tm_news",
+  "commodity": "aluminum",
+  "timestamp": "2026-01-22T14:09:21.737515",
+  "score": 0.3,
+  "confidence": 0.95,
+  "interpretation": "Neutral",
+  "summary": "News & Policy outlook: NEUTRAL. Policy environment China capacity controls and green policies limit supply growth. Supply news: Supply-side constraints provide support but no acute shortage.",
+  "analysis": {
+    "score": 0.3,
+    "summary": "News & Policy outlook: NEUTRAL. Policy environment China capacity controls and green policies limit supply growth. Supply news: Supply-side constraints provide support but no acute shortage.",
+    "policy_analysis": {
+      "category": "Policy & Regulation",
+      "key_themes": [
+        "China aluminum policy",
+        "aluminum tariffs",
+        "carbon border adjustment",
+        "green aluminum",
+        "Section 232"
+      ],
+      "current_focus": [
+        "China capacity controls remain in place",
+        "EU CBAM implementation progressing",
+        "US tariff policy under review"
+      ],
+      "score": 0.5,
+      "rationale": "China capacity controls and green policies limit supply growth",
+      "severity": "medium"
+    },
+    "supply_news": {
+      "category": "Supply Developments",
+      "monitoring": [
+        "smelter curtailment",
+        "aluminum production cut",
+        "power shortage China",
+        "alumina supply"
+      ],
+      "recent_developments": [
+        "Chinese smelter margins tight",
+        "European energy costs elevated",
+        "Alumina market remains tight"
+      ],
+      "score": 0.5,
+      "rationale": "Supply-side constraints provide support but no acute shortage",
+      "severity": "medium"
+    },
+    "demand_news": {
+      "category": "Demand Developments",
+      "monitoring": [
+        "EV demand aluminum",
+        "construction demand",
+        "packaging demand",
+        "automotive aluminum"
+      ],
+      "recent_developments": [
+        "EV sector growth supportive",
+        "Construction sector mixed",
+        "Packaging demand steady"
+      ],
+      "score": 0,
+      "rationale": "Demand growth moderate; EV positive offset by construction weakness",
+      "severity": "low"
+    },
+    "geopolitical": {
+      "category": "Geopolitical",
+      "key_regions": [
+        "China",
+        "Europe",
+        "USA",
+        "Russia"
+      ],
+      "risk_factors": [
+        "US-China trade relations",
+        "Russia sanctions impact",
+        "Energy security concerns"
+      ],
+      "score": 0,
+      "rationale": "Geopolitical risks present but currently contained",
+      "severity": "medium"
+    },
+    "key_events": [
+      {
+        "event": "China NPC/CPPCC",
+        "timing": "March",
+        "impact": "Policy signals"
+      },
+      {
+        "event": "Fed meetings",
+        "timing": "Ongoing",
+        "impact": "USD/risk appetite"
+      },
+      {
+        "event": "LME Week",
+        "timing": "October",
+        "impact": "Industry outlook"
+      }
+    ],
+    "sources": [
+      "Google News RSS",
+      "Reuters Commodities",
+      "Bloomberg Commodities",
+      "Metal Bulletin"
+    ],
+    "news_count": 3
+  },
+  "sources": [
+    "Google News RSS",
+    "Reuters Commodities",
+    "Bloomberg Commodities",
+    "Metal Bulletin"
+  ],
+  "debate_outcome": "accepted",
+  "debate_rounds": 2
+}

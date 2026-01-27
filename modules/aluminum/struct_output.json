@@ -1,0 +1,50 @@
+{
+  "module": "tm_struct",
+  "commodity": "aluminum",
+  "timestamp": "2026-01-22T14:09:21.739508",
+  "score": 0.1,
+  "confidence": 0.95,
+  "interpretation": "Neutral",
+  "summary": "Market Structure: NEUTRAL. Volume trend: Below average. Attention: High (volume spike detected).",
+  "analysis": {
+    "score": 0.1,
+    "summary": "Market Structure: NEUTRAL. Volume trend: Below average. Attention: High (volume spike detected).",
+    "volume_analysis": {
+      "avg_5d_volume": 16.6,
+      "avg_20d_volume": 26.85,
+      "volume_ratio": 0.62,
+      "trend": "Below average",
+      "score": -0.25,
+      "interpretation": "5-day volume 61.8% of 20-day average"
+    },
+    "attention_analysis": {
+      "attention_level": "High (volume spike detected)",
+      "volume_spike_ratio": 2.06,
+      "score": 0.5,
+      "interpretation": "Market attention based on volume patterns"
+    },
+    "liquidity_analysis": {
+      "average_volume": 17.416666666666668,
+      "liquidity_assessment": "Adequate",
+      "score": 0,
+      "note": "Liquidity appears adequate for normal trading"
+    },
+    "crowding_analysis": {
+      "oi_available": false,
+      "crowding_assessment": "Requires exchange OI data",
+      "percentile": "N/A",
+      "score": 0,
+      "note": "Full crowding analysis requires COT/exchange OI data"
+    },
+    "sources": [
+      "Yahoo Finance",
+      "Exchange Data"
+    ]
+  },
+  "sources": [
+    "Yahoo Finance",
+    "Exchange Data"
+  ],
+  "debate_outcome": "accepted",
+  "debate_rounds": 2
+}

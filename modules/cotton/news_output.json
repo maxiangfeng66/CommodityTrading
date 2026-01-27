@@ -1,0 +1,247 @@
+{
+  "module": "TM-NEWS",
+  "commodity": "ICE Cotton No.2",
+  "timestamp": "2026-01-22",
+  "score": 1.0,
+  "outlook": "neutral",
+  "confidence": "medium",
+  "key_events": [
+    {
+      "date": "2026-01-10",
+      "event": "USDA January WASDE Report - US production lowered 2% to 13.9M bales, ending stocks down 7% to 4.2M bales",
+      "impact": "bullish",
+      "severity": 4
+    },
+    {
+      "date": "2026-01-08",
+      "event": "Strong US cotton export sales rebound - renewed short-term demand",
+      "impact": "bullish",
+      "severity": 3
+    },
+    {
+      "date": "2026-01-06",
+      "event": "Cotton futures hit 8-week high at 65.76 cents/lb on supply concerns and oil volatility",
+      "impact": "bullish",
+      "severity": 3
+    },
+    {
+      "date": "2026-01-16",
+      "event": "AmCham China survey shows 79% neutral/positive outlook for US-China relations - 30 point improvement",
+      "impact": "bullish",
+      "severity": 3
+    },
+    {
+      "date": "2025-12-08",
+      "event": "Trump Administration announces $12B farmer bridge payments for trade-impacted farmers",
+      "impact": "neutral",
+      "severity": 2
+    },
+    {
+      "date": "2025-12-31",
+      "event": "Brazil records highest ever cotton exports in December 2024, now world's #1 exporter",
+      "impact": "bearish",
+      "severity": 4
+    },
+    {
+      "date": "2026-01-01",
+      "event": "OBBBA extends marketing assistance loan programs through 2031 with updated loan rates for 2026 crop year",
+      "impact": "bullish",
+      "severity": 2
+    },
+    {
+      "date": "2025-10-01",
+      "event": "India raises cotton MSP by 7-8% for 2025-26 season - above market expectations",
+      "impact": "mixed",
+      "severity": 3
+    }
+  ],
+  "policy_assessment": {
+    "us_domestic_policy": {
+      "status": "supportive",
+      "details": "OBBBA extended marketing assistance loans through 2031, updated loan rates for 2026 crop. Subsidies projected at $61M in 2026, down from $89M in 2025. Farm bridge payments ($12B) announced for trade-impacted farmers.",
+      "impact_score": 1
+    },
+    "us_china_trade": {
+      "status": "improving",
+      "details": "China suspended retaliatory tariffs (15% on cotton). Phase Two deal includes tariff reductions on agricultural products. AmCham survey shows 79% positive/neutral outlook for bilateral relations. However, US cotton faces 26-65% tariffs in China depending on quota.",
+      "impact_score": 1
+    },
+    "india_policy": {
+      "status": "mixed",
+      "details": "India raised MSP 7-8% to Rs 8,110/quintal for long-staple cotton. Extended duty-free imports until Dec 2025. Production down 3% to 23.8M bales due to uneven monsoon. CCI procured 31.19 lakh bales under MSP operations.",
+      "impact_score": 0
+    },
+    "brazil_competition": {
+      "status": "challenging",
+      "details": "Brazil surpassed US as world's #1 cotton exporter in 2024. MY 2025/26 exports projected at 14.1M bales (+8% YoY). Record production of 18.75M bales. Weak Real currency boosting export competitiveness.",
+      "impact_score": -2
+    }
+  },
+  "analysis": {
+    "news_sentiment": "Mildly bullish on supply tightness, tempered by global oversupply concerns and strong Brazilian competition",
+    "key_themes": [
+      "US supply tightening (production -2%, stocks -7%) supporting prices near-term",
+      "Strong but inconsistent export demand - sales rebounded but lag prior year by 15%",
+      "US-China trade relations improving with tariff suspensions benefiting ag exports",
+      "Brazil emerging as dominant global exporter, capturing market share from US",
+      "Dollar weakness providing modest export competitiveness boost",
+      "Global oversupply theme persists - 119M bale crop exceeds mill use",
+      "Weather risks in US Southwest (drought) and India (monsoon variability)"
+    ],
+    "upside_risks": [
+      "Major weather disruption in top producing regions (US/Brazil drought, India monsoon failure)",
+      "Further US-China trade normalization boosting demand for US cotton",
+      "Continued dollar weakness enhancing US export competitiveness",
+      "India export restrictions to protect domestic supply",
+      "Chinese internal cotton prices rising, signaling new import demand"
+    ],
+    "downside_risks": [
+      "Global economic slowdown reducing textile/apparel demand",
+      "Brazil's continued production expansion and weak Real currency",
+      "Resumption of US-China trade tensions",
+      "Strong dollar reversing export competitiveness gains",
+      "Australia returning to normal production levels",
+      "Weak mill demand persisting in key importing countries"
+    ]
+  },
+  "debate_log": {
+    "round_1": {
+      "sup_a_role": "Logic Challenger",
+      "tm_news_initial_score": 1.5,
+      "sup_a_challenge": {
+        "point_1": "The bullish thesis relies heavily on US supply tightening, but this ignores the global context. Global production (119M bales) still exceeds mill use, and ending stocks are rising globally. How can US-specific tightness support prices when substitution from Brazil/Australia is readily available?",
+        "point_2": "Export sales 'rebounding' in one week is insufficient evidence of sustained demand. Year-to-date export commitments remain 15% below last year. One strong week does not establish a trend.",
+        "point_3": "The US-China trade improvement may be overstated. While retaliatory tariffs were suspended, US cotton still faces 26-65% tariffs in China depending on quota. The structural barriers remain significant.",
+        "point_4": "Brazil has now overtaken the US as the world's top cotton exporter with a weak currency advantage. This competitive pressure is structural, not temporary."
+      },
+      "tm_news_response": {
+        "point_1_rebuttal": "Valid concern. However, the USDA report specifically noted global ending stocks declined 1.5M bales with stocks-to-use ratio below 63%. While global supply exceeds demand, the tightening trajectory matters for price direction. The score reflects this nuance.",
+        "point_2_rebuttal": "Agreed. The export data is mixed. I am adjusting weight given to this factor. The rebound shows demand exists but consistency is lacking.",
+        "point_3_rebuttal": "Partially valid. The sentiment improvement (79% positive/neutral in AmCham survey) represents directional change even if structural barriers persist. The Phase Two deal framework provides a pathway for further reductions.",
+        "point_4_rebuttal": "Accepted. Brazil's structural advantage with record production and weak Real is a significant medium-term bearish factor that I may have underweighted.",
+        "score_adjustment": "Reducing initial score from +1.5 to +1.0 to account for global oversupply context and Brazil competitive pressure"
+      }
+    },
+    "round_2": {
+      "sup_b_role": "Data Validator",
+      "sup_b_verification": {
+        "source_assessment": [
+          {
+            "source": "USDA WASDE January 2026",
+            "credibility": "high",
+            "verification": "Official government data. US production 13.9M bales, ending stocks 4.2M bales confirmed across multiple sources"
+          },
+          {
+            "source": "Bloomberg",
+            "credibility": "high",
+            "verification": "Cotton hit 8-week high at 65.76 cents/lb on Jan 6, 2026 confirmed"
+          },
+          {
+            "source": "USDA FAS Cotton Circulars",
+            "credibility": "high",
+            "verification": "Brazil production 18.75M bales, exports 14.1M bales projections verified"
+          },
+          {
+            "source": "Trading Economics",
+            "credibility": "medium-high",
+            "verification": "Current price data (64.65 cents/lb) cross-referenced with ICE data"
+          },
+          {
+            "source": "AmCham China Survey",
+            "credibility": "medium-high",
+            "verification": "79% positive/neutral outlook figure from official AmCham release Jan 16, 2026"
+          },
+          {
+            "source": "Fibre2Fashion",
+            "credibility": "medium",
+            "verification": "Trade news aggregator - data points cross-verified with primary sources"
+          }
+        ],
+        "data_gaps_identified": [
+          "Limited granular data on weekly Chinese import demand patterns",
+          "Uncertainty on exact timing and implementation of Phase Two tariff reductions",
+          "Weather forecast confidence decreases beyond 2-week horizon"
+        ],
+        "recommendation": "Data quality is sufficient for medium confidence assessment. Primary sources (USDA, Bloomberg) are highly reliable. Score of +1.0 is supportable given verified supply data, though confidence should remain medium due to identified data gaps."
+      },
+      "tm_news_final_adjustment": {
+        "pre_validation_score": 1.0,
+        "post_validation_score": 1.0,
+        "rationale": "Data validation confirms key bullish factors (US supply tightening) and bearish factors (Brazil competition, global oversupply) are based on credible sources. Maintaining score at +1.0 with medium confidence is appropriate given the balanced picture and identified data gaps.",
+        "confidence_level": "medium"
+      }
+    }
+  },
+  "sources": [
+    {
+      "name": "ICE Cotton No.2 Futures",
+      "url": "https://www.ice.com/products/254/Cotton-No-2-Futures/data",
+      "type": "exchange"
+    },
+    {
+      "name": "Bloomberg - Cotton Hits Eight-Week High",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-06/cotton-hits-eight-week-high-on-caution-over-supplies-oil-prices",
+      "type": "news"
+    },
+    {
+      "name": "USDA Cotton and Wool Outlook December 2025",
+      "url": "https://ers.usda.gov/sites/default/files/_laserfiche/outlooks/113563/CWS-25k.pdf",
+      "type": "government_report"
+    },
+    {
+      "name": "USDA FAS Cotton World Markets and Trade",
+      "url": "https://apps.fas.usda.gov/psdonline/circulars/cotton.pdf",
+      "type": "government_report"
+    },
+    {
+      "name": "Trading Economics - Cotton Price",
+      "url": "https://tradingeconomics.com/commodity/cotton",
+      "type": "market_data"
+    },
+    {
+      "name": "Cotton Incorporated Monthly Economic Letter January 2026",
+      "url": "https://lifestylemonitor.cottoninc.com/monthly-economic-letter-january-2026/",
+      "type": "industry_report"
+    },
+    {
+      "name": "Fibre2Fashion - ICE Cotton Market Updates",
+      "url": "https://www.fibre2fashion.com/news/textile-news/ice-cotton-closes-lower-as-strong-dollar-demand-worries-weigh-307746-newsdetails.htm",
+      "type": "trade_news"
+    },
+    {
+      "name": "China Briefing - US-China Relations 2026",
+      "url": "https://www.china-briefing.com/news/us-china-relations-in-2026-what-to-watch/",
+      "type": "analysis"
+    },
+    {
+      "name": "Farm Progress - Cotton Price Challenges 2026",
+      "url": "https://www.farmprogress.com/commentary/how-to-navigate-cotton-s-price-challenges-in-2026",
+      "type": "industry_analysis"
+    },
+    {
+      "name": "USDA FAS - Brazil Cotton Update",
+      "url": "https://www.fas.usda.gov/data/brazil-cotton-and-products-update-19",
+      "type": "government_report"
+    },
+    {
+      "name": "USDA FAS - India Cotton Update",
+      "url": "https://www.fas.usda.gov/data/india-cotton-and-products-update-49",
+      "type": "government_report"
+    },
+    {
+      "name": "American Farm Bureau - Cotton Tariff Profile",
+      "url": "https://www.fb.org/market-intel/cotton-tariff-profile",
+      "type": "industry_analysis"
+    },
+    {
+      "name": "USDA - $12B Farmer Bridge Payments Announcement",
+      "url": "https://www.usda.gov/about-usda/news/press-releases/2025/12/08/trump-administration-announces-12-billion-farmer-bridge-payments-american-farmers-impacted-unfair",
+      "type": "government_announcement"
+    },
+    {
+      "name": "Cotton Gins - Global Cotton Outlook 2026",
+      "url": "https://cottongins.org/blog/global-cotton-outlook-2026/",
+      "type": "industry_analysis"
+    }
+  ]
+}

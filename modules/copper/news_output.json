@@ -1,0 +1,90 @@
+{
+  "module": "tm_news",
+  "commodity": "copper",
+  "timestamp": "2026-01-27T11:30:29.646676",
+  "score": 0.7,
+  "confidence": 0.95,
+  "interpretation": "Neutral",
+  "summary": "News & Policy outlook: BULLISH (based on 20 news items). Policy: 2 news items found; sentiment neutral. Supply: 3 news items found; sentiment bullish.",
+  "analysis": {
+    "score": 0.7,
+    "summary": "News & Policy outlook: BULLISH (based on 20 news items). Policy: 2 news items found; sentiment neutral. Supply: 3 news items found; sentiment bullish.",
+    "policy_analysis": {
+      "category": "Policy & Regulation",
+      "count": 2,
+      "score": 0,
+      "rationale": "2 news items found; sentiment neutral",
+      "severity": "medium",
+      "headlines": [
+        "Comex copper plunges as Trump\u2019s tariff excludes refined metal - ING THINK economic and financial ana",
+        "Gold prices marginally up; Comex copper soars on Trump\u2019s 50% tariffs - Investing.com"
+      ],
+      "bullish_signals": 0,
+      "bearish_signals": 0
+    },
+    "supply_news": {
+      "category": "Supply Developments",
+      "count": 3,
+      "score": 1.2,
+      "rationale": "3 news items found; sentiment bullish",
+      "severity": "medium",
+      "headlines": [
+        "Copper Futures Rise on Weak Dollar, Tight Supply - Rediff MoneyWiz",
+        "Copper on pace for best year since 2009 as AI demand, supply fears fuel record price rally - CNBC",
+        "Five Copper Miners Leading the Commodity Rally as Producers Post Explosive Monthly Returns - Yahoo F"
+      ],
+      "bullish_signals": 4,
+      "bearish_signals": 1
+    },
+    "demand_news": {
+      "category": "Demand Developments",
+      "count": 7,
+      "score": 1.2,
+      "rationale": "7 news items found; sentiment bullish",
+      "severity": "high",
+      "headlines": [
+        "Copper futures might moderate - BusinessLine",
+        "Copper Futures Rise on Weak Dollar, Tight Supply - Rediff MoneyWiz",
+        "Hedging with COMEX Copper Futures - CME Group"
+      ],
+      "bullish_signals": 4,
+      "bearish_signals": 1
+    },
+    "geopolitical": {
+      "category": "Geopolitical",
+      "key_regions": [
+        "China",
+        "Chile",
+        "Peru",
+        "DRC",
+        "USA"
+      ],
+      "risk_factors": [],
+      "count": 0,
+      "score": 0,
+      "rationale": "No major geopolitical risks detected",
+      "severity": "low"
+    },
+    "key_events": [],
+    "sources": [
+      "Google News (copper)",
+      "Google News (COMEX copper)",
+      "Google News (copper futures)"
+    ],
+    "news_count": 20,
+    "recent_headlines": [
+      "Copper futures might moderate - BusinessLine",
+      "Comex copper plunges as Trump\u2019s tariff excludes refined metal - ING THINK economic and financial analysis | ING THINK",
+      "Chinese Tycoon Bian Ximing Makes Massive $1 Billion Bet on Copper Futures - Investing News Network",
+      "Copper futures: Correction in the cards - BusinessLine",
+      "Copper Futures Rise on Weak Dollar, Tight Supply - Rediff MoneyWiz"
+    ]
+  },
+  "sources": [
+    "Google News (copper)",
+    "Google News (COMEX copper)",
+    "Google News (copper futures)"
+  ],
+  "debate_outcome": "accepted",
+  "debate_rounds": 2
+}

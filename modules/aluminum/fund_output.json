@@ -1,0 +1,72 @@
+{
+  "module": "tm_fund",
+  "commodity": "aluminum",
+  "timestamp": "2026-01-22T14:09:21.736518",
+  "score": -0.5,
+  "confidence": 0.95,
+  "interpretation": "Neutral",
+  "summary": "Fundamental outlook: NEUTRAL. Supply/demand balance shows Slight surplus expected. Inventory levels Inventory levels remain comfortable, limiting upside.",
+  "analysis": {
+    "score": -0.5,
+    "summary": "Fundamental outlook: NEUTRAL. Supply/demand balance shows Slight surplus expected. Inventory levels Inventory levels remain comfortable, limiting upside.",
+    "supply_demand": {
+      "global_production": 70000000,
+      "top_producers": [
+        "China (58%)",
+        "India (6%)",
+        "Russia (5%)",
+        "Canada (4%)"
+      ],
+      "demand_outlook": "Moderate growth expected",
+      "balance": "Slight surplus expected",
+      "score": -0.5,
+      "rationale": "Global aluminum market in slight surplus; China production remains elevated"
+    },
+    "inventory_analysis": {
+      "lme_stocks_trend": "Monitoring required",
+      "exchange_inventory": "Data from LME/SHFE needed",
+      "hidden_stocks": "China social inventory elevated",
+      "score": -0.5,
+      "rationale": "Inventory levels remain comfortable, limiting upside"
+    },
+    "seasonal_analysis": {
+      "current_quarter": "Q1",
+      "seasonal_factor": "Weak (post-holiday)",
+      "historical_pattern": {
+        "Q1": "Weak (post-holiday)",
+        "Q2": "Construction pickup",
+        "Q3": "Peak demand",
+        "Q4": "Pre-holiday restocking"
+      },
+      "score": -1,
+      "rationale": "Current quarter (Q1): Weak (post-holiday)"
+    },
+    "cost_analysis": {
+      "key_drivers": [
+        "Electricity (30-40% of cost)",
+        "Alumina",
+        "Carbon anodes"
+      ],
+      "electricity_outlook": "Energy prices volatile",
+      "alumina_market": "Tight supply in some regions",
+      "marginal_cost_support": "~$2,000-2,200/MT estimated",
+      "score": 0,
+      "rationale": "Production costs provide price floor support"
+    },
+    "sources": [
+      "International Aluminium Institute (IAI)",
+      "World Bureau of Metal Statistics",
+      "LME Warehouse Data",
+      "China Customs Data"
+    ],
+    "data_quality": "medium"
+  },
+  "sources": [
+    "International Aluminium Institute (IAI)",
+    "World Bureau of Metal Statistics",
+    "LME Warehouse Data",
+    "China Customs Data"
+  ],
+  "debate_outcome": "accepted",
+  "debate_rounds": 2
+}

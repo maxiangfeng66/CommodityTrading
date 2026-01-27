@@ -1,0 +1,58 @@
+{
+  "module": "tm_views",
+  "commodity": "aluminum",
+  "timestamp": "2026-01-22T14:09:21.737515",
+  "score": -0.2,
+  "confidence": 0.95,
+  "interpretation": "Neutral",
+  "summary": "Market Views: NEUTRAL. Consensus is Cautiously bearish. Logic assessment: Market logic appears sound; both bull and bear cases have merit.",
+  "analysis": {
+    "score": -0.2,
+    "summary": "Market Views: NEUTRAL. Consensus is Cautiously bearish. Logic assessment: Market logic appears sound; both bull and bear cases have merit.",
+    "consensus_assessment": {
+      "consensus_sentiment": "Cautiously bearish",
+      "score": -0.5,
+      "key_themes": [
+        "China demand uncertainty",
+        "Elevated global stocks",
+        "Cost support limited"
+      ],
+      "rationale": "Market consensus is Cautiously bearish"
+    },
+    "logic_soundness": {
+      "bull_case_strength": 3,
+      "bear_case_strength": 3,
+      "logic_sound": true,
+      "score": 0,
+      "assessment": "Market logic appears sound; both bull and bear cases have merit",
+      "risk": "Consensus may be overconfident in bear case"
+    },
+    "contrarian_assessment": {
+      "contrarian_signal": "Weak",
+      "sentiment_at_extreme": false,
+      "crowded_trade_risk": "Shorts may be building",
+      "score": 0,
+      "rationale": "No extreme sentiment; limited contrarian opportunity"
+    },
+    "analyst_summary": {
+      "average_forecast": "Neutral to slightly bearish",
+      "forecast_range": "Wide dispersion",
+      "revision_trend": "Recent downgrades",
+      "confidence": "Medium"
+    },
+    "sources": [
+      "Bank Research Reports",
+      "Broker Forecasts",
+      "Industry Commentary",
+      "Market Sentiment Surveys"
+    ]
+  },
+  "sources": [
+    "Bank Research Reports",
+    "Broker Forecasts",
+    "Industry Commentary",
+    "Market Sentiment Surveys"
+  ],
+  "debate_outcome": "accepted",
+  "debate_rounds": 2
+}

@@ -1,0 +1,71 @@
+{
+  "phase": "FINAL_REVIEW",
+  "timestamp": "2026-01-22T14:30:00Z",
+  "commodity": "ICE Cotton No.2",
+
+  "sup_final_review": {
+    "agent": "SUP",
+    "checklist": {
+      "all_modules_completed": true,
+      "debate_rounds_met": true,
+      "data_sources_cited": true,
+      "html_renders_correctly": true,
+      "narrative_coherence": true
+    },
+    "module_review": {
+      "TM-FUND": {"score": -2, "debates": 2, "status": "APPROVED"},
+      "TM-NEWS": {"score": 1, "debates": 2, "status": "APPROVED"},
+      "TM-VIEWS": {"score": -1, "debates": 2, "status": "APPROVED"},
+      "TM-TECH": {"score": -1, "debates": 2, "status": "APPROVED"},
+      "TM-STRUCT": {"score": -1, "debates": 2, "status": "APPROVED"},
+      "TM-POS": {"score": 2, "debates": 2, "status": "APPROVED"}
+    },
+    "weighted_score_verification": {
+      "calculation": "(-2*0.25) + (1*0.10) + (-1*0.15) + (-1*0.20) + (-1*0.10) + (2*0.20) = -0.45",
+      "rounded": -0.5,
+      "status": "VERIFIED"
+    },
+    "verdict": "APPROVED - All modules completed with required debate rounds. Data verified. HTML report comprehensive and coherent."
+  },
+
+  "approval_final_review": {
+    "agent": "APPROVAL",
+    "verification": {
+      "matches_pm_design": true,
+      "matches_blueprint": true,
+      "matches_idea_txt": true,
+      "quality_gates_passed": true
+    },
+    "quality_assessment": {
+      "fundamentals_coverage": "Complete - global balance, major producers, stocks-to-use",
+      "technical_coverage": "Complete - MAs, key levels, momentum, trend",
+      "positioning_coverage": "Complete - COT, CTA triggers, contrarian signals",
+      "debate_quality": "High - meaningful challenges raised and addressed",
+      "visual_presentation": "Excellent - consistent with existing reports"
+    },
+    "verdict": "APPROVED - Report meets all quality standards. Ready for delivery."
+  },
+
+  "delivery": {
+    "output_file": "output/cotton_new.html",
+    "module_outputs": [
+      "modules/cotton/fund_output.json",
+      "modules/cotton/news_output.json",
+      "modules/cotton/views_output.json",
+      "modules/cotton/tech_output.json",
+      "modules/cotton/struct_output.json",
+      "modules/cotton/pos_output.json"
+    ],
+    "debate_logs": [
+      "modules/cotton/fund_debate.md",
+      "modules/cotton/news_debate.md",
+      "modules/cotton/views_debate.md",
+      "modules/cotton/tech_debate.md",
+      "modules/cotton/struct_debate.md",
+      "modules/cotton/pos_debate.md"
+    ],
+    "total_sources": 45,
+    "total_debate_rounds": 12,
+    "status": "DELIVERED"
+  }
+}

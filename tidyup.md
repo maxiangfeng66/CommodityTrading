@@ -4,10 +4,11 @@
 
 ```
 CommodityTrading/
-├── blueprint.md          # Architecture documentation (KEEP)
+├── brain/               # Core design documents
+│   ├── blueprint.md     # Architecture documentation (KEEP)
+│   └── Idea.txt         # Vision document (KEEP)
 ├── log.md               # Session logs (KEEP)
 ├── tidyup.md            # This file (KEEP)
-├── design.txt           # Original requirements (KEEP)
 │
 ├── data/                # Raw data storage
 │   ├── raw/            # Unprocessed fetched data
@@ -39,10 +40,10 @@ CommodityTrading/
 ## File Lifecycle Rules
 
 ### Permanent Files (Never Delete)
-- `blueprint.md` - Core architecture
-- `design.txt` - Original requirements
+- `brain/blueprint.md` - Core architecture
+- `brain/Idea.txt` - Vision document
 - `tidyup.md` - This rulebook
-- `output/report.html` - Final deliverable (latest version)
+- `output/[commodity].html` - Final deliverables (latest versions)
 
 ### Session Files (Archive after session)
 - `log.md` - Move to archive after session complete
@@ -94,8 +95,8 @@ CommodityTrading/
 - Any `.md` file not in archive/
 
 ### Never Delete Automatically
-- `blueprint.md`
-- `design.txt`
+- `brain/blueprint.md`
+- `brain/Idea.txt`
 - `tidyup.md`
 - Files in `archive/`
 

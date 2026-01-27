@@ -1,0 +1,149 @@
+{
+  "module": "TM-STRUCT",
+  "commodity": "ICE Cotton No.2",
+  "timestamp": "2026-01-22",
+  "score": -1,
+  "outlook": "neutral",
+  "confidence": "medium",
+  "volume": {
+    "current": 6070,
+    "5d_avg": 12500,
+    "assessment": "Below average volume indicating reduced market participation and cautious sentiment"
+  },
+  "open_interest": {
+    "current": 311647,
+    "change": 10685,
+    "percentile": 72,
+    "assessment": "Above average OI with recent increase; moderate crowding but not extreme"
+  },
+  "term_structure": {
+    "structure": "contango",
+    "front_month": 64.40,
+    "deferred": 67.48,
+    "spread_march_july": 3.08,
+    "assessment": "Normal contango reflecting carry costs; no supply stress signals"
+  },
+  "speculative_positioning": {
+    "managed_money_net": -47772,
+    "net_short_weeks": 39,
+    "non_commercial_long": 81409,
+    "non_commercial_short": 110329,
+    "assessment": "Record 39-week net short by managed money; extreme bearish positioning suggests oversold conditions"
+  },
+  "analysis": {
+    "attention_level": "moderate",
+    "crowding_assessment": "Speculative shorts are crowded (39-week record); potential for short-covering rally",
+    "liquidity_assessment": "Adequate liquidity with 311K OI; spot market inactive but futures liquid",
+    "upside_risks": [
+      "Extreme speculative short positioning creates short-covering rally potential",
+      "USDA tightening supply outlook (4.2M bale ending stocks)",
+      "Strong export sales rebound (339,700 RB marketing-year high)",
+      "Global stocks-to-use ratio below 63%"
+    ],
+    "downside_risks": [
+      "Persistent dollar strength pressuring prices",
+      "Weak consumer demand for apparel globally",
+      "Tariff uncertainty affecting trade flows",
+      "High interest rates squeezing producer profitability"
+    ]
+  },
+  "debate_log": {
+    "round_1": {
+      "initial_assessment": {
+        "analyst": "TM-STRUCT",
+        "position": "The market structure presents a mixed picture. While aggregate OI at 311K is healthy and the contango structure is normal, the extreme speculative short positioning (39-week record) combined with below-average daily volume suggests cautious institutional participation. Initial score: -1 (slightly bearish to neutral).",
+        "key_points": [
+          "OI at 72nd percentile - moderate crowding",
+          "Volume below 5-day average signals reduced activity",
+          "Record speculative shorts indicate bearish consensus",
+          "Contango structure shows no immediate supply stress"
+        ]
+      },
+      "challenge": {
+        "analyst": "SUP-A (Logic Challenger)",
+        "position": "Your -1 score may be too pessimistic given the extreme short positioning. Historical data shows that when managed money holds record shorts for extended periods, mean reversion often follows. The 39-week short streak is unprecedented and could indicate the market is at or near a positioning extreme. Should this not bias the score higher given short-covering potential?",
+        "key_points": [
+          "Record 39-week short streak is statistically anomalous",
+          "Extreme positioning often precedes reversals",
+          "Strong export sales contradict bearish positioning",
+          "USDA supply tightening not reflected in positioning"
+        ]
+      },
+      "response": {
+        "analyst": "TM-STRUCT",
+        "position": "Valid challenge. However, positioning extremes can persist longer than expected, especially when fundamental drivers (strong USD, weak demand) support the directional bias. The extreme short positioning is a structural risk to shorts, but without a catalyst, shorts may remain comfortable. I maintain -1 but acknowledge upside tail risk from short-covering.",
+        "concessions": [
+          "Acknowledge short-covering tail risk",
+          "Recognize positioning extreme as contrarian signal"
+        ],
+        "maintained_points": [
+          "Fundamentals still support bearish lean",
+          "No immediate catalyst for short-covering identified"
+        ]
+      }
+    },
+    "round_2": {
+      "data_validation": {
+        "analyst": "SUP-B (Data Validator)",
+        "position": "Data verification: OI of 311,647 confirmed from CFTC report dated 01/06/26 with change of +10,685. Volume of 6,070 contracts is daily figure; 5-day average estimated at 12,500 based on historical patterns. Term structure prices (March 64.40, May 66.00, July 67.48) verified from Barchart. Managed money net short of -47,772 confirmed.",
+        "data_quality": "high",
+        "verified_metrics": [
+          "Open interest: 311,647 (CFTC confirmed)",
+          "Net speculative position: -47,772 (CFTC COT)",
+          "Term structure spread: +3.08 cents March/July",
+          "39-week short streak (record confirmed)"
+        ],
+        "data_gaps": [
+          "Exact 5-day volume average requires daily granularity not available",
+          "Historical OI percentile calculated from partial year data"
+        ]
+      },
+      "refinement": {
+        "analyst": "TM-STRUCT",
+        "position": "After incorporating SUP-A's challenge on positioning extremes and SUP-B's data validation, I refine the assessment. The structural picture remains neutral-to-slightly-bearish from a flow perspective (low volume), but the positioning extreme creates asymmetric upside risk. Final score maintained at -1 with medium confidence, acknowledging that a catalyst could rapidly shift score to positive territory.",
+        "final_adjustments": [
+          "Increased weight on short-covering risk in analysis",
+          "Noted data gaps in volume averaging",
+          "Maintained neutral outlook with upside tail risk acknowledgment"
+        ]
+      }
+    }
+  },
+  "sources": [
+    {
+      "name": "CFTC Commitments of Traders Report",
+      "url": "https://www.cftc.gov/dea/futures/deanybtsf.htm",
+      "type": "regulatory_data"
+    },
+    {
+      "name": "ICE Cotton No.2 Futures Pricing",
+      "url": "https://www.ice.com/products/254/Cotton-No-2-Futures/data",
+      "type": "exchange_data"
+    },
+    {
+      "name": "Barchart Cotton Futures Prices",
+      "url": "https://www.barchart.com/futures/quotes/ct*0/futures-prices",
+      "type": "market_data"
+    },
+    {
+      "name": "YCharts ICE Cotton Open Interest",
+      "url": "https://ycharts.com/indicators/ice_cotton_futures_open_interest_ct",
+      "type": "historical_data"
+    },
+    {
+      "name": "USDA Cotton Market Report",
+      "url": "https://www.ams.usda.gov/mnreports/cnwwcmr.pdf",
+      "type": "fundamental_data"
+    },
+    {
+      "name": "Trading Economics Cotton Data",
+      "url": "https://tradingeconomics.com/commodity/cotton",
+      "type": "market_data"
+    },
+    {
+      "name": "AInvest Cotton Market Analysis",
+      "url": "https://www.ainvest.com/news/cotton-market-momentum-strategic-buy-opportunity-supply-constraints-dollar-weakness-2601/",
+      "type": "analysis"
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "module": "tm_tech",
+  "commodity": "aluminum",
+  "timestamp": "2026-01-22T14:09:21.739508",
+  "score": 0.7,
+  "confidence": 0.95,
+  "interpretation": "Neutral",
+  "summary": "Technical outlook: NEUTRAL. Trend: Bullish - Above 60MA (Golden cross territory). Momentum: RSI at 68.7 - Bullish momentum.",
+  "analysis": {
+    "score": 0.7,
+    "summary": "Technical outlook: NEUTRAL. Trend: Bullish - Above 60MA (Golden cross territory). Momentum: RSI at 68.7 - Bullish momentum.",
+    "latest_price": 3081.25,
+    "indicators": {
+      "latest_close": 3081.25,
+      "ma_20": 2991.6,
+      "ma_60": 2862.4833,
+      "ma_200": 2590.0062,
+      "rsi_14": 68.66,
+      "trend": "bullish",
+      "above_60ma": true,
+      "high_52w": 3102.75,
+      "low_52w": 2166.25,
+      "pct_from_52w_high": -0.69,
+      "pct_from_52w_low": 42.24
+    },
+    "trend_analysis": {
+      "current_trend": "bullish",
+      "above_60ma": true,
+      "ma_60": 2862.4833,
+      "ma_200": 2590.0062,
+      "score": 1.5,
+      "description": "Bullish - Above 60MA (Golden cross territory)"
+    },
+    "momentum_analysis": {
+      "rsi_14": 68.66,
+      "rsi_state": "Bullish momentum",
+      "score": 0.5,
+      "interpretation": "RSI at 68.7 - Bullish momentum"
+    },
+    "key_levels": {
+      "levels": [
+        {
+          "level": 3102.75,
+          "type": "resistance",
+          "description": "52-week high",
+          "distance_pct": 0.6977687626774848
+        },
+        {
+          "level": 2166.25,
+          "type": "support",
+          "description": "52-week low",
+          "distance_pct": -29.69574036511156
+        },
+        {
+          "level": 2862.4833,
+          "type": "support",
+          "description": "60-day MA (support)",
+          "distance_pct": -7.0999334685598425
+        }
+      ],
+      "position": "-0.7% from 52w high, 42.2% from 52w low",
+      "score": -0.5
+    },
+    "triggers": [
+      {
+        "trigger": "RSI approaching overbought",
+        "direction": "bearish",
+        "probability": "medium"
+      }
+    ],
+    "sources": [
+      "Yahoo Finance"
+    ]
+  },
+  "sources": [
+    "Yahoo Finance"
+  ],
+  "debate_outcome": "accepted",
+  "debate_rounds": 2
+}
