@@ -1,0 +1,143 @@
+{
+  "status": "running",
+  "commodity": "Copper",
+  "commodity_name": "LME Copper Futures",
+  "start_time": "2026-01-28T17:04:03.706945",
+  "last_updated": "2026-01-28T17:04:18.721984",
+  "agents": {
+    "PM": {
+      "status": "complete",
+      "task": "Coordinating analysis",
+      "tier": 1,
+      "provider": "",
+      "message": "Complete",
+      "output": "",
+      "output_length": 0,
+      "start_time": "2026-01-28T17:04:03.706945",
+      "progress": 0
+    },
+    "SUP": {
+      "status": "complete",
+      "task": "Monitoring quality",
+      "tier": 1,
+      "provider": "",
+      "message": "Complete",
+      "output": "",
+      "output_length": 0,
+      "start_time": "2026-01-28T17:04:03.706945",
+      "progress": 0
+    }
+  },
+  "connections": [],
+  "chat_log": [
+    {
+      "agent": "System",
+      "message": "Starting analysis for LME Copper Futures",
+      "level": "info",
+      "time": "17:04:03"
+    },
+    {
+      "agent": "PM",
+      "message": "Starting: Coordinating analysis",
+      "level": "info",
+      "time": "17:04:03"
+    },
+    {
+      "agent": "SUP",
+      "message": "Starting: Monitoring quality",
+      "level": "info",
+      "time": "17:04:03"
+    },
+    {
+      "agent": "fetcher_prices",
+      "message": "Spawned (by tm_tech): Fetching price history",
+      "level": "info",
+      "time": "17:04:04"
+    },
+    {
+      "agent": "fetcher_cot",
+      "message": "Spawned (by tm_pos): Fetching COT data",
+      "level": "info",
+      "time": "17:04:04"
+    },
+    {
+      "agent": "analyzer_trend",
+      "message": "Spawned (by tm_tech): Analyzing price trends",
+      "level": "info",
+      "time": "17:04:04"
+    },
+    {
+      "agent": "validator_data",
+      "message": "Spawned (by SUP): Validating all data",
+      "level": "info",
+      "time": "17:04:04"
+    },
+    {
+      "agent": "fetcher_prices",
+      "message": "Complete",
+      "level": "info",
+      "time": "17:04:16"
+    },
+    {
+      "agent": "fetcher_prices",
+      "message": "Terminated: Data fetched",
+      "level": "info",
+      "time": "17:04:17"
+    },
+    {
+      "agent": "fetcher_cot",
+      "message": "Complete",
+      "level": "info",
+      "time": "17:04:17"
+    },
+    {
+      "agent": "fetcher_cot",
+      "message": "Terminated: COT data ready",
+      "level": "info",
+      "time": "17:04:17"
+    },
+    {
+      "agent": "analyzer_trend",
+      "message": "Complete",
+      "level": "info",
+      "time": "17:04:17"
+    },
+    {
+      "agent": "analyzer_trend",
+      "message": "Terminated: Trend analyzed",
+      "level": "info",
+      "time": "17:04:18"
+    },
+    {
+      "agent": "validator_data",
+      "message": "Complete",
+      "level": "info",
+      "time": "17:04:18"
+    },
+    {
+      "agent": "validator_data",
+      "message": "Terminated: Validation passed",
+      "level": "info",
+      "time": "17:04:18"
+    },
+    {
+      "agent": "PM",
+      "message": "Complete",
+      "level": "info",
+      "time": "17:04:18"
+    },
+    {
+      "agent": "SUP",
+      "message": "Complete",
+      "level": "info",
+      "time": "17:04:18"
+    }
+  ],
+  "progress": 100,
+  "modules_done": 0,
+  "total_modules": 6,
+  "debate_rounds": 0,
+  "total_chars": 0,
+  "current_phase": "Demo Complete",
+  "error_message": ""
+}

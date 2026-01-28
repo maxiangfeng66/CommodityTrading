@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commodity Quest - Analysis Visualizer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(135deg, #0d1117 0%, #161b22 50%, #0d1117 100%);
+            color: #c9d1d9;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        /* ==================== Header ==================== */
+        .header {
+            background: linear-gradient(90deg, #238636 0%, #1f6feb 50%, #8957e5 100%);
+            padding: 12px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid #30363d;
+        }
+
+        .title {
+            font-size: 28px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            letter-spacing: 3px;
+        }
+
+        .title span {
+            color: #ffd700;
+        }
+
+        .header-info {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .commodity-badge {
+            background: rgba(0,0,0,0.3);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #ffd700;
+            border: 2px solid #ffd700;
+        }
+
+        .timer {
+            font-size: 20px;
+            font-family: 'Courier New', monospace;
+            color: #7ee787;
+        }
+
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        .status-dot.idle { background: #6e7681; }
+        .status-dot.running { background: #ffd700; animation: pulse 1s infinite; }
+        .status-dot.complete { background: #238636; }
+        .status-dot.error { background: #f85149; animation: pulse 0.5s infinite; }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.2); }
+        }
+
+        /* ==================== Main Layout ==================== */
+        .main-container {
+            display: flex;
+            height: calc(100vh - 70px);
+        }
+
+        .flowchart {
+            flex: 1;
+            padding: 20px;
+            position: relative;
+            overflow: auto;
+        }
+
+        .sidebar {
+            width: 320px;
+            background: #161b22;
+            border-left: 2px solid #30363d;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ==================== Agent Nodes ==================== */
+        .agent-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .tier {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .tier-label {
+            width: 100%;
+            text-align: center;
+            color: #8b949e;
+            font-size: 12px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .agent-node {
+            background: #21262d;
+            border: 2px solid #30363d;
+            border-radius: 12px;
+            padding: 16px;
+            min-width: 140px;
+            text-align: center;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .agent-node.idle {
+            opacity: 0.5;
+            filter: grayscale(0.5);
+        }
+
+        .agent-node.thinking {
+            border-color: #ffd700;
+            box-shadow: 0 0 20px rgba(255,215,0,0.4);
+            animation: thinking-bounce 0.8s ease-in-out infinite;
+        }
+
+        .agent-node.complete {
+            border-color: #238636;
+            box-shadow: 0 0 15px rgba(35,134,54,0.4);
+        }
+
+        .agent-node.error {
+            border-color: #f85149;
+            box-shadow: 0 0 15px rgba(248,81,73,0.4);
+            animation: error-shake 0.5s ease-in-out;
+        }
+
+        @keyframes thinking-bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        @keyframes error-shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .agent-icon {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .agent-name {
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .agent-status {
+            font-size: 11px;
+            color: #8b949e;
+            max-width: 120px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .agent-score {
+            margin-top: 8px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .agent-score.positive { color: #238636; }
+        .agent-score.negative { color: #f85149; }
+        .agent-score.neutral { color: #ffd700; }
+
+        /* Spawned Agent Styles */
+        .spawned-container {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px dashed #30363d;
+        }
+
+        .spawned-agent {
+            background: linear-gradient(135deg, #21262d 0%, #161b22 100%);
+            border-style: dashed;
+            position: relative;
+        }
+
+        .spawned-agent::before {
+            content: '✨';
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            font-size: 16px;
+        }
+
+        .agent-parent {
+            font-size: 10px;
+            color: #8b949e;
+            margin-top: 4px;
+            font-style: italic;
+        }
+
+        /* ==================== Module Grid ==================== */
+        .modules-container {
+            background: #161b22;
+            border-radius: 12px;
+            padding: 16px;
+            margin: 20px;
+            border: 2px solid #30363d;
+        }
+
+        .modules-title {
+            text-align: center;
+            color: #8b949e;
+            font-size: 12px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .module-card {
+            background: #21262d;
+            border: 2px solid #30363d;
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .module-card.idle { opacity: 0.5; }
+
+        .module-card.thinking {
+            border-color: #ffd700;
+            box-shadow: 0 0 15px rgba(255,215,0,0.3);
+            animation: module-pulse 1s infinite;
+        }
+
+        .module-card.complete {
+            border-color: #238636;
+            background: rgba(35,134,54,0.1);
+        }
+
+        .module-card.error {
+            border-color: #f85149;
+            background: rgba(248,81,73,0.1);
+        }
+
+        @keyframes module-pulse {
+            0%, 100% { box-shadow: 0 0 15px rgba(255,215,0,0.3); }
+            50% { box-shadow: 0 0 25px rgba(255,215,0,0.5); }
+        }
+
+        .module-icon {
+            font-size: 24px;
+            margin-bottom: 4px;
+        }
+
+        .module-name {
+            font-size: 11px;
+            font-weight: bold;
+            color: #c9d1d9;
+        }
+
+        .module-score {
+            font-size: 14px;
+            font-weight: bold;
+            margin-top: 4px;
+        }
+
+        /* ==================== Sidebar ==================== */
+        .sidebar-header {
+            padding: 16px;
+            border-bottom: 2px solid #30363d;
+            font-weight: bold;
+            color: #ffd700;
+        }
+
+        .chat-log {
+            flex: 1;
+            overflow-y: auto;
+            padding: 12px;
+        }
+
+        .chat-entry {
+            padding: 8px 12px;
+            margin-bottom: 8px;
+            background: #21262d;
+            border-radius: 6px;
+            border-left: 3px solid #30363d;
+            font-size: 12px;
+        }
+
+        .chat-entry.error {
+            border-left-color: #f85149;
+            background: rgba(248,81,73,0.1);
+        }
+
+        .chat-entry .agent {
+            color: #58a6ff;
+            font-weight: bold;
+        }
+
+        .chat-entry .time {
+            color: #6e7681;
+            font-size: 10px;
+            float: right;
+        }
+
+        .chat-entry .message {
+            color: #c9d1d9;
+            margin-top: 4px;
+            word-break: break-word;
+        }
+
+        /* ==================== Stats Bar ==================== */
+        .stats-bar {
+            padding: 12px 16px;
+            background: #0d1117;
+            border-top: 2px solid #30363d;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 20px;
+            font-weight: bold;
+            color: #ffd700;
+        }
+
+        .stat-label {
+            font-size: 10px;
+            color: #6e7681;
+            text-transform: uppercase;
+        }
+
+        /* ==================== Progress Bar ==================== */
+        .progress-container {
+            padding: 12px 16px;
+            background: #0d1117;
+            border-top: 1px solid #30363d;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: #21262d;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #238636, #7ee787);
+            border-radius: 6px;
+            transition: width 0.5s ease;
+        }
+
+        .progress-text {
+            text-align: center;
+            margin-top: 8px;
+            font-size: 12px;
+            color: #8b949e;
+        }
+
+        /* ==================== Connection Lines ==================== */
+        .connections-svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .connection-line {
+            stroke: #30363d;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .connection-line.active {
+            stroke: #ffd700;
+            stroke-dasharray: 8,4;
+            animation: flow 1s linear infinite;
+        }
+
+        .connection-line.complete {
+            stroke: #238636;
+        }
+
+        @keyframes flow {
+            from { stroke-dashoffset: 12; }
+            to { stroke-dashoffset: 0; }
+        }
+
+        /* ==================== Empty State ==================== */
+        .empty-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: #6e7681;
+        }
+
+        .empty-state-icon {
+            font-size: 64px;
+            margin-bottom: 16px;
+        }
+
+        .empty-state-text {
+            font-size: 18px;
+        }
+
+        /* ==================== Output Modal ==================== */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: #161b22;
+            border: 2px solid #30363d;
+            border-radius: 12px;
+            width: 80%;
+            max-width: 800px;
+            max-height: 80%;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-header {
+            padding: 16px;
+            border-bottom: 2px solid #30363d;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-weight: bold;
+            color: #ffd700;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: #8b949e;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .modal-close:hover {
+            color: #f85149;
+        }
+
+        .modal-body {
+            padding: 16px;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .modal-body pre {
+            background: #0d1117;
+            padding: 12px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-size: 12px;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="title">COMMODITY <span>QUEST</span></div>
+        <div class="header-info">
+            <div class="commodity-badge" id="commodity-badge">--</div>
+            <div class="timer" id="timer">00:00:00</div>
+            <div class="status-dot idle" id="status-dot"></div>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Flowchart Area -->
+        <div class="flowchart">
+            <div class="agent-grid">
+                <!-- Level 1: Strategic -->
+                <div class="tier">
+                    <div class="tier-label">Level 1: Strategic</div>
+                </div>
+                <div class="tier">
+                    <div class="agent-node idle" id="agent-PM" onclick="showAgentOutput('PM')">
+                        <div class="agent-icon">📋</div>
+                        <div class="agent-name">PM</div>
+                        <div class="agent-status">Project Manager</div>
+                    </div>
+                    <div class="agent-node idle" id="agent-SUP" onclick="showAgentOutput('SUP')">
+                        <div class="agent-icon">👁️</div>
+                        <div class="agent-name">SUP</div>
+                        <div class="agent-status">Supervisor</div>
+                    </div>
+                    <div class="agent-node idle" id="agent-APPROVAL" onclick="showAgentOutput('APPROVAL')">
+                        <div class="agent-icon">✅</div>
+                        <div class="agent-name">APPROVAL</div>
+                        <div class="agent-status">Approval Gate</div>
+                    </div>
+                </div>
+
+                <!-- Level 2: Modules -->
+                <div class="modules-container">
+                    <div class="modules-title">Level 2: Task Managers</div>
+                    <div class="modules-grid">
+                        <div class="module-card idle" id="module-tm_fund" onclick="showAgentOutput('tm_fund')">
+                            <div class="module-icon">📊</div>
+                            <div class="module-name">FUNDAMENTALS</div>
+                            <div class="module-score" id="score-tm_fund"></div>
+                        </div>
+                        <div class="module-card idle" id="module-tm_news" onclick="showAgentOutput('tm_news')">
+                            <div class="module-icon">📰</div>
+                            <div class="module-name">NEWS</div>
+                            <div class="module-score" id="score-tm_news"></div>
+                        </div>
+                        <div class="module-card idle" id="module-tm_views" onclick="showAgentOutput('tm_views')">
+                            <div class="module-icon">💬</div>
+                            <div class="module-name">VIEWS</div>
+                            <div class="module-score" id="score-tm_views"></div>
+                        </div>
+                        <div class="module-card idle" id="module-tm_tech" onclick="showAgentOutput('tm_tech')">
+                            <div class="module-icon">📈</div>
+                            <div class="module-name">TECHNICAL</div>
+                            <div class="module-score" id="score-tm_tech"></div>
+                        </div>
+                        <div class="module-card idle" id="module-tm_struct" onclick="showAgentOutput('tm_struct')">
+                            <div class="module-icon">🏗️</div>
+                            <div class="module-name">STRUCTURE</div>
+                            <div class="module-score" id="score-tm_struct"></div>
+                        </div>
+                        <div class="module-card idle" id="module-tm_pos" onclick="showAgentOutput('tm_pos')">
+                            <div class="module-icon">📍</div>
+                            <div class="module-name">POSITIONING</div>
+                            <div class="module-score" id="score-tm_pos"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Level 3: Report -->
+                <div class="tier">
+                    <div class="tier-label">Output</div>
+                </div>
+                <div class="tier">
+                    <div class="agent-node idle" id="agent-REPORT" onclick="showAgentOutput('REPORT')">
+                        <div class="agent-icon">📄</div>
+                        <div class="agent-name">REPORT</div>
+                        <div class="agent-status">HTML Synthesis</div>
+                    </div>
+                </div>
+
+                <!-- Dynamically Spawned Agents -->
+                <div class="spawned-container" id="spawned-container" style="display: none;">
+                    <div class="tier">
+                        <div class="tier-label">Spawned Agents</div>
+                    </div>
+                    <div class="tier" id="spawned-agents-tier">
+                        <!-- Dynamically created agent nodes will appear here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">Analysis Log</div>
+            <div class="chat-log" id="chat-log">
+                <div class="empty-state">
+                    <div class="empty-state-icon">🔍</div>
+                    <div class="empty-state-text">Waiting for analysis...</div>
+                </div>
+            </div>
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+                </div>
+                <div class="progress-text" id="progress-text">0% Complete</div>
+            </div>
+            <div class="stats-bar">
+                <div class="stat">
+                    <div class="stat-value" id="stat-modules">0/6</div>
+                    <div class="stat-label">Modules</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="stat-debates">0</div>
+                    <div class="stat-label">Debates</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="stat-chars">0</div>
+                    <div class="stat-label">Output</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Output Modal -->
+    <div class="modal" id="output-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title" id="modal-title">Agent Output</div>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <pre id="modal-output">No output available</pre>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // State
+        let currentState = null;
+        let startTime = null;
+        let timerInterval = null;
+        let pollInterval = null;
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            startPolling();
+            startTimer();
+        });
+
+        // Polling
+        function startPolling() {
+            pollInterval = setInterval(fetchState, 500);
+            fetchState(); // Initial fetch
+        }
+
+        async function fetchState() {
+            try {
+                const response = await fetch('/api/state');
+                const state = await response.json();
+                currentState = state;
+                renderState(state);
+                updateStatusDot('connected');
+            } catch (error) {
+                updateStatusDot('error');
+            }
+        }
+
+        // Render state
+        function renderState(state) {
+            // Update commodity badge
+            const badge = document.getElementById('commodity-badge');
+            badge.textContent = state.commodity_name || state.commodity || '--';
+
+            // Update status dot
+            const statusDot = document.getElementById('status-dot');
+            statusDot.className = `status-dot ${state.status}`;
+
+            // Update start time for timer
+            if (state.start_time && !startTime) {
+                startTime = new Date(state.start_time);
+            }
+
+            // Update agents
+            updateAgents(state.agents || {});
+
+            // Update chat log
+            updateChatLog(state.chat_log || []);
+
+            // Update progress
+            const progressFill = document.getElementById('progress-fill');
+            const progressText = document.getElementById('progress-text');
+            progressFill.style.width = `${state.progress || 0}%`;
+            progressText.textContent = `${state.progress || 0}% - ${state.current_phase || 'Idle'}`;
+
+            // Update stats
+            document.getElementById('stat-modules').textContent =
+                `${state.modules_done || 0}/${state.total_modules || 6}`;
+            document.getElementById('stat-debates').textContent = state.debate_rounds || 0;
+            document.getElementById('stat-chars').textContent = formatNumber(state.total_chars || 0);
+        }
+
+        // Track dynamically created spawned agents
+        const spawnedAgentElements = new Set();
+
+        function updateAgents(agents) {
+            // Map agent IDs to element IDs (predefined agents)
+            const agentMapping = {
+                'PM': 'agent-PM',
+                'SUP': 'agent-SUP',
+                'APPROVAL': 'agent-APPROVAL',
+                'REPORT': 'agent-REPORT',
+                'tm_fund': 'module-tm_fund',
+                'tm_news': 'module-tm_news',
+                'tm_views': 'module-tm_views',
+                'tm_tech': 'module-tm_tech',
+                'tm_struct': 'module-tm_struct',
+                'tm_pos': 'module-tm_pos',
+                'TM-FUND': 'module-tm_fund',
+                'TM-NEWS': 'module-tm_news',
+                'TM-VIEWS': 'module-tm_views',
+                'TM-TECH': 'module-tm_tech',
+                'TM-STRUCT': 'module-tm_struct',
+                'TM-POS': 'module-tm_pos'
+            };
+
+            // Reset predefined agents to idle first
+            document.querySelectorAll('.agent-node:not(.spawned-agent), .module-card').forEach(el => {
+                el.className = el.className.replace(/\s*(idle|thinking|complete|error)/g, '') + ' idle';
+            });
+
+            // Track which spawned agents are still active
+            const activeSpawnedAgents = new Set();
+
+            // Update based on state
+            for (const [agentId, agentState] of Object.entries(agents)) {
+                const elementId = agentMapping[agentId];
+
+                if (elementId) {
+                    // Handle predefined agent
+                    const element = document.getElementById(elementId);
+                    if (element) {
+                        updateAgentElement(element, agentState, agentId);
+                    }
+                } else {
+                    // Handle dynamically spawned agent
+                    activeSpawnedAgents.add(agentId);
+                    let element = document.getElementById(`spawned-${agentId}`);
+
+                    if (!element) {
+                        // Create new spawned agent node
+                        element = createSpawnedAgentNode(agentId, agentState);
+                        spawnedAgentElements.add(agentId);
+                    }
+
+                    updateAgentElement(element, agentState, agentId);
+                }
+            }
+
+            // Remove spawned agents that are no longer in state (terminated)
+            for (const agentId of spawnedAgentElements) {
+                if (!activeSpawnedAgents.has(agentId)) {
+                    const element = document.getElementById(`spawned-${agentId}`);
+                    if (element) {
+                        element.remove();
+                    }
+                    spawnedAgentElements.delete(agentId);
+                }
+            }
+
+            // Show/hide spawned container based on whether there are spawned agents
+            const spawnedContainer = document.getElementById('spawned-container');
+            if (spawnedAgentElements.size > 0) {
+                spawnedContainer.style.display = 'block';
+            } else {
+                spawnedContainer.style.display = 'none';
+            }
+        }
+
+        function updateAgentElement(element, agentState, agentId) {
+            // Update status class
+            element.className = element.className.replace(/\s*(idle|thinking|complete|error)/g, '');
+            element.className += ` ${agentState.status || 'idle'}`;
+
+            // Update status text
+            const statusEl = element.querySelector('.agent-status');
+            if (statusEl && agentState.message) {
+                statusEl.textContent = agentState.message;
+            }
+
+            // Update score for modules
+            const scoreEl = document.getElementById(`score-${agentId.toLowerCase().replace('-', '_')}`);
+            if (scoreEl && agentState.score !== undefined) {
+                scoreEl.textContent = agentState.score >= 0 ? `+${agentState.score.toFixed(1)}` : agentState.score.toFixed(1);
+                scoreEl.className = `module-score ${agentState.score >= 0 ? 'positive' : 'negative'}`;
+            }
+        }
+
+        function createSpawnedAgentNode(agentId, agentState) {
+            const container = document.getElementById('spawned-agents-tier');
+
+            // Choose icon based on agent type/tier
+            const icon = getAgentIcon(agentId, agentState);
+
+            const node = document.createElement('div');
+            node.id = `spawned-${agentId}`;
+            node.className = 'agent-node spawned-agent idle';
+            node.onclick = () => showAgentOutput(agentId);
+
+            node.innerHTML = `
+                <div class="agent-icon">${icon}</div>
+                <div class="agent-name">${agentId}</div>
+                <div class="agent-status">${agentState.message || 'Spawned'}</div>
+                ${agentState.parent ? `<div class="agent-parent">↳ ${agentState.parent}</div>` : ''}
+            `;
+
+            container.appendChild(node);
+            return node;
+        }
+
+        function getAgentIcon(agentId, agentState) {
+            // Determine icon based on agent role/tier
+            const tier = agentState.tier || 3;
+            const role = (agentState.role || agentId).toLowerCase();
+
+            // Role-based icons
+            if (role.includes('sup') || role.includes('supervisor')) return '👁️';
+            if (role.includes('research') || role.includes('fetch')) return '🔍';
+            if (role.includes('analysis') || role.includes('analyze')) return '📊';
+            if (role.includes('write') || role.includes('report')) return '✍️';
+            if (role.includes('validate') || role.includes('check')) return '✅';
+            if (role.includes('debate')) return '⚔️';
+
+            // Tier-based fallback icons
+            if (tier === 1) return '👔';
+            if (tier === 2) return '🛠️';
+            return '🤖';
+        }
+
+        function updateChatLog(chatLog) {
+            const container = document.getElementById('chat-log');
+
+            if (!chatLog || chatLog.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">🔍</div>
+                        <div class="empty-state-text">Waiting for analysis...</div>
+                    </div>
+                `;
+                return;
+            }
+
+            // Only update if changed
+            const newHTML = chatLog.map(entry => `
+                <div class="chat-entry ${entry.level || ''}">
+                    <span class="agent">${entry.agent}</span>
+                    <span class="time">${entry.time}</span>
+                    <div class="message">${escapeHtml(entry.message)}</div>
+                </div>
+            `).join('');
+
+            if (container.innerHTML !== newHTML) {
+                container.innerHTML = newHTML;
+                container.scrollTop = container.scrollHeight;
+            }
+        }
+
+        function updateStatusDot(status) {
+            const dot = document.getElementById('status-dot');
+            if (status === 'connected' && currentState) {
+                dot.className = `status-dot ${currentState.status}`;
+            } else if (status === 'error') {
+                dot.className = 'status-dot error';
+            }
+        }
+
+        // Timer
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                const timerEl = document.getElementById('timer');
+                if (startTime) {
+                    const elapsed = new Date() - startTime;
+                    timerEl.textContent = formatTime(elapsed);
+                } else {
+                    timerEl.textContent = '00:00:00';
+                }
+            }, 1000);
+        }
+
+        function formatTime(ms) {
+            const seconds = Math.floor(ms / 1000);
+            const h = Math.floor(seconds / 3600);
+            const m = Math.floor((seconds % 3600) / 60);
+            const s = seconds % 60;
+            return `${pad(h)}:${pad(m)}:${pad(s)}`;
+        }
+
+        function pad(n) {
+            return n.toString().padStart(2, '0');
+        }
+
+        function formatNumber(n) {
+            if (n >= 1000000) return (n / 1000000).toFixed(1) + 'M';
+            if (n >= 1000) return (n / 1000).toFixed(1) + 'K';
+            return n.toString();
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Modal
+        function showAgentOutput(agentId) {
+            const modal = document.getElementById('output-modal');
+            const title = document.getElementById('modal-title');
+            const output = document.getElementById('modal-output');
+
+            title.textContent = `${agentId} Output`;
+
+            if (currentState && currentState.agents && currentState.agents[agentId]) {
+                const agentState = currentState.agents[agentId];
+                output.textContent = agentState.output || agentState.message || 'No output available';
+            } else {
+                output.textContent = 'No output available';
+            }
+
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('output-modal').classList.remove('active');
+        }
+
+        // Close modal on outside click
+        document.getElementById('output-modal').addEventListener('click', (e) => {
+            if (e.target.id === 'output-modal') {
+                closeModal();
+            }
+        });
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
